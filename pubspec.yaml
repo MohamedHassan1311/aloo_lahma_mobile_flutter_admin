@@ -1,0 +1,171 @@
+name: zurex_admin
+description: A new Flutter project.
+
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.3 <3.0.0'
+dependencies:
+  flutter_localizations:
+    sdk: flutter
+  flutter:
+    sdk: flutter
+  dio: ^5.8.0+1
+  internet_connection_checker:
+  toastification: ^3.0.2
+  fluttertoast: ^8.2.12
+  dartz:
+  pretty_dio_logger: ^1.4.0
+  shared_preferences:
+  get_it: ^8.0.3
+  connectivity_plus: ^6.1.3
+  http: ^1.3.0
+  flutter_staggered_animations:
+  flutter_staggered_grid_view: ^0.7.0
+  image_picker:
+  cached_network_image:
+  flutter_styled_toast:
+  flutter_animate:
+  url_launcher: ^6.3.1
+  readmore:
+  flutter_svg:
+  flutter_local_notifications: ^19.0.0
+  firebase_messaging: ^15.2.4
+  firebase_auth: ^5.5.1
+  firebase_analytics: ^11.4.4
+  firebase_core: ^3.12.1
+  flutter_form_builder:
+  equatable: ^2.0.7
+  pin_code_fields:
+  cupertino_icons: ^1.0.8
+  modal_bottom_sheet: ^3.0.0-pre
+  shimmer: ^3.0.0
+  carousel_slider: ^5.0.0
+  whatsapp_unilink: ^2.1.0
+  syncfusion_flutter_charts: ^28.2.5+1
+  flutter_typeahead:
+  geolocator_platform_interface:
+  geolocator: ^13.0.3
+  map_launcher: ^3.5.0
+  flutter_polyline_points:
+  country_picker: ^2.0.27
+  image: ^4.5.4
+  flutter_image_compress: ^2.4.0
+  flutter_spinkit:
+  app_settings: ^5.2.0
+  substring_highlight: ^1.0.33
+  motion_toast: ^2.12.1
+  upgrader:
+  flutter_inappwebview: ^6.1.5
+  flutter_widget_from_html: ^0.16.0
+  file_picker: ^9.2.1
+  permission_handler: ^11.4.0
+  path_provider: ^2.1.5
+  rxdart: ^0.28.0
+  scroll_to_index: ^3.0.1
+  share_plus: ^10.1.4
+  lottie: ^3.3.1
+  flutter_native_splash: ^2.4.5
+  #  huawei_push: ^6.12.0+303
+  device_info_plus: ^11.3.3
+  flutter_bloc: ^9.1.0
+  hydrated_bloc: ^10.0.0
+  country_code_picker: ^3.2.0
+  external_path: ^2.2.0
+  open_filex: ^4.7.0
+  intro_screen_onboarding_flutter: ^1.0.0
+  sqflite: ^2.4.2
+  path: ^1.9.0
+  dotted_border: ^2.1.0
+  dotted_line: ^3.2.3
+  media_cache_manager: ^0.3.0
+  sign_in_with_apple: ^6.1.4
+  google_sign_in: ^6.3.0
+  flutter_facebook_auth: ^7.1.1
+  date_picker_plus: ^4.2.0
+  in_app_review:
+  socket_io_client: ^3.0.2
+  flutter_slidable: ^4.0.0
+  just_audio: ^0.9.46
+  country_list_pick: ^1.0.1+6
+  country_flags: ^3.2.0
+  country_codes: ^3.3.0
+  google_maps_flutter: ^2.11.0
+  geocoding: ^3.0.0
+  flutter_dotenv: ^5.2.1
+  webview_flutter:
+  flutter_secure_storage: ^9.2.4
+  app_links: ^6.4.0
+  package_info_plus: ^8.3.0
+  in_app_update: ^4.2.3
+  text_marquee: ^0.0.2
+  video_player: ^2.9.3
+  country_state_city: ^0.1.6
+  easy_stepper: ^0.8.5+1
+  flutter_swipe_button: ^2.1.1+1
+  app_tracking_transparency: ^2.0.6+1
+  firebase_crashlytics: ^4.3.5
+
+
+
+dependency_overrides:
+  js: ^0.7.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/fonts/
+    - assets/svgs/
+    - assets/images/
+    - assets/videos/
+    - assets/json/
+    - assets/language/
+    - .env
+
+  fonts:
+    - family: en
+      fonts:
+        - asset: assets/fonts/en/thin.ttf
+          weight: 200
+        - asset: assets/fonts/en/light.ttf
+          weight: 300
+        - asset: assets/fonts/en/regular.ttf
+          weight: 400
+        - asset: assets/fonts/en/medium.ttf
+          weight: 500
+        - asset: assets/fonts/en/semi_bold.ttf
+          weight: 600
+        - asset: assets/fonts/en/bold.ttf
+          weight: 700
+        - asset: assets/fonts/en/extra_bold.ttf
+          weight: 800
+        - asset: assets/fonts/en/black.ttf
+          weight: 900
+
+    - family: ar
+      fonts:
+        - asset: assets/fonts/ar/w300.ttf
+          weight: 300
+        - asset: assets/fonts/ar/w400.ttf
+          weight: 400
+        - asset: assets/fonts/ar/w500.ttf
+          weight: 500
+        - asset: assets/fonts/ar/w600.ttf
+          weight: 600
+        - asset: assets/fonts/ar/w600.ttf
+          weight: 700
+
+#    - family: customIcons
+#      fonts:
+#       - asset: assets/fonts/customIcons/my_custom_icons.ttf

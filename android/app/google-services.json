@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "608449692297",
+    "firebase_url": "https://aloolahma-1886f-default-rtdb.firebaseio.com",
+    "project_id": "aloolahma-1886f",
+    "storage_bucket": "aloolahma-1886f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608449692297:android:0d2d31af9a70a812937c58",
+        "android_client_info": {
+          "package_name": "com.aloolahma.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608449692297-jfrvtielgqccenb844vsvpsk3sr5frqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aloolahma.app",
+            "certificate_hash": "85c439f336d929df87b51b5e3051bc5099ed3ad3"
+          }
+        },
+        {
+          "client_id": "608449692297-ga0o17h2h9d8ib6oljhv5pe0akk640lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDatxAltC9j9-GCwPm8NGczsm-0Iq7m8Qo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608449692297-ga0o17h2h9d8ib6oljhv5pe0akk640lq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "608449692297-a6tuldl54bng0abf42p20e96r79il63q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aloolahma.drivers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608449692297:android:0f028141fcb3bb50937c58",
+        "android_client_info": {
+          "package_name": "com.aloolahma.drivers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608449692297-ga0o17h2h9d8ib6oljhv5pe0akk640lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDatxAltC9j9-GCwPm8NGczsm-0Iq7m8Qo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608449692297-ga0o17h2h9d8ib6oljhv5pe0akk640lq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "608449692297-a6tuldl54bng0abf42p20e96r79il63q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aloolahma.drivers"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

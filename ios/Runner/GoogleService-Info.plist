@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>608449692297-a6tuldl54bng0abf42p20e96r79il63q.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.608449692297-a6tuldl54bng0abf42p20e96r79il63q</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>608449692297-btvhqc8t7s1j6d3phb1m4h52iupcnfb4.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB634Xx_VJJSDTsiBQ5IvxaIQYY4oKOcfk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>608449692297</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.aloolahma.drivers</string>
+	<key>PROJECT_ID</key>
+	<string>aloolahma-1886f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>aloolahma-1886f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:608449692297:ios:e2fea0429a0cfe2c937c58</string>
+	<key>DATABASE_URL</key>
+	<string>https://aloolahma-1886f-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
