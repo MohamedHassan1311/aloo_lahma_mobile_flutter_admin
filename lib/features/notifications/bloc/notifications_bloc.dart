@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/core/app_core.dart';
 import '../../../../app/core/app_event.dart';
-import '../../../../app/core/app_notification.dart';
 import '../../../../app/core/app_state.dart';
-import '../../../../app/core/styles.dart';
 import '../../../../data/error/failures.dart';
 import '../../../app/localization/language_constant.dart';
 import '../../../components/loading_dialog.dart';
@@ -34,8 +32,7 @@ class NotificationsBloc extends Bloc<AppEvent, AppState> {
       bool scroll = AppCore.scrollListener(
           controller, _engine.maxPages, _engine.currentPage!);
       if (scroll) {
-        _engine.updateCurrentPage(_engine.currentPage!);
-        add(Click(arguments: _engine));
+        add(Get(arguments: _engine));
       }
     });
   }
@@ -43,6 +40,13 @@ class NotificationsBloc extends Bloc<AppEvent, AppState> {
   bool get isLogin => repo.isLogin;
 
   List<NotificationModel>? _model;
+
+  @override
+  Future<void> close() {
+    controller.dispose();
+    _model?.clear();
+    return super.close();
+  }
 
   Future<void> onGet(Get event, Emitter<AppState> emit) async {
     try {
@@ -60,12 +64,6 @@ class NotificationsBloc extends Bloc<AppEvent, AppState> {
           await repo.getNotifications(_engine);
 
       response.fold((fail) {
-        AppCore.showSnackBar(
-            notification: AppNotification(
-                message: fail.error,
-                isFloating: true,
-                backgroundColor: Styles.IN_ACTIVE,
-                borderColor: Colors.red));
         emit(Error());
       }, (success) {
         NotificationsModel? res = NotificationsModel.fromJson(success.data);
@@ -80,10 +78,10 @@ class NotificationsBloc extends Bloc<AppEvent, AppState> {
 
             _model?.add(notification);
           }
-
-          _engine.maxPages = res.meta?.pagesCount ?? 1;
-          _engine.updateCurrentPage(res.meta?.currentPage ?? 1);
         }
+        _engine.maxPages = res.meta?.pagesCount ?? 1;
+        _engine.updateCurrentPage(res.meta?.currentPage ?? 1);
+
         if (_model != null && _model!.isNotEmpty) {
           emit(Done(list: _model, loading: false));
         } else {
@@ -91,12 +89,6 @@ class NotificationsBloc extends Bloc<AppEvent, AppState> {
         }
       });
     } catch (e) {
-      AppCore.showSnackBar(
-          notification: AppNotification(
-        message: e.toString(),
-        backgroundColor: Styles.IN_ACTIVE,
-        borderColor: Styles.RED_COLOR,
-      ));
       emit(Error());
     }
   }

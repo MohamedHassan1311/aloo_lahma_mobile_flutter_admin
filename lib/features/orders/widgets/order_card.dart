@@ -198,7 +198,7 @@ class OrderCard extends StatelessWidget {
                     ///Created At
                     Text(
                       (order.createdAt ?? DateTime.now())
-                          .dateFormat(format: "d MMM yyyy hh:mm aa"),
+                          .dateFormat(format: "d MMM yyyy - h:mm aa"),
                       style: AppTextStyles.w500
                           .copyWith(fontSize: 14, color: Styles.PRIMARY_COLOR),
                     ),

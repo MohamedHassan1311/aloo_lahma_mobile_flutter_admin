@@ -31,17 +31,17 @@ class InternetConnection {
     }
 
     isNotConnected ? null : AppCore.hideSnackBar();
-    AppCore.showSnackBar(
-        notification: AppNotification(
-      message: getTranslated(!isNotConnected ? "connected" : "no_connection"),
-      backgroundColor: isNotConnected
-          ? Colors.red.withOpacity(0.85)
-          : Colors.green.withOpacity(0.85),
-      borderColor: isNotConnected
-          ? Colors.red.withOpacity(0.85)
-          : Colors.green.withOpacity(0.85),
-      isFloating: true,
-    ));
+    // AppCore.showSnackBar(
+    //     notification: AppNotification(
+    //   message: getTranslated(!isNotConnected ? "connected" : "no_connection"),
+    //   backgroundColor: isNotConnected
+    //       ? Colors.red.withOpacity(0.85)
+    //       : Colors.green.withOpacity(0.85),
+    //   borderColor: isNotConnected
+    //       ? Colors.red.withOpacity(0.85)
+    //       : Colors.green.withOpacity(0.85),
+    //   isFloating: true,
+    // ));
 
     // if (isNotConnected && showDialog != true) {
     //   showDialog = true;

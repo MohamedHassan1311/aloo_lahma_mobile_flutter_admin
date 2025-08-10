@@ -32,7 +32,7 @@ class NotificationsRepo extends BaseRepo {
       SearchEngine data) async {
     try {
       Response response = await dioClient.get(
-        uri: EndPoints.notifications,
+        uri: EndPoints.notifications(userType),
         queryParameters: {
           "page": data.currentPage! + 1,
           "limit": data.limit,
@@ -51,7 +51,7 @@ class NotificationsRepo extends BaseRepo {
   Future<Either<ServerFailure, Response>> readNotification(id) async {
     try {
       Response response =
-          await dioClient.get(uri: EndPoints.readNotification(id));
+          await dioClient.put(uri: EndPoints.readNotification(userType, id));
       if (response.statusCode == 200) {
         return Right(response);
       } else {

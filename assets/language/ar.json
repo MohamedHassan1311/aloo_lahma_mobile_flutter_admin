@@ -700,5 +700,12 @@
   "receipt_type": "نوع الاستلام",
   "delivery": "توصيل",
   "takeAway": "استلام من المحل",
-  "pay_type": "نوع الدفع"
+  "pay_type": "نوع الدفع",
+  "cancelled_reason": "سبب الالغاء",
+  "delivery_charges": "رسوم التوصيل",
+  "store_address": "عنوان المحل",
+  "store_address_details": "تفاصيل عنوان المحل",
+  "paid_from": "تم الدفع عن طريق",
+  "order_number": "رقم الطلب",
+  "order_status": "حالة الطلب"
 }

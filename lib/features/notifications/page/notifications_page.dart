@@ -1,14 +1,11 @@
 import 'package:aloo_lahma_admin/app/core/extensions.dart';
-import 'package:aloo_lahma_admin/features/notifications/model/notifications_model.dart';
-import 'package:aloo_lahma_admin/features/notifications/repo/notifications_repo.dart';
-import 'package:aloo_lahma_admin/features/notifications/widgets/notification_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../app/core/app_event.dart';
 import '../../../app/core/app_state.dart';
 import '../../../app/core/dimensions.dart';
-import '../../../app/core/images.dart';
 import '../../../app/core/styles.dart';
+import '../../../app/core/svg_images.dart';
 import '../../../app/localization/language_constant.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/custom_app_bar.dart';
@@ -18,6 +15,9 @@ import '../../../components/shimmer/custom_shimmer.dart';
 import '../../../data/config/di.dart';
 import '../../../main_models/search_engine.dart';
 import '../bloc/notifications_bloc.dart';
+import '../model/notifications_model.dart';
+import '../repo/notifications_repo.dart';
+import '../widgets/notification_card.dart';
 
 class NotificationsPage extends StatelessWidget {
   const NotificationsPage({super.key});
@@ -36,9 +36,8 @@ class NotificationsPage extends StatelessWidget {
                 return Column(
                   children: [
                     Expanded(
-                      child: ListAnimator(data: [
-                        SizedBox(height: Dimensions.PADDING_SIZE_DEFAULT.h),
-                        ...List.generate(
+                      child: ListAnimator(
+                        data: List.generate(
                           10,
                           (i) => Container(
                             margin: EdgeInsets.symmetric(
@@ -56,7 +55,7 @@ class NotificationsPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ]),
+                      ),
                     ),
                   ],
                 );
@@ -75,22 +74,18 @@ class NotificationsPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListAnimator(
-                            controller:
-                                context.read<NotificationsBloc>().controller,
-                            data: [
-                              SizedBox(
-                                  height: Dimensions.PADDING_SIZE_DEFAULT.h),
-                              ...List.generate(
-                                  list.length,
-                                  (i) => NotificationCard(
-                                        notification: list[i],
-                                        withBorder: i != (list.length - 1),
-                                      )),
-                            ]),
+                          controller:
+                              context.read<NotificationsBloc>().controller,
+                          data: List.generate(
+                            list.length,
+                            (i) => NotificationCard(
+                              notification: list[i],
+                              withBorder: i != (list.length - 1),
+                            ),
+                          ),
+                        ),
                       ),
-                      CustomLoadingText(
-                        loading: state.loading,
-                      ),
+                      CustomLoadingText(loading: state.loading),
                     ],
                   ),
                 );
@@ -114,12 +109,18 @@ class NotificationsPage extends StatelessWidget {
                               height: 50.h,
                             ),
                             EmptyState(
-                              img: Images.emptyNotifications,
-                              imgHeight: 175.h,
+                              img: SvgImages.emptyNotifications,
+                              imageColor: null,
+                              isSvg: true,
+                              imgHeight: 220.h,
                               imgWidth: 140.w,
                               txt: state is Error
                                   ? getTranslated("something_went_wrong")
                                   : getTranslated("no_notifications"),
+                              subText: state is Empty
+                                  ? getTranslated(
+                                      "no_notifications_description")
+                                  : null,
                             ),
                           ],
                         ),

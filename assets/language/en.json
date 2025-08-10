@@ -700,5 +700,12 @@
   "delivery": "Delivery",
   "takeAway": "Take Away",
   "receipt_type": "Receipt Type",
-  "pay_type": "Pay Type"
+  "pay_type": "Pay Type",
+  "cancelled_reason": "Cancelled Reason",
+  "store_address": "Store address",
+  "store_address_details": "Store address details",
+  "delivery_charges": "Delivery Charges",
+  "paid_from": "Paid From",
+  "order_number": "Order Number",
+  "order_status": "Order Status"
 }

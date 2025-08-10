@@ -13,7 +13,7 @@ class OrderDetailsRepo extends BaseRepo {
   Future<Either<ServerFailure, Response>> getOrderDetails(id) async {
     try {
       Response response = await dioClient.get(
-        uri: EndPoints.orderDetails(id),
+        uri: EndPoints.orderDetails(userType,id),
         queryParameters: {
           "with": "invoice.shipping,invoice.bank,invoice.bankTransfer,driver,products.product,products.gift,products.items.item,orderStatusLogs"
         },

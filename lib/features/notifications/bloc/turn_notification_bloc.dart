@@ -1,10 +1,9 @@
-import 'package:aloo_lahma_admin/components/loading_dialog.dart';
-import 'package:aloo_lahma_admin/navigation/custom_navigation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/core/app_core.dart';
 import '../../../../app/core/app_event.dart';
 import '../../../../app/core/app_state.dart';
-import '../../../data/config/di.dart';
+import '../../../components/loading_dialog.dart';
+import '../../../navigation/custom_navigation.dart';
 import '../repo/notifications_repo.dart';
 
 class TurnNotificationsBloc extends Bloc<AppEvent, AppState> {

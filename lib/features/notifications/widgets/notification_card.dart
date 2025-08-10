@@ -1,7 +1,6 @@
 import 'package:aloo_lahma_admin/app/core/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:readmore/readmore.dart';
 import '../../../app/core/app_event.dart';
 import '../../../app/core/app_state.dart';
@@ -14,6 +13,7 @@ import '../../../components/custom_images.dart';
 import '../../../navigation/custom_navigation.dart';
 import '../../../navigation/routes.dart';
 import '../bloc/notifications_bloc.dart';
+import '../enum/notification_target_enum.dart';
 import '../model/notifications_model.dart';
 
 class NotificationCard extends StatelessWidget {
@@ -35,124 +35,103 @@ class NotificationCard extends StatelessWidget {
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
             vertical: Dimensions.paddingSizeMini.h,
           ),
-          child: Slidable(
-            key: ValueKey(notification?.id),
-            endActionPane: ActionPane(
-              motion: const ScrollMotion(),
-              extentRatio: 0.3,
-              children: [
-                SlidableAction(
-                  onPressed: (context) => context
-                      .read<NotificationsBloc>()
-                      .add(Delete(arguments: notification?.id)),
-                  backgroundColor: Styles.RED_COLOR,
-                  foregroundColor: Colors.white,
-                  label: getTranslated("delete"),
-                ),
-              ],
-            ),
-            child: InkWell(
-              onTap: () {
-                if (notification?.keyId != null &&
-                    notification?.key == "order") {
-                  CustomNavigator.push(Routes.orderDetails,
-                      arguments: notification?.keyId);
-                }
+          child: InkWell(
+            onTap: () {
+              if (notification?.target != null &&
+                  notification?.target?.name == NotificationTarget.order) {
+                CustomNavigator.push(Routes.orderDetails,
+                    arguments: notification?.target?.id);
+              }
 
-                if (notification?.isRead != true) {
-                  context
-                      .read<NotificationsBloc>()
-                      .add(Read(arguments: notification?.id ?? ""));
-                }
-              },
-              child: Container(
-                width: context.width,
-                padding: EdgeInsets.symmetric(
-                    horizontal: Dimensions.PADDING_SIZE_SMALL.w,
-                    vertical: Dimensions.PADDING_SIZE_SMALL.h),
-                decoration: BoxDecoration(
-                    color: notification?.isRead == true
+              if (notification?.isRead != true) {
+                context
+                    .read<NotificationsBloc>()
+                    .add(Read(arguments: notification?.id ?? ""));
+              }
+            },
+            child: Container(
+              width: context.width,
+              padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.PADDING_SIZE_SMALL.w,
+                  vertical: Dimensions.PADDING_SIZE_SMALL.h),
+              decoration: BoxDecoration(
+                  color: notification?.isRead == true
+                      ? Styles.WHITE_COLOR
+                      : Styles.PRIMARY_COLOR.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: Styles.LIGHT_BORDER_COLOR)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 8.h,
+                children: [
+                  customContainerImage(
+                    backGroundColor: notification?.isRead != true
                         ? Styles.WHITE_COLOR
-                        : Styles.PRIMARY_COLOR.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: Styles.LIGHT_BORDER_COLOR)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    customContainerImage(
-                      backGroundColor: notification?.isRead != true
-                          ? Styles.WHITE_COLOR
-                          : Styles.PRIMARY_COLOR.withOpacity(0.1),
-                      imageName: Images.logo,
-                      radius: 100,
-                      width: 50,
-                      height: 50,
+                        : Styles.PRIMARY_COLOR.withValues(alpha: 0.1),
+                    imageName: Images.logo,
+                    color: Styles.PRIMARY_COLOR,
+                    radius: 100,
+                    width: 50,
+                    height: 50,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 2.h,
+                      children: [
+                        Text(
+                          notification?.title ?? "Notification Title",
+                          textAlign: TextAlign.start,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyles.w500
+                              .copyWith(fontSize: 14, color: Styles.HEADER),
+                        ),
+                        ReadMoreText(
+                          notification?.body ?? "Notification Message",
+                          style: AppTextStyles.w500
+                              .copyWith(fontSize: 12, color: Styles.TITLE),
+                          trimLines: 2,
+                          colorClickableText: Colors.pink,
+                          trimMode: TrimMode.Line,
+                          trimCollapsedText: getTranslated("show_more"),
+                          trimExpandedText: getTranslated("show_less"),
+                          textAlign: TextAlign.start,
+                          moreStyle: AppTextStyles.w600.copyWith(
+                              fontSize: 14, color: Styles.PRIMARY_COLOR),
+                          lessStyle: AppTextStyles.w600.copyWith(
+                              fontSize: 14, color: Styles.PRIMARY_COLOR),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      width: 8.w,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            notification?.title ?? "Notification Title",
-                            textAlign: TextAlign.start,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTextStyles.w500
-                                .copyWith(fontSize: 14, color: Styles.HEADER),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 2.h),
-                            child: ReadMoreText(
-                              notification?.body ?? "Notification Message",
-                              style: AppTextStyles.w500
-                                  .copyWith(fontSize: 12, color: Styles.TITLE),
-                              trimLines: 2,
-                              colorClickableText: Colors.pink,
-                              trimMode: TrimMode.Line,
-                              trimCollapsedText: getTranslated("show_more"),
-                              trimExpandedText: getTranslated("show_less"),
-                              textAlign: TextAlign.start,
-                              moreStyle: AppTextStyles.w600.copyWith(
-                                  fontSize: 14, color: Styles.PRIMARY_COLOR),
-                              lessStyle: AppTextStyles.w600.copyWith(
-                                  fontSize: 14, color: Styles.PRIMARY_COLOR),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  notification?.createdTime ?? "since 4 h",
-                                  textAlign: TextAlign.end,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: AppTextStyles.w400.copyWith(
-                                      fontSize: 12,
-                                      color: Styles.DETAILS_COLOR),
-                                ),
-                              ),
-                              Flexible(
-                                child: Text(
-                                  " - ${notification?.createdAt ?? "12-8-2024"}",
-                                  textAlign: TextAlign.end,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: AppTextStyles.w400.copyWith(
-                                      fontSize: 12,
-                                      color: Styles.DETAILS_COLOR),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    spacing: 2.h,
+                    children: [
+                      Text(
+                        notification?.createdAt
+                                ?.dateFormat(format: "d/M/yyyy") ??
+                            "",
+                        textAlign: TextAlign.end,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: AppTextStyles.w600
+                            .copyWith(fontSize: 12, color: Styles.TITLE),
                       ),
-                    ),
-                  ],
-                ),
+                      Text(
+                        notification?.createdAt?.dateFormat(format: "h:m a") ??
+                            "",
+                        textAlign: TextAlign.end,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: AppTextStyles.w400
+                            .copyWith(fontSize: 12, color: Styles.SUBTITLE),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           ),

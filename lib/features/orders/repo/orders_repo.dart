@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:aloo_lahma_admin/main_models/search_engine.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -20,8 +22,8 @@ class OrdersRepo extends BaseRepo {
           "limit": data.limit,
           if (userType == UserType.driver.name) "deliveryByMyTeam": true,
           if (userType == UserType.admin.name) "managedByMe": true,
-          "with": "invoice,deliveryTime"
-
+          "order_by": jsonEncode({"created_at": "desc"}),
+          "with": "invoice,deliveryTime",
         }..addAll(data.data),
       );
       if (response.statusCode == 200) {

@@ -18,6 +18,7 @@ class EmptyState extends StatelessWidget {
   final String? txt;
   final String? subText;
   final bool withImage;
+  final Color? imageColor;
 
   const EmptyState({
     super.key,
@@ -30,6 +31,7 @@ class EmptyState extends StatelessWidget {
     this.imgWidth,
     this.txt,
     this.subText,
+    this.imageColor,
   });
   @override
   Widget build(BuildContext context) {
@@ -47,14 +49,14 @@ class EmptyState extends StatelessWidget {
             !isSvg
                 ? customImageIcon(
                     imageName: img ?? Images.logo,
-                    width: imgWidth ?? context.width * 0.5,
-                    height: imgHeight ?? context.width * 0.5,
-                  ) //width: MediaQueryHelper.width*.8,),
+                    width: imgWidth ?? context.width * 0.6,
+                    height: imgHeight ?? context.width * 0.6,
+                    color: imageColor)
                 : customImageIconSVG(
                     imageName: img ?? SvgImages.appLogo,
-                    width: imgWidth ?? context.width * 0.5,
-                    height: imgHeight ?? context.width * 0.5,
-                  ),
+                    width: imgWidth ?? context.width * 0.45,
+                    height: imgHeight ?? context.height * 0.25,
+                    color: imageColor),
           SizedBox(
             height: spaceBtw ?? 12.h,
           ),

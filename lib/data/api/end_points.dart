@@ -26,7 +26,7 @@ class EndPoints {
 
   ///User Profile
   static const String editProfile = 'update-profile';
-  static  String profile (userType) => '$userType/me';
+  static String profile(userType) => '$userType/me';
 
   ///Chats
   static const String createChat = 'chats';
@@ -37,13 +37,13 @@ class EndPoints {
   static const String uploadFile = 'upload-file';
 
   ///Notification
-  static const String notifications = 'notifications';
-  static readNotification(id) => 'notifications/$id';
+  static String notifications(userType) => '$userType/notifications';
+  static String readNotification(userType, id) => '$userType/notifications/$id';
   static deleteNotification(id) => 'notifications/$id';
 
   ///Orders
-  static  String orders(userType) => '$userType/orders';
-  static orderDetails(id) => 'orders/$id';
+  static String orders(userType) => '$userType/orders';
+  static orderDetails(userType, id) => '$userType/orders/$id';
   static const String cancelReasons = 'cancel-reason';
   static changeOrderStatus(id) => 'orders/$id/changeOrderStatus';
 

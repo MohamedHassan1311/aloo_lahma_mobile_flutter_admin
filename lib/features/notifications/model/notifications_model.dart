@@ -1,5 +1,6 @@
 import '../../../data/config/mapper.dart';
 import '../../../main_models/meta.dart';
+import '../enum/notification_target_enum.dart';
 
 class NotificationsModel extends SingleMapper {
   String? status;
@@ -24,6 +25,7 @@ class NotificationsModel extends SingleMapper {
             json["data"]!.map((x) => NotificationModel.fromJson(x)));
   }
 
+  @override
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
@@ -41,56 +43,71 @@ class NotificationsModel extends SingleMapper {
 
 class NotificationModel extends SingleMapper {
   String? id;
-  String? createdTime;
-  String? createdAt;
   bool? isRead;
-  String? image;
-  String? key;
   String? title;
   String? body;
-  int? keyId;
+  NotifyTargetModel? target;
+  DateTime? createdAt;
 
   NotificationModel({
     this.id,
-    this.createdTime,
-    this.createdAt,
     this.isRead,
-    this.image,
-    this.key,
+    this.target,
     this.title,
     this.body,
-    this.keyId,
+    this.createdAt,
   });
 
   NotificationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    createdTime = json['created_time'];
-    createdAt = json['created_at'];
-    isRead = json['is_readed'];
-    image = json['image'];
-    key = json['key'];
     title = json['title'];
     body = json['body'];
-    keyId = json['key_id'];
+    createdAt =
+        json['created_at'] != null ? DateTime.parse(json['created_at']) : null;
+    isRead = json['read_at'] != null;
+    target = json['target'] != null
+        ? NotifyTargetModel.fromJson(json['target'])
+        : null;
   }
 
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['key_id'] = keyId;
-    data['created_time'] = createdTime;
-    data['created_at'] = createdAt;
-    data['is_readed'] = isRead;
-    data['image'] = image;
-    data['key'] = key;
     data['title'] = title;
     data['body'] = body;
+    data['read_at'] = isRead;
+    data['created_at'] = createdAt?.toIso8601String();
+    data['target'] = target?.toJson();
     return data;
   }
 
   @override
   Mapper fromJson(Map<String, dynamic> json) {
     return NotificationModel.fromJson(json);
+  }
+}
+
+class NotifyTargetModel {
+  int? id;
+  NotificationTarget? name;
+
+
+  NotifyTargetModel({
+    this.id,
+    this.name,
+  });
+
+  NotifyTargetModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = NotificationTargetConverter.convertStringToEnum(
+        json['name'] ?? 'product');
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name?.name;
+    return data;
   }
 }

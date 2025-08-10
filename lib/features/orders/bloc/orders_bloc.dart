@@ -81,7 +81,7 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
           emit(Done(list: _model, loading: true));
         }
         _engine.data = {
-          "status": OrderMainStatusEnumConverter
+          "statusOfOrders": OrderMainStatusEnumConverter
               .convertOrderMainStatusFromEnumToString(selectTab.value)
         };
 

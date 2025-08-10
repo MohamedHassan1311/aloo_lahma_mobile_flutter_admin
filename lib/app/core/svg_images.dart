@@ -1,4 +1,5 @@
 class SvgImages {
+  static const String emptyNotifications = 'assets/svgs/empty_notifications.svg';
   static const String success = 'assets/svgs/success.svg';
   static const String fillCloseCircle = 'assets/svgs/fill-close-circle.svg';
   static const String cameraIcon = 'assets/svgs/camera.svg';
