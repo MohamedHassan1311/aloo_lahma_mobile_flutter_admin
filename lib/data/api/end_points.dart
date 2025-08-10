@@ -38,7 +38,7 @@ class EndPoints {
 
   ///Notification
   static String notifications(userType) => '$userType/notifications';
-  static String readNotification(userType, id) => '$userType/notifications/$id';
+  static String readNotification(userType, id) => '$userType/notifications/read/$id';
   static deleteNotification(id) => 'notifications/$id';
 
   ///Orders
