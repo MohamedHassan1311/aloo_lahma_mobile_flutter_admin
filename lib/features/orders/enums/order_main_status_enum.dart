@@ -1,0 +1,1 @@
+enum OrderMainStatus { current, previous }

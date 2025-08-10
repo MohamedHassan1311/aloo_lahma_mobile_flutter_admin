@@ -10,6 +10,7 @@ import '../../../app/core/styles.dart';
 import '../../../app/core/text_styles.dart';
 import '../../../app/localization/language_constant.dart';
 import '../../../data/config/di.dart';
+import '../enums/order_main_status_enum.dart';
 
 class OrderTabs extends StatelessWidget {
   const OrderTabs({super.key});

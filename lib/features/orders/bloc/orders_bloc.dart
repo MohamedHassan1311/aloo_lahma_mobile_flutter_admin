@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../../../app/core/app_core.dart';
 import '../../../../../app/core/app_event.dart';
-import '../../../../../app/core/app_notification.dart';
 import '../../../../../app/core/app_state.dart';
-import '../../../../../app/core/styles.dart';
 import '../../../../../data/error/failures.dart';
 import '../../../../../main_models/search_engine.dart';
 import '../../../data/internet_connection/internet_connection.dart';
+import '../enums/order_main_status_enum.dart';
+import '../enums/order_main_status_enum_converter.dart';
 import '../model/orders_model.dart';
 import '../repo/orders_repo.dart';
 
@@ -24,13 +24,10 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
   OrdersBloc({required this.repo, required this.internetConnection})
       : super(Start()) {
     updateSelectTab(OrderMainStatus.current);
-    searchTEC = TextEditingController();
     controller = ScrollController();
     customScroll(controller);
     on<Click>(onClick);
   }
-
-  TextEditingController? searchTEC;
 
   late ScrollController controller;
   late SearchEngine _engine;
@@ -45,6 +42,15 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
   Function(bool) get updateGoingDown => goingDown.sink.add;
   Stream<bool> get goingDownStream => goingDown.stream.asBroadcastStream();
 
+  @override
+  close() async {
+    super.close();
+    selectTab.close();
+    goingDown.close();
+    controller.dispose();
+    _model?.clear();
+  }
+
   customScroll(ScrollController controller) {
     controller.addListener(() {
       if (controller.position.userScrollDirection == ScrollDirection.forward) {
@@ -55,7 +61,6 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
       bool scroll = AppCore.scrollListener(
           controller, _engine.maxPages, _engine.currentPage!);
       if (scroll) {
-        _engine.updateCurrentPage(_engine.currentPage!);
         add(Click(arguments: _engine));
       }
     });
@@ -74,20 +79,14 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
           emit(Done(data: _model, loading: true));
         }
         _engine.data = {
-          "status": selectTab.value.name,
-          // if (searchTEC?.text.trim() != "") "keyword": searchTEC?.text.trim(),
+          "status": OrderMainStatusEnumConverter
+              .convertOrderMainStatusFromEnumToString(selectTab.value)
         };
 
         Either<ServerFailure, Response> response =
             await repo.getOrders(_engine);
 
         response.fold((fail) {
-          AppCore.showSnackBar(
-              notification: AppNotification(
-                  message: fail.error,
-                  isFloating: true,
-                  backgroundColor: Styles.IN_ACTIVE,
-                  borderColor: Colors.red));
           emit(Error());
         }, (success) {
           OrdersModel? res = OrdersModel.fromJson(success.data);
@@ -101,10 +100,9 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
               _model?.removeWhere((e) => e.id == item.id);
               _model?.add(item);
             }
-            _engine.maxPages = res.meta?.pagesCount ?? 1;
-            _engine.updateCurrentPage(res.meta?.currentPage ?? 1);
           }
-
+          _engine.maxPages = res.meta?.pagesCount ?? 1;
+          _engine.updateCurrentPage(res.meta?.currentPage ?? 1);
           if (_model != null && _model!.isNotEmpty) {
             emit(Done(list: _model, loading: false));
           } else {
@@ -112,12 +110,6 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
           }
         });
       } catch (e) {
-        AppCore.showSnackBar(
-            notification: AppNotification(
-          message: e.toString(),
-          backgroundColor: Styles.IN_ACTIVE,
-          borderColor: Styles.RED_COLOR,
-        ));
         emit(Error());
       }
     }
@@ -151,5 +143,3 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
   @override
   Map<String, dynamic>? toJson(AppState? state) => state?.toJson();
 }
-
-enum OrderMainStatus { current, completed, cancelled }
