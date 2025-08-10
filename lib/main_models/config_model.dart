@@ -1,4 +1,4 @@
-import 'package:zurex_admin/data/config/mapper.dart';
+import 'package:aloo_lahma_admin/data/config/mapper.dart';
 
 class ConfigModel extends SingleMapper {
   String? message;

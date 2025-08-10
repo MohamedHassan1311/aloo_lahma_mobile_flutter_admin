@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/app/localization/language_constant.dart';
-import 'package:zurex_admin/components/custom_app_bar.dart';
-import 'package:zurex_admin/components/shimmer/custom_shimmer.dart';
-import 'package:zurex_admin/features/order_details/bloc/order_details_bloc.dart';
-import 'package:zurex_admin/features/order_details/model/order_details_model.dart';
-import 'package:zurex_admin/features/order_details/repo/order_details_repo.dart';
-import 'package:zurex_admin/main_widgets/bill_details.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/components/custom_app_bar.dart';
+import 'package:aloo_lahma_admin/components/shimmer/custom_shimmer.dart';
+import 'package:aloo_lahma_admin/features/order_details/bloc/order_details_bloc.dart';
+import 'package:aloo_lahma_admin/features/order_details/model/order_details_model.dart';
+import 'package:aloo_lahma_admin/features/order_details/repo/order_details_repo.dart';
+import 'package:aloo_lahma_admin/main_widgets/bill_details.dart';
 
 import '../../../app/core/app_event.dart';
 import '../../../app/core/app_state.dart';
@@ -49,7 +49,7 @@ class OrderDetailsPage extends StatelessWidget {
                         ///Order Body
                         Expanded(
                           child: ListAnimator(
-                            customPadding: EdgeInsets.symmetric(
+                            padding: EdgeInsets.symmetric(
                               horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                             ),
                             data: [
@@ -94,7 +94,7 @@ class OrderDetailsPage extends StatelessWidget {
                   }
                   if (state is Loading) {
                     return ListAnimator(
-                      customPadding: EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                       ),
                       data: [
@@ -168,7 +168,7 @@ class OrderDetailsPage extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ListAnimator(
-                              customPadding: EdgeInsets.symmetric(
+                              padding: EdgeInsets.symmetric(
                                 horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                               ),
                               data: [

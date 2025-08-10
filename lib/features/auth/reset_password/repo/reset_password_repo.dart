@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:zurex_admin/app/core/app_storage_keys.dart';
+import 'package:aloo_lahma_admin/app/core/app_storage_keys.dart';
 import '../../../../data/api/end_points.dart';
 import '../../../../data/error/api_error_handler.dart';
 import '../../../../data/error/failures.dart';
@@ -12,8 +12,8 @@ class ResetPasswordRepo extends BaseRepo {
 
   Future<Either<ServerFailure, Response>> resetPassword(data) async {
     try {
-      Response response =
-          await dioClient.post(uri: EndPoints.resetPassword, data: data);
+      Response response = await dioClient.post(
+          uri: EndPoints.resetPassword(userType), data: data);
 
       if (response.statusCode == 200) {
         sharedPreferences.remove(AppStorageKey.credentials);

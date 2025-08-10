@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/core/text_styles.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/text_styles.dart';
 
 import '../app/core/app_core.dart';
 import '../app/core/styles.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../app/core/styles.dart';

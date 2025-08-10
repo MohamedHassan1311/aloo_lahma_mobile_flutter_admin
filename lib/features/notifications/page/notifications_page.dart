@@ -1,7 +1,7 @@
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/features/notifications/model/notifications_model.dart';
-import 'package:zurex_admin/features/notifications/repo/notifications_repo.dart';
-import 'package:zurex_admin/features/notifications/widgets/notification_card.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/features/notifications/model/notifications_model.dart';
+import 'package:aloo_lahma_admin/features/notifications/repo/notifications_repo.dart';
+import 'package:aloo_lahma_admin/features/notifications/widgets/notification_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../app/core/app_event.dart';
@@ -107,7 +107,7 @@ class NotificationsPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListAnimator(
-                          customPadding: EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                               horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                           data: [
                             SizedBox(

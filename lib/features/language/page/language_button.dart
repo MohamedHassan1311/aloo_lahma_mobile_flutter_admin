@@ -31,32 +31,35 @@ class _LanguageButtonState extends State<LanguageButton> {
     return BlocBuilder<LanguageBloc, AppState>(
       builder: (context, state) {
         return Container(
-          height: 55.h,
-          decoration: const BoxDecoration(
-              color: Styles.WHITE_COLOR,
-              border:
-              Border(bottom: BorderSide(color: Styles.LIGHT_BORDER_COLOR))),
+          margin: EdgeInsets.symmetric(vertical: Dimensions.paddingSizeMini.h),
           padding: EdgeInsets.symmetric(
-              horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+              vertical: Dimensions.paddingSizeExtraSmall.h,
+              horizontal: Dimensions.PADDING_SIZE_SMALL.w),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.w),
+              color: Styles.WHITE_COLOR,
+              border: Border.all(color: Styles.LIGHT_BORDER_COLOR)),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: Dimensions.PADDING_SIZE_SMALL.w,
             children: [
-              customImageIconSVG(
+              customContainerSvgIcon(
                 imageName: SvgImages.language,
-                height: 22.w,
-                width: 22.w,
-                color: Styles.TITLE,
+                padding: 8.w,
+                radius: 12.w,
+                height: 40.w,
+                width: 40.w,
+                borderColor: Styles.LIGHT_BORDER_COLOR,
+                backGround: Styles.WHITE_COLOR,
+                color: Styles.PRIMARY_COLOR,
               ),
               Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Text(getTranslated("language", context: context),
-                      maxLines: 1,
-                      style: AppTextStyles.w600.copyWith(
-                          fontSize: 16,
-                          overflow: TextOverflow.ellipsis,
-                          color: Styles.TITLE)),
-                ),
+                child: Text(getTranslated("language", context: context),
+                    maxLines: 1,
+                    style: AppTextStyles.w700.copyWith(
+                        fontSize: 16,
+                        overflow: TextOverflow.ellipsis,
+                        color: Styles.HEADER)),
               ),
 
               ///Toggle Buttons

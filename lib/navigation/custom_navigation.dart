@@ -1,9 +1,12 @@
 import 'dart:io';
-import 'package:zurex_admin/features/edit_profile/page/edit_profile_page.dart';
-import 'package:zurex_admin/features/maps/models/location_model.dart';
-import 'package:zurex_admin/features/order_details/page/order_details_page.dart';
+import 'package:aloo_lahma_admin/features/edit_profile/page/edit_profile_page.dart';
+import 'package:aloo_lahma_admin/features/maps/models/location_model.dart';
+import 'package:aloo_lahma_admin/features/order_details/page/order_details_page.dart';
+import 'package:aloo_lahma_admin/features/setting/packages/about_us/view/about_the_app_page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import '../app/services/analytics_service.dart';
 import '../components/video_preview_page.dart';
 import '../features/contact_with_us/page/contact_with_us_page.dart';
 import '../features/faqs/page/faqs_page.dart';
@@ -11,7 +14,8 @@ import '../features/in_app_web_view/in_app_web_view_page.dart';
 import '../features/maps/page/pick_map_page.dart';
 import '../features/maps/page/preview_location_page.dart';
 import '../features/notifications/page/notifications_page.dart';
-import '../features/who_us/page/who_us_page.dart';
+import '../features/setting/packages/privacy_policy/view/privacy_policy.dart';
+import '../features/setting/packages/terms_conditions/view/terms_conditions.dart';
 import '../main.dart';
 import 'routes.dart';
 import '../main_page/page/dashboard.dart';
@@ -22,8 +26,7 @@ import '../features/auth/reset_password/page/reset_password.dart';
 import '../features/auth/verification/model/verification_model.dart';
 import '../features/auth/verification/page/verification.dart';
 import '../features/change_password/page/change_password_page.dart';
-import '../features/setting/pages/privacy_policy.dart';
-import '../features/setting/pages/terms.dart';
+
 import '../features/splash/page/splash.dart';
 
 abstract class CustomNavigator {
@@ -81,7 +84,6 @@ abstract class CustomNavigator {
       case Routes.videoPreview:
         return _pageRoute(VideoPreviewPage(data: settings.arguments as Map));
 
-
       case Routes.pickLocation:
         return _pageRoute(
             PickMapPage(data: settings.arguments as LocationModel));
@@ -100,10 +102,10 @@ abstract class CustomNavigator {
         return _pageRoute(const PrivacyPolicy());
 
       case Routes.terms:
-        return _pageRoute(const Terms());
+        return _pageRoute(const TermsConditions());
 
-      case Routes.whoUs:
-        return _pageRoute(const WhoUsPage());
+      case Routes.aboutUs:
+        return _pageRoute(const AboutTheAppPage());
 
       case Routes.faqs:
         return _pageRoute(const FaqsPage());
@@ -144,8 +146,10 @@ abstract class CustomNavigator {
       {arguments, bool replace = false, bool clean = false}) {
     if (clean) {
       return navigatorState.currentState!.pushNamedAndRemoveUntil(
-          routeName, (_) => false,
-          arguments: arguments);
+        routeName,
+            (route) => route.settings.name == Routes.dashboard,
+        arguments: arguments,
+      );
     } else if (replace) {
       return navigatorState.currentState!.pushReplacementNamed(
         routeName,
@@ -157,3 +161,23 @@ abstract class CustomNavigator {
     }
   }
 }
+
+
+class AnalyticsRouteObserver extends RouteObserver<PageRoute<dynamic>> {
+  void _sendScreenView(PageRoute<dynamic> route) {
+    final screenName = route.settings.name ?? route.runtimeType.toString();
+    if (kDebugMode) {
+      print("Navigated to $screenName");
+    }
+    // AnalyticsService.logScreen(screenName);
+  }
+
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    super.didPush(route, previousRoute);
+    if (route is PageRoute) {
+      _sendScreenView(route);
+    }
+  }
+}
+

@@ -1,5 +1,5 @@
-import 'package:zurex_admin/main_models/custom_field_model.dart';
-import 'package:zurex_admin/main_models/user_model.dart';
+import 'package:aloo_lahma_admin/main_models/custom_field_model.dart';
+import 'package:aloo_lahma_admin/main_models/user_model.dart';
 
 import '../../../app/localization/language_constant.dart';
 import '../../../data/config/mapper.dart';

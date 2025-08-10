@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:zurex_admin/main_repos/base_repo.dart';
+import 'package:aloo_lahma_admin/main_repos/base_repo.dart';
 
 import '../../../app/core/app_storage_keys.dart';
 import '../../../data/api/end_points.dart';

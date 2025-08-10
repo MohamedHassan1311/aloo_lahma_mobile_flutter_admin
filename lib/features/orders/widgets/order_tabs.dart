@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/features/orders/bloc/orders_bloc.dart';
-import 'package:zurex_admin/main_models/search_engine.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/features/orders/bloc/orders_bloc.dart';
+import 'package:aloo_lahma_admin/main_models/search_engine.dart';
 import '../../../app/core/app_event.dart';
 import '../../../app/core/app_state.dart';
 import '../../../app/core/dimensions.dart';

@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/components/loading_dialog.dart';
-import 'package:zurex_admin/features/order_details/model/order_details_model.dart';
-import 'package:zurex_admin/main_models/search_engine.dart';
-import 'package:zurex_admin/navigation/custom_navigation.dart';
+import 'package:aloo_lahma_admin/components/loading_dialog.dart';
+import 'package:aloo_lahma_admin/features/order_details/model/order_details_model.dart';
+import 'package:aloo_lahma_admin/main_models/search_engine.dart';
+import 'package:aloo_lahma_admin/navigation/custom_navigation.dart';
 import '../../../../app/core/app_core.dart';
 import '../../../../app/core/app_event.dart';
 import '../../../../app/core/app_state.dart';

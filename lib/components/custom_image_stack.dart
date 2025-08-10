@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/components/shimmer/custom_shimmer.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/components/shimmer/custom_shimmer.dart';
 import '../app/core/text_styles.dart';
 import 'custom_network_image.dart';
 

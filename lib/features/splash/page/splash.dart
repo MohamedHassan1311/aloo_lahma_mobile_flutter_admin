@@ -1,11 +1,12 @@
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/app_state.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:zurex_admin/features/splash/repo/splash_repo.dart';
+import 'package:aloo_lahma_admin/features/splash/repo/splash_repo.dart';
 import '../../../app/core/app_event.dart';
+import '../../../app/core/dimensions.dart';
 import '../../../app/core/images.dart';
 import '../../../data/config/di.dart';
 import '../bloc/splash_bloc.dart';
@@ -38,42 +39,31 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
       child: BlocBuilder<SplashBloc, AppState>(
         builder: (context, state) {
           return Scaffold(
-              body: Stack(
-            children: [
-              Center(
-                child: Image.asset(
-                  Images.splash,
-                  width: context.width,
-                ).animate().then(delay: 200.ms).shimmer(),
+              body: SizedBox(
+            height: context.height,
+            width: context.width,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    Images.logo,
+                    width: context.width * 0.8,
+                    height: context.width * 0.8,
+                  )
+                      .animate()
+                      .scale(
+                        duration: 2000.ms,
+                        curve: Curves.easeInOut,
+                      )
+                      .then(delay: 100.ms)
+                      .shimmer(),
+                ],
               ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  height: 100,
-                  width: context.width,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[
-                        Colors.white,
-                        Color(0xffc2d6e3),
-                      ])),
-                ),
-              ),
-              Positioned(
-                right: 0,
-                bottom: 10,
-                child: Image.asset(
-                  Images.motorSplash,
-                  width: context.width * .85,
-                )
-                    .animate()
-                    .slideX(begin: 1.0, end: 0.0, duration: 1200.ms)
-                    .then(delay: 200.ms)
-                    .shimmer(),
-              ),
-            ],
+            ),
           ));
         },
       ),

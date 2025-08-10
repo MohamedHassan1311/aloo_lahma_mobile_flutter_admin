@@ -1,6 +1,6 @@
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/components/custom_app_bar.dart';
-import 'package:zurex_admin/components/custom_network_image.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/components/custom_app_bar.dart';
+import 'package:aloo_lahma_admin/components/custom_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImageViewer extends StatelessWidget {

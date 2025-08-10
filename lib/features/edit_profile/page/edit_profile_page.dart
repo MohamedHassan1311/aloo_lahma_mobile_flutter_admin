@@ -1,7 +1,7 @@
-import 'package:zurex_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/components/custom_app_bar.dart';
+import 'package:aloo_lahma_admin/components/custom_app_bar.dart';
 import '../../../../data/config/di.dart';
 import '../../../app/core/app_event.dart';
 import '../bloc/edit_profile_bloc.dart';

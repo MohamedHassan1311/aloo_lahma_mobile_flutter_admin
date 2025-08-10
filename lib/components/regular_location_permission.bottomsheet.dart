@@ -1,4 +1,4 @@
-import 'package:zurex_admin/navigation/custom_navigation.dart';
+import 'package:aloo_lahma_admin/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'custom_button.dart';
 

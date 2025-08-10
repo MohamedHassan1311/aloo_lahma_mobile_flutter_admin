@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/app/core/text_styles.dart';
-import 'package:zurex_admin/app/localization/language_constant.dart';
-import 'package:zurex_admin/features/orders/model/orders_model.dart';
-import 'package:zurex_admin/navigation/custom_navigation.dart';
-import 'package:zurex_admin/navigation/routes.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/text_styles.dart';
+import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/features/orders/model/orders_model.dart';
+import 'package:aloo_lahma_admin/navigation/custom_navigation.dart';
+import 'package:aloo_lahma_admin/navigation/routes.dart';
 
 import '../../../app/core/app_core.dart';
 import '../../../app/core/dimensions.dart';

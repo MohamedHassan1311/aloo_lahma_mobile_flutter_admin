@@ -1,12 +1,11 @@
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/localization/language_constant.dart';
-import 'package:zurex_admin/components/custom_app_bar.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/components/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/app_state.dart';
-import 'package:zurex_admin/components/animated_widget.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/components/animated_widget.dart';
 import '../../../app/core/app_event.dart';
-import '../../../app/core/styles.dart';
 import '../../../app/core/svg_images.dart';
 import '../../../data/config/di.dart';
 import '../../../main_blocs/user_bloc.dart';
@@ -64,8 +63,9 @@ class _MoreState extends State<More> {
                       child: BlocBuilder<UserBloc, AppState>(
                         builder: (context, state) {
                           return ListAnimator(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                             data: [
-
                               ///Buttons
                               if (UserBloc.instance.isLogin) ...[
                                 ///Edit Profile
@@ -78,15 +78,6 @@ class _MoreState extends State<More> {
                                 ),
 
                                 ///Notifications
-                                MoreButton(
-                                  title: getTranslated("notifications",
-                                      context: context),
-                                  icon: SvgImages.notification,
-                                  onTap: () => CustomNavigator.push(
-                                      Routes.notifications),
-                                ),
-
-                                ///Turn Notifications
                                 BlocProvider(
                                   create: (context) => TurnNotificationsBloc(
                                       repo: sl<NotificationsRepo>()),
@@ -94,14 +85,15 @@ class _MoreState extends State<More> {
                                       AppState>(
                                     builder: (context, state) {
                                       return TurnButton(
-                                        title: getTranslated(
-                                            "push_notification",
+                                        onTap: () => CustomNavigator.push(
+                                            Routes.notifications),
+                                        title: getTranslated("notifications",
                                             context: context),
                                         icon: SvgImages.notification,
                                         bing: context
                                             .read<TurnNotificationsBloc>()
                                             .isTurnOn,
-                                        onTap: () {
+                                        onSwitch: () {
                                           context
                                               .read<TurnNotificationsBloc>()
                                               .add(Turn());
@@ -111,26 +103,19 @@ class _MoreState extends State<More> {
                                     },
                                   ),
                                 ),
+
+                                ///Change Password
+                                MoreButton(
+                                  title: getTranslated("change_password",
+                                      context: context),
+                                  icon: SvgImages.lockIcon,
+                                  onTap: () => CustomNavigator.push(
+                                      Routes.changePassword),
+                                ),
                               ],
+
                               ///Language
                               const LanguageButton(),
-
-                              ///Change Password
-                              MoreButton(
-                                title: getTranslated("change_password",
-                                    context: context),
-                                icon: SvgImages.lockIcon,
-                                onTap: () =>
-                                    CustomNavigator.push(Routes.changePassword),
-                              ),
-
-                              ///Who us
-                              MoreButton(
-                                title:
-                                    getTranslated("who_us", context: context),
-                                icon: SvgImages.info,
-                                onTap: () => CustomNavigator.push(Routes.whoUs),
-                              ),
 
                               ///Contact With Us
                               MoreButton(
@@ -139,6 +124,15 @@ class _MoreState extends State<More> {
                                 icon: SvgImages.contactWithUs,
                                 onTap: () =>
                                     CustomNavigator.push(Routes.contactWithUs),
+                              ),
+
+                              ///About the App
+                              MoreButton(
+                                title: getTranslated("about_the_app",
+                                    context: context),
+                                icon: SvgImages.aboutUs,
+                                onTap: () =>
+                                    CustomNavigator.push(Routes.aboutUs),
                               ),
 
                               ///Terms && Conditions

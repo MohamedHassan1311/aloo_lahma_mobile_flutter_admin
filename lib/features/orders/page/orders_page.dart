@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/main_blocs/user_bloc.dart';
-import 'package:zurex_admin/main_widgets/guest_mode.dart';
+import 'package:aloo_lahma_admin/main_blocs/user_bloc.dart';
+import 'package:aloo_lahma_admin/main_widgets/guest_mode.dart';
 import '../../../app/core/app_state.dart';
 import '../../../data/config/di.dart';
 import '../widgets/main_app_bar.dart';

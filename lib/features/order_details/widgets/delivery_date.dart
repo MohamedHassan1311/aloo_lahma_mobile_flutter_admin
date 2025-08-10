@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/app/core/svg_images.dart';
-import 'package:zurex_admin/components/custom_images.dart';
+import 'package:aloo_lahma_admin/app/core/svg_images.dart';
+import 'package:aloo_lahma_admin/components/custom_images.dart';
 import '../../../app/core/dimensions.dart';
 import '../../../app/core/styles.dart';
 import '../../../app/core/text_styles.dart';

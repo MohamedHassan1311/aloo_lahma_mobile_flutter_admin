@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/app/core/svg_images.dart';
-import 'package:zurex_admin/main_models/purchased_product_model.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/svg_images.dart';
+import 'package:aloo_lahma_admin/main_models/purchased_product_model.dart';
 
 import '../../../app/core/dimensions.dart';
 import '../../../app/core/styles.dart';

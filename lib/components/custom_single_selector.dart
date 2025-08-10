@@ -1,7 +1,7 @@
-import 'package:zurex_admin/app/localization/language_constant.dart';
-import 'package:zurex_admin/components/animated_widget.dart';
+import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/components/animated_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
 
 import '../app/core/dimensions.dart';
 import '../app/core/styles.dart';
@@ -37,7 +37,7 @@ class _CustomSingleSelectorState extends State<CustomSingleSelector> {
   Widget build(BuildContext context) {
     return ListAnimator(
       controller: ScrollController(),
-      customPadding:
+      padding:
           EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
       data: List.generate(
         widget.list.length,

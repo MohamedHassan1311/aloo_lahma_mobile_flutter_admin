@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/app_state.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/features/auth/reset_password/bloc/reset_password_bloc.dart';
-import 'package:zurex_admin/features/auth/reset_password/repo/reset_password_repo.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/features/auth/reset_password/bloc/reset_password_bloc.dart';
+import 'package:aloo_lahma_admin/features/auth/reset_password/repo/reset_password_repo.dart';
 
 import '../../../../app/core/app_event.dart';
 import '../../../../app/core/svg_images.dart';
@@ -42,7 +42,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               children: [
                 Expanded(
                   child: ListAnimator(
-                    customPadding: EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                         vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
                     data: [

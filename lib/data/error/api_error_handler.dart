@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:zurex_admin/data/error/failures.dart';
+import 'package:aloo_lahma_admin/data/error/failures.dart';
 
 import '../../app/core/app_event.dart';
 import '../../app/core/app_state.dart';

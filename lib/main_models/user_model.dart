@@ -1,5 +1,7 @@
-import 'package:zurex_admin/data/config/mapper.dart';
-import 'package:zurex_admin/main_blocs/user_bloc.dart';
+import 'package:aloo_lahma_admin/data/config/mapper.dart';
+import 'package:aloo_lahma_admin/features/profile/enums/user_types_enum.dart';
+
+import '../features/profile/enums/user_types_enum_converter.dart';
 
 class UserModel extends SingleMapper {
   int? id;
@@ -30,7 +32,7 @@ class UserModel extends SingleMapper {
     countryCode = json['country_code'];
     phone = json['phone_number'];
     email = json['email'];
-    userType = UserType.values.firstWhere((e) => e.name.toUpperCase() == json['type'].toString().toUpperCase());
+    userType = UserTypeEnumConverter.convertUserTypeFromStringToEnum(json['type']);
   }
 
   @override

@@ -2,7 +2,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/features/order_details/repo/order_details_repo.dart';
+import 'package:aloo_lahma_admin/features/order_details/repo/order_details_repo.dart';
 
 import '../../../../../app/core/app_core.dart';
 import '../../../../../app/core/app_event.dart';

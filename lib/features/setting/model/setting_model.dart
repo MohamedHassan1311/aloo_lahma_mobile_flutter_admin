@@ -1,166 +1,169 @@
-import 'package:zurex_admin/data/config/mapper.dart';
+import 'package:aloo_lahma_admin/data/config/mapper.dart';
 
 class SettingModel extends SingleMapper {
-  GeneralModel? general;
-  SocialModel? social;
-  AppRulesModel? appRules;
-  ContactUsModel? contactUs;
-  PriceModel? price;
+  int? id;
+  String? urlSite;
+  String? nameAr;
+  String? nameEn;
+  String? email;
+  String? arInstitutionName;
+  String? enInstitutionName;
+  String? institutionTaxNumber;
+  String? mobile;
+  int? androidForcedUpdate;
+  int? iosForcedUpdate;
+  String? contentAr;
+  String? contentEn;
+  String? addressAr;
+  String? addressEn;
+  String? whatsapp;
+  int? hoursBeforeOrder;
+  String? googleAppUrl;
+  String? appleAppUrl;
+  String? facebook;
+  String? instagram;
+  String? messenger;
+  String? twitter;
+  String? snapchat;
+  double? longitude;
+  double? latitude;
+  String? startTime;
+  String? endTime;
+  String? taxNumber;
+  int? maroof;
+  String? complaintNumber;
+  String? customerNumber;
+  String? deliveryMessageAr;
+  String? deliveryMessageEn;
+  String? defaultColor;
+  String? secondaryColor;
+  String? sacrificePrice;
+  String? specialDeliveryLimit;
 
-  SettingModel({general, social, appRules, price});
+  SettingModel({
+    this.id,
+    this.urlSite,
+    this.nameAr,
+    this.nameEn,
+    this.email,
+    this.arInstitutionName,
+    this.enInstitutionName,
+    this.institutionTaxNumber,
+    this.mobile,
+    this.androidForcedUpdate,
+    this.iosForcedUpdate,
+    this.contentAr,
+    this.contentEn,
+    this.whatsapp,
+    this.hoursBeforeOrder,
+    this.googleAppUrl,
+    this.appleAppUrl,
+    this.facebook,
+    this.instagram,
+    this.messenger,
+    this.twitter,
+    this.snapchat,
+    this.startTime,
+    this.endTime,
+    this.taxNumber,
+    this.maroof,
+    this.complaintNumber,
+    this.customerNumber,
+    this.deliveryMessageAr,
+    this.deliveryMessageEn,
+    this.defaultColor,
+    this.secondaryColor,
+    this.sacrificePrice,
+    this.specialDeliveryLimit,
+    this.addressAr,
+    this.addressEn,
+    this.longitude,
+    this.latitude,
+  });
 
   SettingModel.fromJson(Map<String, dynamic> json) {
-    general =
-        json['general'] != null ? GeneralModel.fromJson(json['general']) : null;
-    social =
-        json['social'] != null ? SocialModel.fromJson(json['social']) : null;
-    appRules = json['app_rules'] != null
-        ? AppRulesModel.fromJson(json['app_rules'])
-        : null;
-    contactUs = json['contact_us'] != null
-        ? ContactUsModel.fromJson(json['contact_us'])
-        : null;
-    price = json['price'] != null ? PriceModel.fromJson(json['price']) : null;
+    id = json['id'];
+    urlSite = json['url_site'];
+    nameAr = json['name_ar'];
+    nameEn = json['name_en'];
+    email = json['email'];
+    arInstitutionName = json['ar_institution_name'];
+    enInstitutionName = json['en_institution_name'];
+    institutionTaxNumber = json['institution_tax_number'];
+    mobile = json['mobile'];
+    androidForcedUpdate = json['android_forced_update'];
+    iosForcedUpdate = json['ios_forced_update'];
+    contentAr = json['content_ar'];
+    contentEn = json['content_en'];
+    addressAr = json['address_ar'];
+    addressEn = json['address_en'];
+    whatsapp = json['whatsapp'];
+    hoursBeforeOrder = json['hours_before_order'];
+    googleAppUrl = json['google_app_url'];
+    appleAppUrl = json['apple_app_url'];
+    facebook = json['facebook'];
+    instagram = json['instagram'];
+    messenger = json['messenger'];
+    twitter = json['twitter'];
+    snapchat = json['snapchat'];
+    longitude = double.parse(json['longitude']?.toString() ?? '0');
+    latitude = double.parse(json['latitude']?.toString() ?? '0');
+    startTime = json['start_time'];
+    endTime = json['end_time'];
+    taxNumber = json['tax_number'];
+    maroof = json['maroof'];
+    complaintNumber = json['complaintـnumber'];
+    customerNumber = json['customerـnumber'];
+    deliveryMessageAr = json['delivery_message_ar'];
+    deliveryMessageEn = json['delivery_message_en'];
+    defaultColor = json['default_color'];
+    secondaryColor = json['secondary_color'];
+    sacrificePrice = json['sacrifice_price'];
+    specialDeliveryLimit = json['special_delivery_limit'];
   }
 
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['general'] = general?.toJson();
-    data['social'] = social?.toJson();
-    data['app_rules'] = appRules?.toJson();
-    data['contact_us'] = contactUs?.toJson();
-    data['price'] = price?.toJson();
-
+    data['id'] = id;
+    data['url_site'] = urlSite;
+    data['name_ar'] = nameAr;
+    data['name_en'] = nameEn;
+    data['email'] = email;
+    data['ar_institution_name'] = arInstitutionName;
+    data['en_institution_name'] = enInstitutionName;
+    data['institution_tax_number'] = institutionTaxNumber;
+    data['mobile'] = mobile;
+    data['android_forced_update'] = androidForcedUpdate;
+    data['ios_forced_update'] = iosForcedUpdate;
+    data['content_ar'] = contentAr;
+    data['content_en'] = contentEn;
+    data['whatsapp'] = whatsapp;
+    data['hours_before_order'] = hoursBeforeOrder;
+    data['google_app_url'] = googleAppUrl;
+    data['apple_app_url'] = appleAppUrl;
+    data['facebook'] = facebook;
+    data['instagram'] = instagram;
+    data['messenger'] = messenger;
+    data['twitter'] = twitter;
+    data['snapchat'] = snapchat;
+    data['start_time'] = startTime;
+    data['end_time'] = endTime;
+    data['tax_number'] = taxNumber;
+    data['maroof'] = maroof;
+    data['complaintـnumber'] = complaintNumber;
+    data['customerـnumber'] = customerNumber;
+    data['delivery_message_ar'] = deliveryMessageAr;
+    data['delivery_message_en'] = deliveryMessageEn;
+    data['default_color'] = defaultColor;
+    data['secondary_color'] = secondaryColor;
+    data['sacrifice_price'] = sacrificePrice;
+    data['special_delivery_limit'] = specialDeliveryLimit;
     return data;
   }
 
   @override
   Mapper fromJson(Map<String, dynamic> json) {
     return SettingModel.fromJson(json);
-  }
-}
-
-class GeneralModel {
-  String? siteNameAr;
-  String? siteNameEn;
-  String? siteLogo;
-  String? splashLogo;
-  String? splashVideo;
-
-  GeneralModel({siteNameAr, siteNameEn, siteLogo, splashLogo, splashVideo});
-
-  GeneralModel.fromJson(Map<String, dynamic> json) {
-    siteNameAr = json['site_name_ar'];
-    siteNameEn = json['site_name_en'];
-    siteLogo = json['site_logo'];
-    splashLogo = json['splash_logo'];
-    splashVideo = json['splash_video'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['site_name_ar'] = siteNameAr;
-    data['site_name_en'] = siteNameEn;
-    data['site_logo'] = siteLogo;
-    data['splash_logo'] = splashLogo;
-    data['splash_video'] = splashVideo;
-    return data;
-  }
-}
-
-class SocialModel {
-  String? whatsApp;
-  String? facebook;
-  String? twitter;
-  String? tiktok;
-  String? snapchat;
-  String? instagram;
-  String? website;
-
-  SocialModel(
-      {this.whatsApp,
-      this.facebook,
-      this.twitter,
-      this.tiktok,
-      this.snapchat,
-      this.instagram,
-      this.website});
-
-  SocialModel.fromJson(Map<String, dynamic> json) {
-    whatsApp = json['whatsApp'];
-    facebook = json['facebook'];
-    twitter = json['twitter'];
-    snapchat = json['snapchat'];
-    instagram = json['instagram'];
-    website = json['website'];
-    tiktok = json['tiktok'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['whatsapp_link'] = whatsApp;
-    data['facebook'] = facebook;
-    data['twitter'] = twitter;
-    data['snapchat'] = snapchat;
-    data['instagram'] = instagram;
-    data['website'] = website;
-    data['tiktok'] = tiktok;
-    return data;
-  }
-}
-
-class AppRulesModel {
-  String? privacyPolicy;
-  String? termsAndConditions;
-
-  AppRulesModel({privacyPolicy, termsAndConditions});
-
-  AppRulesModel.fromJson(Map<String, dynamic> json) {
-    privacyPolicy = json['privacy_and_policy'];
-    termsAndConditions = json['terms_and_conditions'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['terms_and_conditions'] = termsAndConditions;
-    data['privacy_and_policy'] = privacyPolicy;
-    return data;
-  }
-}
-
-class ContactUsModel {
-  String? phone;
-  String? email;
-
-  ContactUsModel({this.phone, this.email});
-
-  ContactUsModel.fromJson(Map<String, dynamic> json) {
-    phone = json['phone'];
-    email = json['email'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['phone'] = phone;
-    data['email'] = email;
-    return data;
-  }
-}
-
-class PriceModel {
-  double? minPurchaseAmount;
-
-  PriceModel({this.minPurchaseAmount});
-
-  PriceModel.fromJson(Map<String, dynamic> json) {
-    minPurchaseAmount =
-        double.tryParse(json['min_purchase_amount']?.toString() ?? "0");
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['min_purchase_amount'] = minPurchaseAmount;
-    return data;
   }
 }

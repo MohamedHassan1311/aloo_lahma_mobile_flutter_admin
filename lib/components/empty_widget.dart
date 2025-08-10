@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import '../app/core/images.dart';
 import '../app/core/styles.dart';
@@ -47,13 +47,13 @@ class EmptyState extends StatelessWidget {
             !isSvg
                 ? customImageIcon(
                     imageName: img ?? Images.logo,
-                    width: imgWidth ?? context.width * 0.45,
-                    height: imgHeight ?? context.height * 0.1,
+                    width: imgWidth ?? context.width * 0.5,
+                    height: imgHeight ?? context.width * 0.5,
                   ) //width: MediaQueryHelper.width*.8,),
                 : customImageIconSVG(
                     imageName: img ?? SvgImages.appLogo,
-                    width: imgWidth ?? context.width * 0.45,
-                    height: imgHeight ?? context.height * 0.19,
+                    width: imgWidth ?? context.width * 0.5,
+                    height: imgHeight ?? context.width * 0.5,
                   ),
           SizedBox(
             height: spaceBtw ?? 12.h,

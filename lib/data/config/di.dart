@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zurex_admin/features/change_status/repo/change_status_repo.dart';
+import 'package:aloo_lahma_admin/features/change_status/repo/change_status_repo.dart';
 import '../../app/theme/theme_provider/theme_provider.dart';
 import '../../features/auth/activation_account/repo/activation_account_repo.dart';
 import '../../features/auth/deactivate_account/repo/deactivate_account_repo.dart';
@@ -19,7 +19,7 @@ import '../../features/faqs/repo/faqs_repo.dart';
 import '../../features/order_details/repo/order_details_repo.dart';
 import '../../features/orders/bloc/orders_bloc.dart';
 import '../../features/orders/repo/orders_repo.dart';
-import '../../features/who_us/repo/who_us_repo.dart';
+import '../../features/setting/repo/settings_repo.dart';
 import '../../main_blocs/country_states_bloc.dart';
 import '../../main_repos/country_states_repo.dart';
 import '../../features/language/bloc/language_bloc.dart';
@@ -28,8 +28,7 @@ import '../../features/maps/repo/maps_repo.dart';
 import '../../features/notifications/repo/notifications_repo.dart';
 import '../../features/profile/bloc/profile_bloc.dart';
 import '../../features/profile/repo/profile_repo.dart';
-import '../../features/setting/bloc/setting_bloc.dart';
-import '../../features/setting/repo/setting_repo.dart';
+import '../../features/setting/bloc/settings_bloc.dart';
 import '../../features/contact_with_us/repo/contact_with_us_repo.dart';
 import '../../helpers/pickers/repo/picker_helper_repo.dart';
 import '../../main_blocs/user_bloc.dart';
@@ -62,13 +61,11 @@ Future<void> init() async {
       () => LocalizationRepo(sharedPreferences: sl(), dioClient: sl()));
 
   sl.registerLazySingleton(
-      () => SettingRepo(sharedPreferences: sl(), dioClient: sl()));
+      () => SettingsRepo(sharedPreferences: sl(), dioClient: sl()));
 
   sl.registerLazySingleton(
       () => FaqsRepo(sharedPreferences: sl(), dioClient: sl()));
 
-  sl.registerLazySingleton(
-      () => WhoUsRepo(sharedPreferences: sl(), dioClient: sl()));
 
   sl.registerLazySingleton(() => DownloadRepo());
 
@@ -137,7 +134,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LanguageBloc(repo: sl()));
   sl.registerLazySingleton(() => ThemeProvider(sharedPreferences: sl()));
   sl.registerLazySingleton(() => CountryStatesBloc(repo: sl()));
-  sl.registerLazySingleton(() => SettingBloc(repo: sl()));
+  sl.registerLazySingleton(() => SettingsBloc(repo: sl()));
   sl.registerLazySingleton(() => DashboardBloc());
   sl.registerLazySingleton(() => ProfileBloc(repo: sl()));
   sl.registerLazySingleton(() => UserBloc(repo: sl()));

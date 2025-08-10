@@ -1,9 +1,9 @@
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/app/core/images.dart';
-import 'package:zurex_admin/app/localization/language_constant.dart';
-import 'package:zurex_admin/components/animated_widget.dart';
-import 'package:zurex_admin/components/custom_button.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/images.dart';
+import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/components/animated_widget.dart';
+import 'package:aloo_lahma_admin/components/custom_button.dart';
 import 'package:flutter/material.dart';
 import '../app/core/styles.dart';
 import '../app/core/text_styles.dart';
@@ -19,7 +19,7 @@ class GuestMode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ListAnimator(
-        customPadding: EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
             vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
         data: [

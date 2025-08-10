@@ -1,38 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-class AnimatedWidgets extends StatelessWidget {
-  final Widget? child;
-  final double? verticalOffset;
-  final double? horizontalOffset;
-  final double? durationMilli;
-
-  const AnimatedWidgets(
-      {super.key,
-      this.child,
-      this.verticalOffset,
-      this.horizontalOffset,
-      this.durationMilli});
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimationConfiguration.staggeredList(
-      position: 2,
-      duration: Duration(
-          milliseconds: durationMilli != null ? durationMilli!.toInt() : 500),
-      child: SlideAnimation(
-        curve: Curves.easeInOut,
-        horizontalOffset: horizontalOffset ?? 0,
-        verticalOffset: verticalOffset ?? 50,
-        child: FadeInAnimation(
-          child: child!,
-        ),
-      ),
-    );
-  }
-}
-
-class ListAnimator extends StatefulWidget {
+class ListAnimator extends StatelessWidget {
   final List<Widget>? data;
   final int? durationMilli;
   final double? verticalOffset;
@@ -42,8 +12,9 @@ class ListAnimator extends StatefulWidget {
   final bool addPadding;
   final bool reverse;
   final bool scroll;
-  final customPadding;
-  final Stream<int>? scrollControllerStream;
+  final bool shrinkWrap;
+  final EdgeInsets? padding;
+  final CrossAxisAlignment? crossAxisAlignment;
 
   const ListAnimator({
     this.controller,
@@ -55,49 +26,31 @@ class ListAnimator extends StatefulWidget {
     this.direction,
     this.addPadding = true,
     this.reverse = false,
-    this.customPadding,
-    this.scrollControllerStream,
+    this.padding,
+    this.crossAxisAlignment,
     this.scroll = true,
+    this.shrinkWrap = false,
   });
 
   @override
-  _ListAnimatorState createState() => _ListAnimatorState();
-}
-
-class _ListAnimatorState extends State<ListAnimator> {
-  @override
   Widget build(BuildContext context) {
-    return StreamBuilder<int>(
-        stream: widget.scrollControllerStream,
-        builder: (context, snapshot) {
-          // if(snapshot.hasData){
-          //   autoScroll.scrollToIndex(snapshot.data ,preferPosition: AutoScrollPosition.middle );
-          // }
-          return AnimationLimiter(
-            child: SingleChildScrollView(
-              controller: widget.controller,
-              padding: widget.customPadding ??
-                  EdgeInsets.only(top: widget.addPadding ? 0 : 0),
-              physics: widget.scroll
-                  ? const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics())
-                  : const NeverScrollableScrollPhysics(),
-              reverse: widget.reverse,
-              scrollDirection: widget.direction ?? Axis.vertical,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: List.generate(widget.data!.length, (index) {
-                  return AnimationConfiguration.staggeredList(
-                      position: index,
-                      duration:
-                          Duration(milliseconds: widget.durationMilli ?? 400),
-                      child: SlideAnimation(
-                          verticalOffset: widget.verticalOffset ?? 1.0,
-                          child: FadeInAnimation(child: widget.data![index])));
-                }),
-              ),
-            ),
-          );
-        });
+    return ListView.builder(
+      controller: controller,
+      padding: padding ?? EdgeInsets.only(top: addPadding ? 0 : 0),
+      physics: scroll
+          ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+          : const NeverScrollableScrollPhysics(),
+      reverse: reverse,
+      scrollDirection: direction ?? Axis.vertical,
+      itemCount: data?.length ?? 0,
+      shrinkWrap: shrinkWrap,
+      itemBuilder: (c, i) => data?[i].animate().scale(
+            delay: Duration(milliseconds: i * 10),
+          ),
+    ).animate().slideY(
+        end: 0,
+        begin: 0.4,
+        curve: Curves.easeOut,
+        duration: Duration(milliseconds: 700));
   }
 }

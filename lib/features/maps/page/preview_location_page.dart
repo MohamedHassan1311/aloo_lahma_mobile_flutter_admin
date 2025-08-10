@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/app/localization/language_constant.dart';
-import 'package:zurex_admin/components/custom_app_bar.dart';
-import 'package:zurex_admin/features/maps/models/location_model.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/components/custom_app_bar.dart';
+import 'package:aloo_lahma_admin/features/maps/models/location_model.dart';
 
 import '../../../app/core/app_strings.dart';
 

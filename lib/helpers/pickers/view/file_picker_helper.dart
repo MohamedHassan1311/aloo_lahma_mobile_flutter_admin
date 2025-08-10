@@ -4,7 +4,7 @@ import 'dart:developer' as print;
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:zurex_admin/app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
 
 import '../../../app/core/app_core.dart';
 

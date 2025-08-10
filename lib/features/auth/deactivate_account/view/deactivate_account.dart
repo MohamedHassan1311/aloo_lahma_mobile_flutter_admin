@@ -1,8 +1,8 @@
-import 'package:zurex_admin/app/core/app_state.dart';
-import 'package:zurex_admin/app/core/images.dart';
-import 'package:zurex_admin/app/core/text_styles.dart';
-import 'package:zurex_admin/components/custom_images.dart';
-import 'package:zurex_admin/navigation/custom_navigation.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/images.dart';
+import 'package:aloo_lahma_admin/app/core/text_styles.dart';
+import 'package:aloo_lahma_admin/components/custom_images.dart';
+import 'package:aloo_lahma_admin/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

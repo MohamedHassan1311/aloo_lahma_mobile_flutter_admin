@@ -1,4 +1,4 @@
-import 'package:zurex_admin/features/language/bloc/language_bloc.dart';
+import 'package:aloo_lahma_admin/features/language/bloc/language_bloc.dart';
 
 import '../../data/config/di.dart';
 

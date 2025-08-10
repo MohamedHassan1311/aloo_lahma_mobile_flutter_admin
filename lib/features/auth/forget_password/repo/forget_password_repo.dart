@@ -12,8 +12,8 @@ class ForgetPasswordRepo extends BaseRepo {
   Future<Either<ServerFailure, Response>> forgetPassword(
       Map<String, dynamic> data) async {
     try {
-      Response response =
-          await dioClient.post(uri: EndPoints.forgetPassword, data: data);
+      Response response = await dioClient.post(
+          uri: EndPoints.forgetPassword(userType), data: data);
 
       if (response.statusCode == 200) {
         return Right(response);

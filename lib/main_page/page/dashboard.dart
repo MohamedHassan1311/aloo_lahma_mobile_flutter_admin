@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:app_links/app_links.dart';
-import 'package:zurex_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/features/more/page/more.dart';
-import 'package:zurex_admin/main_blocs/user_bloc.dart';
+import 'package:aloo_lahma_admin/features/more/page/more.dart';
+import 'package:aloo_lahma_admin/main_blocs/user_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/main_models/search_engine.dart';
+import 'package:aloo_lahma_admin/main_models/search_engine.dart';
 import '../../app/core/app_event.dart';
 import '../../data/config/di.dart';
 import '../../data/internet_connection/internet_connection.dart';

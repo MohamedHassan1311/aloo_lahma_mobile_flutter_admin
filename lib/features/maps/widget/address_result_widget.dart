@@ -1,8 +1,8 @@
-import 'package:zurex_admin/app/core/app_state.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/features/maps/bloc/map_bloc.dart';
-import 'package:zurex_admin/features/maps/models/location_model.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/features/maps/bloc/map_bloc.dart';
+import 'package:aloo_lahma_admin/features/maps/models/location_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

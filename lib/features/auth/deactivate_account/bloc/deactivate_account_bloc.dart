@@ -1,10 +1,10 @@
-import 'package:zurex_admin/app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/components/loading_dialog.dart';
-import 'package:zurex_admin/navigation/custom_navigation.dart';
+import 'package:aloo_lahma_admin/components/loading_dialog.dart';
+import 'package:aloo_lahma_admin/navigation/custom_navigation.dart';
 import '../../../../app/core/app_core.dart';
 import '../../../../app/core/app_event.dart';
 import '../../../../app/core/app_notification.dart';

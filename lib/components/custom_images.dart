@@ -1,4 +1,4 @@
-import 'package:zurex_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

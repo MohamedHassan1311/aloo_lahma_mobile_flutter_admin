@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:media_cache_manager/media_cache_manager.dart';
-import 'package:zurex_admin/data/api/end_points.dart';
+import 'package:aloo_lahma_admin/data/api/end_points.dart';
 import '../../data/config/di.dart';
-import '../../features/setting/bloc/setting_bloc.dart';
+import '../../features/setting/bloc/settings_bloc.dart';
 import 'video_player_widget.dart';
 
 class VideoCacheManager extends StatefulWidget {
@@ -19,7 +19,7 @@ class _VideoCacheManagerState extends State<VideoCacheManager> {
   Widget build(BuildContext context) {
 
     return StreamBuilder<String>(
-        stream: sl<SettingBloc>().configVideoStream,
+        stream: sl<SettingsBloc>().configVideoStream,
         builder: (context, videoSnapshot) {
           if (videoSnapshot.hasData) {
             return DownloadMediaBuilder(

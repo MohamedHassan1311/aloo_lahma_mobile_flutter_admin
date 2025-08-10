@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/app_state.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
 import '../../../../app/core/styles.dart';
 import '../../../../app/core/text_styles.dart';
 import '../../../../app/core/validation.dart';
@@ -42,7 +42,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               children: [
                 Expanded(
                   child: ListAnimator(
-                    customPadding: EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                         vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
                     data: [

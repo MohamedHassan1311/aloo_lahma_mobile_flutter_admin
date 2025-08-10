@@ -52,6 +52,7 @@ class SvgImages {
   static const String lockIcon = 'assets/svgs/lock.svg';
   static const String eyeIcon = 'assets/svgs/eye.svg';
   static const String hiddenEyeIcon = 'assets/svgs/hidden_eye.svg';
+  static const String phone = 'assets/svgs/phone.svg';
   static const String phoneCallIcon = 'assets/svgs/phone_call.svg';
   static const String arrowRightAlt = 'assets/svgs/arrow_right_alt.svg';
   static const String arrowRight = 'assets/svgs/arrow_right.svg';

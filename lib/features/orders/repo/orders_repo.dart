@@ -1,4 +1,4 @@
-import 'package:zurex_admin/main_models/search_engine.dart';
+import 'package:aloo_lahma_admin/main_models/search_engine.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -6,7 +6,7 @@ import '../../../../../data/api/end_points.dart';
 import '../../../../../data/error/api_error_handler.dart';
 import '../../../../../data/error/failures.dart';
 import '../../../../../main_repos/base_repo.dart';
-import '../../../main_blocs/user_bloc.dart';
+import '../../profile/enums/user_types_enum.dart';
 
 class OrdersRepo extends BaseRepo {
   OrdersRepo({required super.dioClient, required super.sharedPreferences});
@@ -18,10 +18,8 @@ class OrdersRepo extends BaseRepo {
         queryParameters: {
           "page": data.currentPage! + 1,
           "limit": data.limit,
-          if (UserBloc.instance.user?.userType == UserType.driver)
-            "deliveryByMyTeam": true,
-          if (UserBloc.instance.user?.userType == UserType.admin)
-            "managedByMe": true,
+          if (userType == UserType.driver.name) "deliveryByMyTeam": true,
+          if (userType == UserType.admin.name) "managedByMe": true,
         }..addAll(data.data),
       );
       if (response.statusCode == 200) {

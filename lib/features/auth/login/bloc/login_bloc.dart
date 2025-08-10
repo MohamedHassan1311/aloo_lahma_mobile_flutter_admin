@@ -3,17 +3,18 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:zurex_admin/components/custom_simple_dialog.dart';
+import 'package:aloo_lahma_admin/components/custom_simple_dialog.dart';
 import '../../../../app/core/app_core.dart';
 import '../../../../app/core/app_event.dart';
 import '../../../../app/core/app_notification.dart';
 import '../../../../app/core/app_state.dart';
+import '../../../../app/core/app_storage_keys.dart';
 import '../../../../app/core/styles.dart';
 import '../../../../app/localization/language_constant.dart';
 import '../../../../data/error/failures.dart';
-import '../../../../main_blocs/user_bloc.dart';
 import '../../../../navigation/custom_navigation.dart';
 import '../../../../navigation/routes.dart';
+import '../../../profile/enums/user_types_enum.dart';
 import '../../activation_account/view/activation_dialog.dart';
 import '../repo/login_repo.dart';
 
@@ -38,7 +39,11 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
   TextEditingController passwordTEC = TextEditingController();
 
   final userType = BehaviorSubject<UserType>();
-  Function(UserType) get updateUserType => userType.sink.add;
+  updateUserType(UserType type) {
+    userType.sink.add(type);
+    repo.sharedPreferences.setString(AppStorageKey.userType, type.name);
+  }
+
   Stream<UserType> get userTypeStream => userType.stream.asBroadcastStream();
 
   Function(bool?) get updateRememberMe => rememberMe.sink.add;
@@ -62,7 +67,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
       emit(Loading());
 
       Map<String, dynamic> data = {
-        "phone_number": phoneTEC.text.trim(),
+        "mobile": phoneTEC.text.trim(),
         "password": passwordTEC.text.trim(),
         "type": userType.valueOrNull?.name,
       };

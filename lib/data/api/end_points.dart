@@ -9,17 +9,18 @@ class EndPoints {
   static String apiKey = dotenv.env['API_KEY'] ?? "";
   static chatPort(id) => '${dotenv.env['CHAT_PORT']}$id';
   static String googleMapsBaseUrl = dotenv.env['GOOGLE_MAPS_BASE_URL'] ?? "";
-  static const String generalTopic = isProductionEnv ? 'zurex' : 't_zurex';
-  static const String userTypeTopic = isProductionEnv ? 'user' : 't_user';
+  static const String generalTopic =
+      isProductionEnv ? 'aloo_lahma_admin' : 't_aloo_lahma';
+  static String userTypeTopic(type) => isProductionEnv ? 'type' : 't_$type';
   static specificTopic(id) => isProductionEnv ? '$id' : 't_$id';
 
   ///Auth
-  static const String forgetPassword = 'forgot-password';
-  static const String resetPassword = 'reset-password';
-  static const String changePassword = 'change-password';
-  static const String logIn = 'login';
+  static String forgetPassword(userType) => '$userType/forgot-password';
+  static String resetPassword(userType) => '$userType/reset-password';
+  static String changePassword(userType) => '$userType/change-password';
+  static String logIn(userType) => '$userType/login';
   static const String resend = 'resend-otp';
-  static const String verifyOtp = 'verify-forgot-password';
+  static String verifyOtp(userType) => '$userType/verify-forgot-password';
   static const String suspendAccount = 'suspend-account';
   static const String reactivateAccount = 'reactivate-account';
 
@@ -47,10 +48,10 @@ class EndPoints {
   static changeOrderStatus(id) => 'orders/$id/changeOrderStatus';
 
   ///Setting
-  static const String settings = 'settings';
-  static const String faqs = 'faqs';
-  static const String whoUs = 'who-us';
-  static const String contactUs = 'contact-us';
+  static const String settings = 'user/settings';
+  static String pages(content) => 'user/pages/$content';
+  static const String faqs = 'user/faqs';
+  static const String contactUs = 'user/contact-us';
   static const String countryStates = 'country-states';
 
   ///Share

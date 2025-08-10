@@ -1,6 +1,6 @@
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/app/core/images.dart';
-import 'package:zurex_admin/components/empty_widget.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/images.dart';
+import 'package:aloo_lahma_admin/components/empty_widget.dart';
 import 'package:flutter/material.dart';
 import '../../app/core/dimensions.dart';
 import '../../app/core/styles.dart';
@@ -20,7 +20,7 @@ class CheckConnectionDialog extends StatelessWidget {
       child: EmptyState(
         txt: getTranslated("no_connection"),
         subText: getTranslated("check_internet"),
-        img: Images.noInternet,
+        img: "",
         imgHeight: 150,
         imgWidth: 150,
       ),

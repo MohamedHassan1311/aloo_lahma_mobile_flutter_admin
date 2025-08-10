@@ -15,9 +15,9 @@ import 'components/empty_widget.dart';
 import 'firebase_options.dart';
 import 'package:country_codes/country_codes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:zurex_admin/app/core/app_state.dart';
-import 'package:zurex_admin/data/local_data/local_database.dart';
-import 'package:zurex_admin/features/language/bloc/language_bloc.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/data/local_data/local_database.dart';
+import 'package:aloo_lahma_admin/features/language/bloc/language_bloc.dart';
 import 'app/core/app_storage_keys.dart';
 import 'app/core/un_focus.dart';
 import 'app/localization/app_localization.dart';
@@ -120,7 +120,10 @@ class _MyAppState extends State<MyApp> {
             initialRoute: Routes.splash,
             navigatorKey: CustomNavigator.navigatorState,
             onGenerateRoute: CustomNavigator.onCreateRoute,
-            navigatorObservers: [CustomNavigator.routeObserver],
+            navigatorObservers: [
+              CustomNavigator.routeObserver,
+              AnalyticsRouteObserver()
+            ],
             title: AppStrings.appName,
             scaffoldMessengerKey: CustomNavigator.scaffoldState,
             debugShowCheckedModeBanner: false,

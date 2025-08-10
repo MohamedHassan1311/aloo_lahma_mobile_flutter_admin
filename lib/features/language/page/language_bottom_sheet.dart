@@ -1,8 +1,8 @@
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/components/animated_widget.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/components/animated_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
 import '../../../components/custom_radio_button.dart';
 import '../bloc/language_bloc.dart';
 
@@ -14,7 +14,7 @@ class LanguageBottomSheet extends StatelessWidget {
     return BlocBuilder<LanguageBloc, AppState>(
       builder: (context, state) {
         return ListAnimator(
-          customPadding: EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
               horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
           data: List.generate(
               LanguageBloc.instance.languages.length,

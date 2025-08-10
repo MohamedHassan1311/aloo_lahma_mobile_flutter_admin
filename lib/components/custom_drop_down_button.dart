@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
 import '../app/core/dimensions.dart';
 import '../app/core/styles.dart';
 import '../app/core/text_styles.dart';

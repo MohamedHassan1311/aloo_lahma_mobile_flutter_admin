@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:zurex_admin/main_models/user_model.dart';
+import 'package:aloo_lahma_admin/main_models/user_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -33,7 +33,7 @@ class LoginRepo extends BaseRepo {
         .subscribeToTopic(EndPoints.specificTopic(id))
         .then((v) async {
       FirebaseMessaging.instance
-          .subscribeToTopic("${EndPoints.isProductionEnv ? "" : "t_"}$userType")
+          .subscribeToTopic(EndPoints.userTypeTopic(String))
           .then((v) async {
         await sharedPreferences.setBool(AppStorageKey.isSubscribe, true);
       });
@@ -62,7 +62,7 @@ class LoginRepo extends BaseRepo {
       {required Map<String, dynamic> data}) async {
     try {
       Response response = await dioClient.post(
-          uri: EndPoints.logIn, data: FormData.fromMap(data));
+          uri: EndPoints.logIn(userType), data: FormData.fromMap(data));
 
       if (response.statusCode == 200) {
         if (response.data['data'] != null &&

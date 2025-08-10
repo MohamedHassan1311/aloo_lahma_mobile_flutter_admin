@@ -1,4 +1,4 @@
-import 'package:zurex_admin/main_widgets/guest_mode.dart';
+import 'package:aloo_lahma_admin/main_widgets/guest_mode.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/localization/language_constant.dart';

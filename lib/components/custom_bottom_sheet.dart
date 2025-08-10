@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
 import '../app/core/styles.dart';
 import '../app/core/text_styles.dart';
 import '../app/localization/language_constant.dart';

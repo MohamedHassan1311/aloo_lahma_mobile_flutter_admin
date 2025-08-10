@@ -1,6 +1,7 @@
 {
+  "splash_header": "Aloo Lahma For Business",
   "login_header": "Welcome \uD83D\uDC4B\uD83C\uDFFB",
-  "login_description": "Because you are the best driver, choosing us is the best decision.",
+  "login_description": "Sign in to manage orders, track deliveries, and keep Aloo Lahma moving.",
   "signup_header": "Sign Up with Us",
   "signup_description": "Choose whether you are an artist (talented) or an organization/company looking for talent.",
   "more_header" : "Log in to save your data",
@@ -171,6 +172,7 @@
   "messages": "Messages",
   "favourites": "Favourites",
   "contact_with_us": "Contact with us",
+  "contact_with_us_header": "Support staff will answer your questions!",
   "contact_with_us_via": "Contact with us via",
   "social_media": "Social Media",
   "contact_with_us_description": "We are here to help you if you need any inquiries or have questions about our car maintenance services, please feel free to contact us. Our support team works around the clock to provide the best service to our customers.",

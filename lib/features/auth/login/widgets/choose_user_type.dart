@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
 import '../../../../app/core/dimensions.dart';
 import '../../../../app/core/styles.dart';
 import '../../../../app/core/svg_images.dart';
 import '../../../../app/core/text_styles.dart';
 import '../../../../app/localization/language_constant.dart';
 import '../../../../components/custom_images.dart';
-import '../../../../main_blocs/user_bloc.dart';
+import '../../../profile/enums/user_types_enum.dart';
 
 class ChooseUserType extends StatelessWidget {
   const ChooseUserType({super.key, required this.type, required this.onChange});

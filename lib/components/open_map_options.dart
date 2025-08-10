@@ -1,7 +1,7 @@
-import 'package:zurex_admin/components/animated_widget.dart';
+import 'package:aloo_lahma_admin/components/animated_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:map_launcher/map_launcher.dart';
-import 'package:zurex_admin/components/custom_images.dart';
+import 'package:aloo_lahma_admin/components/custom_images.dart';
 
 import '../app/core/dimensions.dart';
 import '../app/core/styles.dart';
@@ -15,7 +15,7 @@ class OpenMapOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListAnimator(
-      customPadding:
+      padding:
           EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
       data: List.generate(
         maps.length,

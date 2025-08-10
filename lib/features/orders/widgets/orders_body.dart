@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
 
 import '../../../app/core/app_event.dart';
 import '../../../app/core/app_state.dart';
@@ -28,7 +28,7 @@ class OrdersBody extends StatelessWidget {
           if (state is Loading) {
             return ListAnimator(
               controller: sl<OrdersBloc>().controller,
-              customPadding: EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
               data: List.generate(
                 10,
@@ -55,7 +55,7 @@ class OrdersBody extends StatelessWidget {
                   Expanded(
                     child: ListAnimator(
                       controller: sl<OrdersBloc>().controller,
-                      customPadding: EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                       data: List.generate(
                         orders.length,
@@ -81,7 +81,7 @@ class OrdersBody extends StatelessWidget {
                   Expanded(
                     child: ListAnimator(
                       controller: sl<OrdersBloc>().controller,
-                      customPadding: EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         vertical: Dimensions.PADDING_SIZE_DEFAULT.h,
                       ),
                       data: [

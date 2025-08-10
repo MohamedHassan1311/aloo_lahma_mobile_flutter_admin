@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/features/orders/widgets/order_tabs.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/features/orders/widgets/order_tabs.dart';
 import '../../../app/core/app_state.dart';
 import '../../../data/config/di.dart';
 import '../bloc/orders_bloc.dart';

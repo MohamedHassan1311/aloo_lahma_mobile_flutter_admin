@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/app/core/app_strings.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/core/images.dart';
-import 'package:zurex_admin/components/custom_images.dart';
+import 'package:aloo_lahma_admin/app/core/app_strings.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/images.dart';
+import 'package:aloo_lahma_admin/components/custom_images.dart';
 
 import '../app/core/app_core.dart';
 import '../app/core/styles.dart';

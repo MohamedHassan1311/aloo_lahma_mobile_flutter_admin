@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/app_state.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/localization/language_constant.dart';
-import 'package:zurex_admin/components/custom_app_bar.dart';
-import 'package:zurex_admin/main_blocs/user_bloc.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/components/custom_app_bar.dart';
+import 'package:aloo_lahma_admin/main_blocs/user_bloc.dart';
 import '../../../app/core/app_event.dart';
 import '../../../app/core/styles.dart';
 import '../../../data/config/di.dart';

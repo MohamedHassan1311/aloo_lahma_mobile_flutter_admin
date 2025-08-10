@@ -1,14 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/navigation/custom_navigation.dart';
-import 'package:zurex_admin/navigation/routes.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:aloo_lahma_admin/navigation/custom_navigation.dart';
+import 'package:aloo_lahma_admin/navigation/routes.dart';
 import '../../../app/core/app_event.dart';
 import '../../../app/core/app_state.dart';
 import '../../../data/config/di.dart';
-import '../../../helpers/permissions.dart';
 import '../../../main_blocs/user_bloc.dart';
-import '../../setting/bloc/setting_bloc.dart';
+import '../../setting/bloc/settings_bloc.dart';
 import '../repo/splash_repo.dart';
 
 class SplashBloc extends Bloc<AppEvent, AppState> {
@@ -18,15 +16,11 @@ class SplashBloc extends Bloc<AppEvent, AppState> {
   }
 
   Future<void> onClick(AppEvent event, Emitter<AppState> emit) async {
-    Future.delayed(const Duration(milliseconds: 2800), () async {
-      ///Ask Notification Permission
-      PermissionHandler.checkNotificationsPermission();
+    Future.delayed(const Duration(milliseconds: 2500), () async {
 
-      ///Ask Location Permission
-      Geolocator.requestPermission();
+      ///Get Settings
+      sl<SettingsBloc>().add(Get());
 
-      ///Get Setting
-      sl<SettingBloc>().add(Get());
       if (repo.isLogin) {
         UserBloc.instance.add(Click());
       } else {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
-import 'package:zurex_admin/app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
 import '../../app/core/styles.dart';
 import '../../app/core/svg_images.dart';
 import '../bloc/dashboard_bloc.dart';

@@ -1,7 +1,7 @@
-import 'package:zurex_admin/app/core/app_core.dart';
-import 'package:zurex_admin/app/core/app_state.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/navigation/custom_navigation.dart';
+import 'package:aloo_lahma_admin/app/core/app_core.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/navigation/custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../app/core/app_notification.dart';
@@ -13,8 +13,8 @@ import '../../../../../components/custom_bottom_sheet.dart';
 import '../../../../../components/custom_images.dart';
 import '../../../../../main_blocs/country_states_bloc.dart';
 import 'package:country_state_city/models/state.dart' as states_of_country;
-import 'package:zurex_admin/components/animated_widget.dart';
-import 'package:zurex_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/components/animated_widget.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
 
 class StatesOfCountrySelection extends StatelessWidget {
   const StatesOfCountrySelection(
@@ -161,7 +161,7 @@ class _SelectionViewState extends State<_SelectionView> {
   Widget build(BuildContext context) {
     return ListAnimator(
       controller: ScrollController(),
-      customPadding:
+      padding:
           EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
       data: List.generate(
         widget.list.length,

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
 import '../../navigation/custom_navigation.dart';
 import '../app/core/styles.dart';
 import '../app/core/text_styles.dart';

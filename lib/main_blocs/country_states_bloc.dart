@@ -1,5 +1,5 @@
-import 'package:zurex_admin/main_repos/country_states_repo.dart';
-import 'package:zurex_admin/main_models/custom_field_model.dart';
+import 'package:aloo_lahma_admin/main_repos/country_states_repo.dart';
+import 'package:aloo_lahma_admin/main_models/custom_field_model.dart';
 import 'package:country_state_city/models/state.dart' as states_of_country;
 import 'package:country_state_city/utils/state_utils.dart';
 import 'package:dartz/dartz.dart';

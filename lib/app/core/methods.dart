@@ -1,8 +1,15 @@
-import 'package:zurex_admin/app/core/extensions.dart';
+import 'package:aloo_lahma_admin/app/core/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 abstract class Methods {
+
+  static double getRadiansFromDegree(double degree) {
+    double unitRadian = 57.295779513;
+    return degree / unitRadian;
+  }
+
+
   static diffBtw2Dates({
     required DateTime startDate,
     required DateTime endDate,

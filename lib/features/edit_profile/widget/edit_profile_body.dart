@@ -3,11 +3,11 @@ import 'package:country_flags/country_flags.dart';
 import 'package:country_codes/country_codes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zurex_admin/app/core/app_state.dart';
-import 'package:zurex_admin/app/core/dimensions.dart';
-import 'package:zurex_admin/app/core/svg_images.dart';
-import 'package:zurex_admin/components/animated_widget.dart';
-import 'package:zurex_admin/main_blocs/user_bloc.dart';
+import 'package:aloo_lahma_admin/app/core/app_state.dart';
+import 'package:aloo_lahma_admin/app/core/dimensions.dart';
+import 'package:aloo_lahma_admin/app/core/svg_images.dart';
+import 'package:aloo_lahma_admin/components/animated_widget.dart';
+import 'package:aloo_lahma_admin/main_blocs/user_bloc.dart';
 import '../../../../app/core/styles.dart';
 import '../../../../app/core/text_styles.dart';
 import '../../../../app/core/validation.dart';
@@ -36,7 +36,7 @@ class _RegisterBodyState extends State<EditProfileBody> {
       child: BlocBuilder<EditProfileBloc, AppState>(
         builder: (context, state) {
           return ListAnimator(
-            customPadding: EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
                 horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
             data: [
               Form(

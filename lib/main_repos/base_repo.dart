@@ -7,8 +7,8 @@ abstract class BaseRepo {
   final SharedPreferences sharedPreferences;
   final DioClient dioClient;
   BaseRepo({required this.sharedPreferences, required this.dioClient});
-
   String get userId => sharedPreferences.getString(AppStorageKey.userId) ?? "";
+  String get userType => sharedPreferences.getString(AppStorageKey.userType) ?? "";
   String get token => sharedPreferences.getString(AppStorageKey.token) ?? "";
   bool get isLogin => sharedPreferences.containsKey(AppStorageKey.isLogin);
 }

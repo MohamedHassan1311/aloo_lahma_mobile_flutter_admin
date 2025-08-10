@@ -1,4 +1,4 @@
-import 'package:zurex_admin/data/config/mapper.dart';
+import 'package:aloo_lahma_admin/data/config/mapper.dart';
 
 class LocationModel extends SingleMapper {
   int? addressId;

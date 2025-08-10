@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:zurex_admin/main_models/user_model.dart';
+import 'package:aloo_lahma_admin/main_models/user_model.dart';
 
 import '../../../app/core/dimensions.dart';
 import '../../../app/core/styles.dart';
