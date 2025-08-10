@@ -2,8 +2,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:aloo_lahma_admin/features/order_details/repo/order_details_repo.dart';
-
 import '../../../../../app/core/app_core.dart';
 import '../../../../../app/core/app_event.dart';
 import '../../../../../app/core/app_notification.dart';
@@ -11,6 +9,7 @@ import '../../../../../app/core/app_state.dart';
 import '../../../../../app/core/styles.dart';
 import '../../../../../data/error/failures.dart';
 import '../model/order_details_model.dart';
+import '../repo/order_details_repo.dart';
 
 class OrderDetailsBloc extends Bloc<AppEvent, AppState> {
   final OrderDetailsRepo repo;
@@ -45,6 +44,7 @@ class OrderDetailsBloc extends Bloc<AppEvent, AppState> {
         }
       });
     } catch (e) {
+      print(e.toString());
       AppCore.showSnackBar(
           notification: AppNotification(
         message: e.toString(),

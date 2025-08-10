@@ -653,6 +653,8 @@
   "canceled": "ملغيه",
   "search_by_order_id": "البحث برقم الطلب",
   "orders": "الطلبات",
+  "orders_number": "عدد الطلبات",
+  "order": "طلب",
   "order_details": "تفاصيل الطلب",
   "order_created_at": "تم الطلب في",
   "order_delivered_at": "تم توصيل الطلب في",
@@ -694,5 +696,9 @@
   "driver": "سائق",
   "admin": "مدير",
   "see_details": "عرض التفاصيل",
-  "delivered": "تم التوصيل"
+  "delivered": "تم التوصيل",
+  "receipt_type": "نوع الاستلام",
+  "delivery": "توصيل",
+  "takeAway": "استلام من المحل",
+  "pay_type": "نوع الدفع"
 }

@@ -83,7 +83,7 @@ class ProfileCard extends StatelessWidget {
                 ///Phone
                 if (sl<UserBloc>().isLogin)
                   Text(
-                    "+966${UserBloc.instance.isLogin ? UserBloc.instance.user?.phone ?? "" : "00000000"}",
+                    "+966${UserBloc.instance.isLogin ? UserBloc.instance.user?.mobile ?? "" : "00000000"}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.w400.copyWith(

@@ -24,8 +24,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
   final LoginRepo repo;
   LoginBloc({required this.repo}) : super(Start()) {
     updateRememberMe(false);
-    updateUserType(UserType.driver);
-
+    updateUserType(UserType.admin);
     on<Add>(onAdd);
     on<Click>(onClick);
     on<Remember>(onRemember);
@@ -52,7 +51,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
   clear() {
     phoneTEC.clear();
     passwordTEC.clear();
-    updateUserType(UserType.driver);
+    updateUserType(UserType.admin);
     updateRememberMe(false);
   }
 
@@ -117,8 +116,8 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
     Map<String, dynamic>? data = repo.getCredentials();
     if (data != null) {
       passwordTEC.text = data["password"];
-      phoneTEC.text = data["phone_number"];
-      updateRememberMe(data["phone_number"] != "" && data["password"] != null);
+      phoneTEC.text = data["mobile"];
+      updateRememberMe(data["mobile"] != "" && data["password"] != null);
       emit(Done());
     }
   }

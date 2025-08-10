@@ -1,5 +1,9 @@
 import '../../../data/config/mapper.dart';
 import '../../../main_models/meta.dart';
+import '../../order_details/enums/order_details_enums.dart';
+import '../../order_details/enums/order_details_enums_converter.dart';
+import '../../order_details/model/order_schedule_model.dart';
+import '../../order_details/model/payment_model.dart';
 
 class OrdersModel extends SingleMapper {
   String? message;
@@ -18,7 +22,7 @@ class OrdersModel extends SingleMapper {
   Map<String, dynamic> toJson() => {
         "message": message,
         "status_code": statusCode,
-        "pagination": meta?.toJson(),
+        "meta": meta?.toJson(),
         "data": data != null
             ? List<dynamic>.from(data!.map((x) => x.toJson()))
             : [],
@@ -27,8 +31,7 @@ class OrdersModel extends SingleMapper {
   OrdersModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     statusCode = json['status_code'];
-    meta =
-        json['pagination'] != null ? Meta.fromJson(json['pagination']) : null;
+    meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
 
     if (json['data'] != null) {
       data = [];
@@ -47,25 +50,50 @@ class OrdersModel extends SingleMapper {
 class OrderModel extends SingleMapper {
   int? id;
   String? orderNum;
-  double? total;
+  double? amount;
   String? status;
+  ReceiptTypes? deliveryType;
+  DateTime? deliveryDay;
+  OrderScheduleModel? deliveryTime;
+  PaymentModel? payType;
+  String? timeReceipt;
   DateTime? createdAt;
 
   OrderModel({
     this.id,
     this.orderNum,
-    this.total,
+    this.amount,
     this.status,
+    this.deliveryType,
+    this.deliveryDay,
+    this.deliveryTime,
+    this.timeReceipt,
+    this.payType,
     this.createdAt,
   });
 
   OrderModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     orderNum = json['order_number'];
-    total = json['bill'] != null && json["bill"]['total_price'] != null
-        ? double.tryParse(json["bill"]['total_price']?.toString() ?? "0")
-        : null;
+    amount = double.tryParse(json["amount"]?.toString() ?? "0");
     status = json['status'];
+    deliveryType = json['delivery_type'] != null
+        ? OrderDetailsEnumsConverter.convertStringToReceiptType(
+            json['delivery_type']?.toUpperCase())
+        : null;
+    deliveryDay = json['delivery_day'] != null
+        ? DateTime.parse(json['delivery_day'])
+        : null;
+
+    deliveryTime = json['delivery_time'] != null
+        ? OrderScheduleModel.fromJson(json['delivery_time'])
+        : null;
+    timeReceipt = json['time_receipt'];
+    payType =
+        json['invoice'] != null && json['invoice']['pay_type_object'] != null
+            ? PaymentModel.fromJson(json['invoice']['pay_type_object'])
+            : null;
+
     createdAt =
         json['created_at'] != null ? DateTime.parse(json['created_at']) : null;
   }
@@ -75,8 +103,13 @@ class OrderModel extends SingleMapper {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['order_number'] = orderNum;
-    data['total_price'] = total;
+    data['amount'] = amount;
     data['status'] = status;
+    data['delivery_type'] = deliveryType?.name.toUpperCase();
+    data['delivery_day'] = deliveryDay?.toIso8601String();
+    data['delivery_time'] = deliveryTime?.toJson();
+    data['pay_type_object'] = payType?.toJson();
+    data['time_receipt'] = timeReceipt;
     data['created_at'] = createdAt?.toIso8601String();
     return data;
   }

@@ -1,16 +1,12 @@
 import 'package:aloo_lahma_admin/data/config/mapper.dart';
-import 'package:aloo_lahma_admin/features/profile/enums/user_types_enum.dart';
-
-import '../features/profile/enums/user_types_enum_converter.dart';
 
 class UserModel extends SingleMapper {
   int? id;
   String? name;
   String? profileImage;
   String? countryCode;
-  String? phone;
+  String? mobile;
   String? email;
-  UserType? userType;
   double? balance;
 
   UserModel({
@@ -19,20 +15,20 @@ class UserModel extends SingleMapper {
     this.profileImage,
     this.balance,
     this.countryCode,
-    this.phone,
+    this.mobile,
     this.email,
-    this.userType,
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    balance = json['balance'] != null ? double.parse(json["balance"]?.toString() ?? "0") : null;
+    balance = json['balance'] != null
+        ? double.parse(json["balance"]?.toString() ?? "0")
+        : null;
     profileImage = json['profile_image'];
     countryCode = json['country_code'];
-    phone = json['phone_number'];
+    mobile = json['mobile'];
     email = json['email'];
-    userType = UserTypeEnumConverter.convertUserTypeFromStringToEnum(json['type']);
   }
 
   @override
@@ -42,9 +38,8 @@ class UserModel extends SingleMapper {
     data['name'] = name;
     data['balance'] = balance;
     data['profile_image'] = profileImage;
-    data['phone_number'] = phone;
+    data['mobile'] = mobile;
     data['email'] = email;
-    data['type'] = userType?.name;
 
     return data;
   }

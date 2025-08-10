@@ -6,12 +6,12 @@ import 'package:aloo_lahma_admin/app/core/app_state.dart';
 import 'package:aloo_lahma_admin/app/core/text_styles.dart';
 import 'package:aloo_lahma_admin/features/change_status/repo/change_status_repo.dart';
 import 'package:aloo_lahma_admin/features/order_details/bloc/order_details_bloc.dart';
-import 'package:aloo_lahma_admin/features/order_details/model/order_details_model.dart';
 import '../../../app/core/app_event.dart';
 import '../../../app/core/dimensions.dart';
 import '../../../app/core/styles.dart';
 import '../../../app/localization/language_constant.dart';
 import '../../../data/config/di.dart';
+import '../../order_details/enums/order_details_enums.dart';
 import '../bloc/change_status_bloc.dart';
 
 class OrderDetailsActions extends StatelessWidget {
@@ -29,7 +29,7 @@ class OrderDetailsActions extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              if (status == OrderStatus.out_for_delivery.name)
+              if (status == OrderStatuses.outForDelivery.name)
                 SafeArea(
                   top: false,
                   child: Padding(
@@ -65,7 +65,7 @@ class OrderDetailsActions extends StatelessWidget {
                               Click(
                                 arguments: {
                                   "id": id,
-                                  "status": OrderStatus.delivered.name,
+                                  "status": OrderStatuses.completed.name,
                                   "onSuccess": (v) =>
                                       context.read<OrderDetailsBloc>().add(
                                             Update(arguments: v),
@@ -77,7 +77,7 @@ class OrderDetailsActions extends StatelessWidget {
                     ).animate(onPlay: (c) {
                       c.repeat();
                     }).shimmer(
-                        color: Colors.white.withOpacity(0.4),
+                        color: Colors.white.withValues(alpha: 0.4),
                         duration: 1500.ms),
                   ),
                 ),

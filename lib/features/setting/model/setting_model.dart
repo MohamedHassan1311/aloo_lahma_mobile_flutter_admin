@@ -1,5 +1,7 @@
 import 'package:aloo_lahma_admin/data/config/mapper.dart';
 
+import '../../order_details/model/address_model.dart';
+
 class SettingModel extends SingleMapper {
   int? id;
   String? urlSite;
@@ -39,6 +41,7 @@ class SettingModel extends SingleMapper {
   String? secondaryColor;
   String? sacrificePrice;
   String? specialDeliveryLimit;
+  AddressModel? address;
 
   SettingModel({
     this.id,
@@ -75,6 +78,7 @@ class SettingModel extends SingleMapper {
     this.secondaryColor,
     this.sacrificePrice,
     this.specialDeliveryLimit,
+    this.address,
     this.addressAr,
     this.addressEn,
     this.longitude,
@@ -120,6 +124,11 @@ class SettingModel extends SingleMapper {
     secondaryColor = json['secondary_color'];
     sacrificePrice = json['sacrifice_price'];
     specialDeliveryLimit = json['special_delivery_limit'];
+    address = AddressModel(
+      addressName: addressAr ?? addressEn ?? '',
+      lng: longitude,
+      lat: latitude,
+    );
   }
 
   @override

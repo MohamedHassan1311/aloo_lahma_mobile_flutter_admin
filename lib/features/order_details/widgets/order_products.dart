@@ -1,18 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:aloo_lahma_admin/app/core/extensions.dart';
-import 'package:aloo_lahma_admin/app/core/svg_images.dart';
-import 'package:aloo_lahma_admin/main_models/purchased_product_model.dart';
-
+import 'package:flutter/material.dart';
 import '../../../app/core/dimensions.dart';
 import '../../../app/core/styles.dart';
 import '../../../app/core/text_styles.dart';
 import '../../../app/localization/language_constant.dart';
-import '../../../components/custom_images.dart';
-import '../../../main_widgets/purchased_product_card.dart';
+import '../model/order_product_model.dart';
+import 'order_product_card.dart';
 
 class OrderProducts extends StatefulWidget {
   const OrderProducts({super.key, required this.items});
-  final List<PurchasedProductModel> items;
+  final List<OrderProductModel> items;
 
   @override
   State<OrderProducts> createState() => _OrderProductsState();
@@ -66,12 +63,13 @@ class _OrderProductsState extends State<OrderProducts> {
             firstChild: SizedBox(height: 0, width: context.width),
             secondChild: Column(
               children: [
-                SizedBox(height: Dimensions.paddingSizeMini.h),
+                Divider(
+                  height: Dimensions.PADDING_SIZE_DEFAULT.h,
+                  color: Styles.LIGHT_BORDER_COLOR,
+                ),
                 ...List.generate(
                   widget.items.length,
-                  (i) => PurchasedProductCard(
-                    item: widget.items[i],
-                  ),
+                  (i) => OrderProductCard(product: widget.items[i]),
                 )
               ],
             ),

@@ -26,7 +26,7 @@ class EndPoints {
 
   ///User Profile
   static const String editProfile = 'update-profile';
-  static const String profile = 'me';
+  static  String profile (userType) => '$userType/me';
 
   ///Chats
   static const String createChat = 'chats';
@@ -42,7 +42,7 @@ class EndPoints {
   static deleteNotification(id) => 'notifications/$id';
 
   ///Orders
-  static const String orders = 'orders';
+  static  String orders(userType) => '$userType/orders';
   static orderDetails(id) => 'orders/$id';
   static const String cancelReasons = 'cancel-reason';
   static changeOrderStatus(id) => 'orders/$id/changeOrderStatus';

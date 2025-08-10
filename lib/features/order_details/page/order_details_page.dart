@@ -1,3 +1,4 @@
+import 'package:aloo_lahma_admin/features/order_details/widgets/order_driver_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aloo_lahma_admin/app/core/extensions.dart';
@@ -7,21 +8,24 @@ import 'package:aloo_lahma_admin/components/shimmer/custom_shimmer.dart';
 import 'package:aloo_lahma_admin/features/order_details/bloc/order_details_bloc.dart';
 import 'package:aloo_lahma_admin/features/order_details/model/order_details_model.dart';
 import 'package:aloo_lahma_admin/features/order_details/repo/order_details_repo.dart';
-import 'package:aloo_lahma_admin/main_widgets/bill_details.dart';
-
 import '../../../app/core/app_event.dart';
 import '../../../app/core/app_state.dart';
 import '../../../app/core/dimensions.dart';
 import '../../../app/core/styles.dart';
+import '../../../app/core/text_styles.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/empty_widget.dart';
 import '../../../data/config/di.dart';
+import '../../change_status/view/order_details_actions.dart';
+import '../../setting/bloc/settings_bloc.dart';
+import '../enums/order_details_enums.dart';
 import '../widgets/delivery_date.dart';
 import '../widgets/delivery_location.dart';
-import '../widgets/order_current_status.dart';
-import '../../change_status/view/order_details_actions.dart';
+import '../widgets/order_bill_details.dart';
+import '../widgets/order_cancel_reason.dart';
+import '../widgets/order_payment_method.dart';
 import '../widgets/order_products.dart';
-import '../widgets/order_user_card.dart';
+import '../widgets/order_status_list.dart';
 
 class OrderDetailsPage extends StatelessWidget {
   const OrderDetailsPage({super.key, required this.id});
@@ -37,162 +41,241 @@ class OrderDetailsPage extends StatelessWidget {
       body: BlocProvider(
         create: (context) => OrderDetailsBloc(repo: sl<OrderDetailsRepo>())
           ..add(Click(arguments: id)),
-        child: Column(
-          children: [
-            Expanded(
-              child: BlocBuilder<OrderDetailsBloc, AppState>(
-                builder: (context, state) {
-                  if (state is Done) {
-                    OrderDetailsModel model = state.model as OrderDetailsModel;
-                    return Column(
-                      children: [
-                        ///Order Body
-                        Expanded(
-                          child: ListAnimator(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                            ),
-                            data: [
-                              SizedBox(
-                                  height: Dimensions.PADDING_SIZE_DEFAULT.h),
-                              OrderCurrentStatus(
-                                orderNum: model.orderNum,
-                                status: model.status,
-                              ),
-                              OrderUserCard(user: model.user),
-                              // OrderStatusList(list: model.statuses ?? []),
-                              OrderProducts(items: model.products ?? []),
-                              DeliveryDate(
-                                date: model.deliveryDate,
-                                time: model.deliveryTime?.name,
-                              ),
-                              DeliveryLocation(address: model.address),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: Dimensions.paddingSizeMini.h),
-                                child: BillDetails(
-                                  bill: model.bill,
-                                  decoration: BoxDecoration(
-                                      color: Styles.WHITE_COLOR,
-                                      borderRadius: BorderRadius.circular(16.w),
-                                      border: Border.all(
-                                        color: Styles.LIGHT_BORDER_COLOR,
-                                      )),
-                                ),
-                              ),
-                              SizedBox(
-                                  height: Dimensions.PADDING_SIZE_DEFAULT.h),
-                            ],
-                          ),
-                        ),
-
-                        ///Order Actions
-                          OrderDetailsActions(
-                              id: id, status: model.statusCode ?? ""),
-                      ],
-                    );
-                  }
-                  if (state is Loading) {
-                    return ListAnimator(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                      ),
-                      data: [
-                        SizedBox(height: Dimensions.PADDING_SIZE_DEFAULT.h),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: Dimensions.paddingSizeMini.h),
-                          child: CustomShimmerContainer(
-                            height: 60.h,
-                            width: context.width,
-                            radius: 16.w,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: Dimensions.paddingSizeMini.h),
-                          child: CustomShimmerContainer(
-                            height: 150.h,
-                            width: context.width,
-                            radius: 16.w,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: Dimensions.paddingSizeMini.h),
-                          child: CustomShimmerContainer(
-                            height: 150.h,
-                            width: context.width,
-                            radius: 16.w,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: Dimensions.paddingSizeMini.h),
-                          child: CustomShimmerContainer(
-                            height: 160.h,
-                            width: context.width,
-                            radius: 16.w,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: Dimensions.paddingSizeMini.h),
-                          child: CustomShimmerContainer(
-                            height: 80.h,
-                            width: context.width,
-                            radius: 16.w,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: Dimensions.paddingSizeMini.h),
-                          child: CustomShimmerContainer(
-                            height: 160.h,
-                            width: context.width,
-                            radius: 16.w,
-                          ),
-                        ),
-                      ],
-                    );
-                  }
-                  if (state is Error || state is Empty) {
-                    return RefreshIndicator(
-                      color: Styles.PRIMARY_COLOR,
-                      onRefresh: () async {
-                        context
-                            .read<OrderDetailsBloc>()
-                            .add(Click(arguments: id));
-                      },
-                      child: Column(
+        child: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: BlocBuilder<OrderDetailsBloc, AppState>(
+                  builder: (context, state) {
+                    if (state is Done) {
+                      OrderDetailsModel model =
+                          state.model as OrderDetailsModel;
+                      return Column(
                         children: [
+                          ///Order Body
                           Expanded(
                             child: ListAnimator(
                               padding: EdgeInsets.symmetric(
                                 horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                               ),
                               data: [
-                                SizedBox(height: 50.h),
-                                EmptyState(
-                                  txt: getTranslated("no_result_found"),
-                                  subText: state is Error
-                                      ? getTranslated("something_went_wrong")
-                                      : getTranslated(
-                                          "no_result_found_description"),
+                                ///Order Number && Date of Creation
+                                Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: Dimensions.paddingSizeMini.h),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          Dimensions.PADDING_SIZE_DEFAULT.w,
+                                      vertical:
+                                          Dimensions.PADDING_SIZE_DEFAULT.h),
+                                  decoration: BoxDecoration(
+                                      color: Styles.WHITE_COLOR,
+                                      borderRadius: BorderRadius.circular(16.w),
+                                      border: Border.all(
+                                        color: Styles.LIGHT_BORDER_COLOR,
+                                      )),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    spacing: Dimensions.paddingSizeMini.h,
+                                    children: [
+                                      Text(
+                                        "${getTranslated("order_number")}: #${model.orderNum ?? 0000}",
+                                        style: AppTextStyles.w700.copyWith(
+                                            fontSize: 16, color: Styles.HEADER),
+                                      ),
+                                      Text(
+                                        (model.createdAt ?? DateTime.now())
+                                            .dateFormat(
+                                                format:
+                                                    "d/MMM/yyyy  -  hh:mm aa"),
+                                        style: AppTextStyles.w500.copyWith(
+                                            fontSize: 14,
+                                            color: Styles.DETAILS_COLOR),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                if (model.statuses != null &&
+                                    model.statuses!.isNotEmpty)
+                                  OrderStatusList(list: model.statuses ?? []),
+                                if (model.products != null &&
+                                    model.products!.isNotEmpty)
+                                  OrderProducts(items: model.products ?? []),
+                                DeliveryDate(
+                                  date: model.deliveryDay
+                                      ?.dateFormat(format: "d-MMM-yyyy"),
+                                  time: model.deliveryType ==
+                                          ReceiptTypes.delivery
+                                      ? model.deliveryTime?.name
+                                      : model.timeReceipt,
+                                ),
+                                DeliveryLocation(
+                                  address: model.deliveryType ==
+                                          ReceiptTypes.delivery
+                                      ? model.address
+                                      : sl<SettingsBloc>().model?.address,
+                                  receiptType: model.deliveryType ??
+                                      ReceiptTypes.delivery,
+                                ),
+                                OrderPaymentMethod(
+                                  payment: model.payType,
+                                  bank: model.bank,
+                                  bankTransfer: model.bill?.bankTransfer,
+                                ),
+                                if (model.driver != null)
+                                  OrderDriverCard(driver: model.driver!),
+                                if (model.cancelReason != null)
+                                  OrderCancelReason(
+                                      cancelReason: model.cancelReason ?? ''),
+                                OrderBillDetails(
+                                    bill: model.bill,
+                                    deliveryType: model.deliveryType),
+                              ],
+                            ),
+                          ),
+
+                          ///Order Actions
+                          OrderDetailsActions(
+                              id: id, status: model.statusCode ?? ""),
+                        ],
+                      );
+                    }
+                    if (state is Loading) {
+                      return ListAnimator(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                        ),
+                        data: [
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: Dimensions.paddingSizeMini.h),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                                vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
+                            decoration: BoxDecoration(
+                                color: Styles.WHITE_COLOR,
+                                borderRadius: BorderRadius.circular(16.w),
+                                border: Border.all(
+                                  color: Styles.LIGHT_BORDER_COLOR,
+                                )),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomShimmerText(width: 100.w),
+                                Divider(
+                                  height: Dimensions.PADDING_SIZE_DEFAULT.h,
+                                  color: Styles.LIGHT_BORDER_COLOR,
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: List.generate(
+                                        5,
+                                        (i) => Row(
+                                              children: [
+                                                CustomShimmerCircleImage(
+                                                  diameter: 50.w,
+                                                ),
+                                                if (i != 4)
+                                                  CustomShimmerContainer(
+                                                    height: 4.h,
+                                                    width: 40.w,
+                                                  )
+                                              ],
+                                            )),
+                                  ),
                                 ),
                               ],
                             ),
                           ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: Dimensions.paddingSizeMini.h),
+                            child: CustomShimmerContainer(
+                              height: 150.h,
+                              width: context.width,
+                              radius: 16.w,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: Dimensions.paddingSizeMini.h),
+                            child: CustomShimmerContainer(
+                              height: 160.h,
+                              width: context.width,
+                              radius: 16.w,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: Dimensions.paddingSizeMini.h),
+                            child: CustomShimmerContainer(
+                              height: 120.h,
+                              width: context.width,
+                              radius: 16.w,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: Dimensions.paddingSizeMini.h),
+                            child: CustomShimmerContainer(
+                              height: 80.h,
+                              width: context.width,
+                              radius: 16.w,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: Dimensions.paddingSizeMini.h),
+                            child: CustomShimmerContainer(
+                              height: 160.h,
+                              width: context.width,
+                              radius: 16.w,
+                            ),
+                          ),
                         ],
-                      ),
-                    );
-                  } else {
-                    return const SizedBox();
-                  }
-                },
-              ),
-            )
-          ],
+                      );
+                    }
+                    if (state is Error || state is Empty) {
+                      return RefreshIndicator(
+                        color: Styles.PRIMARY_COLOR,
+                        onRefresh: () async {
+                          context
+                              .read<OrderDetailsBloc>()
+                              .add(Click(arguments: id));
+                        },
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: ListAnimator(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                                ),
+                                data: [
+                                  SizedBox(height: 50.h),
+                                  EmptyState(
+                                    txt: getTranslated("no_result_found"),
+                                    subText: state is Error
+                                        ? getTranslated("something_went_wrong")
+                                        : getTranslated(
+                                            "no_result_found_description"),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

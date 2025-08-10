@@ -1,35 +1,49 @@
-import 'package:aloo_lahma_admin/main_models/custom_field_model.dart';
-import 'package:aloo_lahma_admin/main_models/user_model.dart';
-
-import '../../../app/localization/language_constant.dart';
+import 'package:aloo_lahma_admin/features/order_details/enums/order_details_enums_converter.dart';
+import 'package:aloo_lahma_admin/features/order_details/model/payment_model.dart';
 import '../../../data/config/mapper.dart';
-import '../../../main_models/purchased_product_model.dart';
+import '../../../main_models/user_model.dart';
+import '../enums/order_details_enums.dart';
+import 'address_model.dart';
+import 'order_invoice_model.dart';
+import 'order_product_model.dart';
+import 'order_schedule_model.dart';
+import 'order_status_model.dart';
 
 class OrderDetailsModel extends SingleMapper {
   int? id;
   String? orderNum;
-  String? deliveryDate;
-  CustomFieldModel? deliveryTime;
-  BillModel? bill;
-  List<PurchasedProductModel>? products;
-  List<StatusModel>? statuses;
+  DateTime? deliveryDay;
+  OrderScheduleModel? deliveryTime;
+  String? timeReceipt;
+  String? cancelReason;
+  ReceiptTypes? deliveryType;
+  OrderInvoiceModel? bill;
+  PaymentMethodModel? bank;
+  List<OrderProductModel>? products;
+  List<OrderStatusModel>? statuses;
   String? status, statusCode;
   AddressModel? address;
-  UserModel? user;
+  PaymentModel? payType;
+  UserModel? driver;
   DateTime? createdAt;
 
   OrderDetailsModel({
     this.id,
     this.orderNum,
-    this.deliveryDate,
+    this.deliveryDay,
     this.deliveryTime,
+    this.timeReceipt,
+    this.deliveryType,
     this.bill,
     this.products,
     this.statuses,
     this.address,
     this.status,
     this.statusCode,
-    this.user,
+    this.payType,
+    this.driver,
+    this.cancelReason,
+    this.bank,
     this.createdAt,
   });
 
@@ -37,19 +51,24 @@ class OrderDetailsModel extends SingleMapper {
   Map<String, dynamic> toJson() => {
         "id": id,
         "order_number": orderNum,
-        "status_code": statusCode,
         "status": status,
-        "delivery_date": deliveryDate,
+        "status_code": statusCode,
+        "delivery_day": deliveryDay?.toIso8601String(),
         "delivery_time": deliveryTime?.toJson(),
-        "user": user?.toJson(),
-        "bill": bill?.toJson(),
-        "address": address?.toJson(),
-        "status_list": statuses != null
+        "time_receipt": timeReceipt,
+        "cancel_reason": cancelReason,
+        "delivery_type": deliveryType?.name.toUpperCase(),
+        "invoice": bill?.toJson(),
+        "shipping": address?.toJson(),
+        "pay_type_object": payType?.toJson(),
+        "driver": driver?.toJson(),
+        "status_logs": statuses != null
             ? List<dynamic>.from(statuses!.map((x) => x.toJson()))
             : [],
         "products": products != null
             ? List<dynamic>.from(products!.map((x) => x.toJson()))
             : [],
+        "bank": bank?.toJson(),
         "created_at": createdAt?.toIso8601String(),
       };
 
@@ -58,24 +77,44 @@ class OrderDetailsModel extends SingleMapper {
     orderNum = json['order_number'];
     status = json['status'];
     statusCode = json['status_code'];
-    deliveryDate = json['delivery_date'];
-    deliveryTime = json['delivery_time'] != null
-        ? CustomFieldModel.fromJson(json['delivery_time'])
+    cancelReason = json['cancel_reason'];
+    deliveryType = json['delivery_type'] != null
+        ? OrderDetailsEnumsConverter.convertStringToReceiptType(
+            json['delivery_type'])
         : null;
-    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
-    bill = json['bill'] != null ? BillModel.fromJson(json['bill']) : null;
-    address =
-        json['address'] != null ? AddressModel.fromJson(json['address']) : null;
-    if (json['status_list'] != null) {
+    deliveryDay = json['delivery_day'] != null
+        ? DateTime.parse(json['delivery_day'])
+        : null;
+
+    deliveryTime = json['delivery_time'] != null
+        ? OrderScheduleModel.fromJson(json['delivery_time'])
+        : null;
+    timeReceipt = json['time_receipt'];
+    driver = json['driver'] != null ? UserModel.fromJson(json['driver']) : null;
+    bill = json['invoice'] != null
+        ? OrderInvoiceModel.fromJson(json['invoice'])
+        : null;
+    payType =
+        json['invoice'] != null && json['invoice']['pay_type_object'] != null
+            ? PaymentModel.fromJson(json['invoice']['pay_type_object'])
+            : null;
+    bank = json['invoice'] != null && json['invoice']['bank'] != null
+        ? PaymentMethodModel.fromJson(json['invoice']['bank'])
+        : null;
+    address = json['invoice'] != null && json['invoice']['shipping'] != null
+        ? AddressModel.fromJson(json['invoice']['shipping'])
+        : null;
+
+    if (json['status_logs'] != null) {
       statuses = [];
-      json['status_list'].forEach((v) {
-        statuses!.add(StatusModel.fromJson(v));
+      json['status_logs'].forEach((v) {
+        statuses!.add(OrderStatusModel.fromJson(v));
       });
     }
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
-        products!.add(PurchasedProductModel.fromJson(v));
+        products!.add(OrderProductModel.fromJson(v));
       });
     }
     createdAt =
@@ -86,148 +125,4 @@ class OrderDetailsModel extends SingleMapper {
   Mapper fromJson(Map<String, dynamic> json) {
     return OrderDetailsModel.fromJson(json);
   }
-}
-
-class StatusModel {
-  String? status, statusCode;
-  String? image;
-  bool? isCurrent;
-  DateTime? createdAt;
-
-  StatusModel(
-      {this.status,
-      this.statusCode,
-      this.image,
-      this.isCurrent,
-      this.createdAt});
-
-  StatusModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    statusCode = json['status_code'];
-    image = json['image'];
-    isCurrent = json['is_current'];
-    createdAt =
-        json['created_at'] != null ? DateTime.parse(json['created_at']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['status_code'] = statusCode;
-    data['image'] = image;
-    data['is_current'] = isCurrent;
-    data['created_at'] = createdAt?.toIso8601String();
-    return data;
-  }
-}
-
-class AddressModel {
-  int? id;
-  double? latitude;
-  double? longitude;
-  String? fullAddress;
-
-  AddressModel({
-    this.id,
-    this.latitude,
-    this.longitude,
-    this.fullAddress,
-  });
-
-  AddressModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    fullAddress = json['full_address'];
-    latitude =
-        json['latitude'] != null ? double.tryParse(json['latitude']) : null;
-    longitude =
-        json['longitude'] != null ? double.tryParse(json['longitude']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['latitude'] = latitude;
-    data['longitude'] = longitude;
-    data['full_address'] = fullAddress;
-    return data;
-  }
-}
-
-class BillModel extends SingleMapper {
-  double? subTotal;
-  double? tax;
-  double? taxPercentage;
-  double? fees;
-  double? feesPercentage;
-  double? discount;
-  double? totalPrice;
-  String? currency;
-
-  BillModel(
-      {this.subTotal,
-      this.taxPercentage,
-      this.tax,
-      this.fees,
-      this.feesPercentage,
-      this.discount,
-      this.totalPrice,
-      this.currency});
-
-  BillModel.fromJson(Map<String, dynamic> json) {
-    subTotal = json['sub_total'] != null
-        ? double.parse(json['sub_total'].toString())
-        : null;
-    taxPercentage = json['tax_percentage'] != null
-        ? double.parse(json['tax_percentage'].toString())
-        : null;
-    tax = json['tax_value'] != null
-        ? double.parse(json['tax_value'].toString())
-        : null;
-    feesPercentage = json['fees_percentage'] != null
-        ? double.parse(json['fees_percentage'].toString())
-        : null;
-    fees = json['fees_value'] != null
-        ? double.parse(json['fees_value'].toString())
-        : null;
-    discount = json['discount'] != null
-        ? double.parse(json['discount'].toString())
-        : json['discount'] != null
-            ? double.parse(json['discount'].toString())
-            : null;
-
-    totalPrice = json['total_price'] != null
-        ? double.parse(json['total_price'].toString())
-        : null;
-
-    currency = json['currency'] ?? getTranslated("sar");
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['sub_total'] = subTotal;
-    data['tax_percentage'] = taxPercentage;
-    data['tax_value'] = tax;
-    data['fees_percentage'] = feesPercentage;
-    data['fees_value'] = fees;
-    data['discount'] = discount;
-    data['total_price'] = totalPrice;
-    data['currency'] = currency;
-    return data;
-  }
-
-  @override
-  Mapper fromJson(Map<String, dynamic> json) {
-    return BillModel.fromJson(json);
-  }
-}
-
-enum OrderStatus {
-  pending,
-  accepted,
-  processing,
-  out_for_delivery,
-  delivered,
-  cancelled,
-  paid_failed,
 }

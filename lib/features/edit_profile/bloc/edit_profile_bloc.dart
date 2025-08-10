@@ -29,7 +29,7 @@ class EditProfileBloc extends Bloc<AppEvent, AppState> {
   Map<String, dynamic> body = {
     "name": "${UserBloc.instance.user?.name}",
     "email": "${UserBloc.instance.user?.email}",
-    "phone_number": "${UserBloc.instance.user?.phone}",
+    "phone_number": "${UserBloc.instance.user?.mobile}",
   };
 
   TextEditingController nameTEC = TextEditingController();
@@ -153,7 +153,7 @@ class EditProfileBloc extends Bloc<AppEvent, AppState> {
   ///To init Profile Data
   Future<void> onInit(Init event, Emitter<AppState> emit) async {
     nameTEC.text = UserBloc.instance.user?.name ?? "";
-    phoneTEC.text = UserBloc.instance.user?.phone ?? "";
+    phoneTEC.text = UserBloc.instance.user?.mobile ?? "";
     mailTEC.text = UserBloc.instance.user?.email ?? "";
     emit(Start());
   }

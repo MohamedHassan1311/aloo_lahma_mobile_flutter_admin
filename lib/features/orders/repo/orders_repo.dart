@@ -14,12 +14,14 @@ class OrdersRepo extends BaseRepo {
   Future<Either<ServerFailure, Response>> getOrders(SearchEngine data) async {
     try {
       Response response = await dioClient.get(
-        uri: EndPoints.orders,
+        uri: EndPoints.orders(userType),
         queryParameters: {
           "page": data.currentPage! + 1,
           "limit": data.limit,
           if (userType == UserType.driver.name) "deliveryByMyTeam": true,
           if (userType == UserType.admin.name) "managedByMe": true,
+          "with": "invoice,deliveryTime"
+
         }..addAll(data.data),
       );
       if (response.statusCode == 200) {

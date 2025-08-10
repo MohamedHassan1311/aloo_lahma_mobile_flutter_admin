@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
-import 'package:aloo_lahma_admin/main_blocs/user_bloc.dart';
 import '../../../../app/core/app_core.dart';
 import '../../../../app/core/app_event.dart';
 import '../../../../app/core/app_notification.dart';
@@ -35,7 +34,7 @@ class ChangePasswordBloc extends Bloc<AppEvent, AppState> {
       Map<String, dynamic> data = {
         "current_password": currentPasswordTEC.text.trim(),
         "password": newPasswordTEC.text.trim(),
-        "type": UserBloc.instance.user?.userType,
+        "type": repo.userType,
       };
 
       Either<ServerFailure, Response> response =

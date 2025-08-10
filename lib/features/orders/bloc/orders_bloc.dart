@@ -32,6 +32,7 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
   late ScrollController controller;
   late SearchEngine _engine;
   List<OrderModel>? _model;
+  int? total;
 
   final selectTab = BehaviorSubject<OrderMainStatus>();
   Function(OrderMainStatus) get updateSelectTab => selectTab.sink.add;
@@ -73,10 +74,11 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
         if (_engine.currentPage == 0) {
           _model = [];
           if (!_engine.isUpdate) {
+            total = null;
             emit(Loading());
           }
         } else {
-          emit(Done(data: _model, loading: true));
+          emit(Done(list: _model, loading: true));
         }
         _engine.data = {
           "status": OrderMainStatusEnumConverter
@@ -101,13 +103,18 @@ class OrdersBloc extends HydratedBloc<AppEvent, AppState> {
               _model?.add(item);
             }
           }
+
+          total = res.meta?.total;
           _engine.maxPages = res.meta?.pagesCount ?? 1;
           _engine.updateCurrentPage(res.meta?.currentPage ?? 1);
+
           if (_model != null && _model!.isNotEmpty) {
             emit(Done(list: _model, loading: false));
-          } else {
+          }
+          else {
             emit(Empty());
           }
+
         });
       } catch (e) {
         emit(Error());

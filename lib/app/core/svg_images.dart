@@ -129,6 +129,7 @@ class SvgImages {
   static const String coupons = 'assets/svgs/coupons.svg';
   static const String saudiRiyalSymbol = 'assets/svgs/saudi_riyal_symbol.svg';
   static const String deliveryDate = 'assets/svgs/delivery_date.svg';
-  static const String driver = 'assets/svgs/out_for_delivery.svg';
+  static const String driver = 'assets/svgs/driver.svg';
+  static const String bill = 'assets/svgs/bill.svg';
   static orderStatus(status) => 'assets/svgs/$status.svg';
 }

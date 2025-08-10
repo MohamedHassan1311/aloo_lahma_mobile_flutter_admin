@@ -48,6 +48,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
+              spacing: Dimensions.PADDING_SIZE_SMALL.w,
               children: [
                 ///Profile Image Widget
                 ProfileImageWidget(
@@ -55,8 +56,6 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                   radius: 30.w,
                   image: UserBloc.instance.user?.profileImage,
                 ),
-
-                SizedBox(width: 12.w),
                 Expanded(
                     child: InkWell(
                   onTap: () {
@@ -66,16 +65,16 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 4.h,
                     children: [
                       ///Guest
                       Text(
-                        "${getTranslated(DateTime.now().dateFormat(format: "a") == "AM" ? "good_morning" : "good_night", context: context)}, ${UserBloc.instance.user?.name ?? "Guest"}",
+                        "${getTranslated("welcome", context: context)}${UserBloc.instance.user?.name ?? "Guest"}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.w600
+                        style: AppTextStyles.w700
                             .copyWith(fontSize: 18, color: Styles.HEADER),
                       ),
-                      SizedBox(height: 6.h),
 
                       ///Current Location
                       BlocProvider(
@@ -128,21 +127,22 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 )),
                 customContainerSvgIcon(
-                    onTap: () {
-                      if (UserBloc.instance.isLogin) {
-                        CustomNavigator.push(Routes.notifications);
-                      } else {
-                        CustomBottomSheet.show(widget: const GuestMode());
-                      }
-                    },
-                    width: 40.w,
-                    height: 40.w,
-                    radius: 100.w,
-                    padding: 10.w,
-                    backGround: Styles.PRIMARY_COLOR.withOpacity(0.08),
-                    borderColor: Styles.PRIMARY_COLOR.withOpacity(0.08),
-                    color: Styles.PRIMARY_COLOR,
-                    imageName: SvgImages.notification),
+                  onTap: () {
+                    if (UserBloc.instance.isLogin) {
+                      CustomNavigator.push(Routes.notifications);
+                    } else {
+                      CustomBottomSheet.show(widget: const GuestMode());
+                    }
+                  },
+                  imageName: SvgImages.notification,
+                  color: Styles.PRIMARY_COLOR,
+                  backGround: Styles.PRIMARY_COLOR.withValues(alpha: 0.08),
+                  borderColor: Styles.PRIMARY_COLOR.withValues(alpha: 0.08),
+                  width: 50.w,
+                  height: 50.w,
+                  padding: 12.w,
+                  radius: 8.w,
+                ),
               ],
             ),
           ),

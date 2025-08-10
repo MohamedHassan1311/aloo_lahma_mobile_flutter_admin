@@ -6,6 +6,9 @@ import 'package:aloo_lahma_admin/app/core/dimensions.dart';
 import 'package:aloo_lahma_admin/app/core/extensions.dart';
 import 'package:aloo_lahma_admin/features/orders/widgets/order_tabs.dart';
 import '../../../app/core/app_state.dart';
+import '../../../app/core/styles.dart';
+import '../../../app/core/text_styles.dart';
+import '../../../app/localization/language_constant.dart';
 import '../../../data/config/di.dart';
 import '../bloc/orders_bloc.dart';
 
@@ -35,10 +38,31 @@ class _OrdersHeaderState extends State<OrdersHeader> {
               padding: EdgeInsets.only(
                 left: Dimensions.PADDING_SIZE_DEFAULT.w,
                 right: Dimensions.PADDING_SIZE_DEFAULT.w,
-                top: Dimensions.paddingSizeExtraSmall.h,
-                bottom: Dimensions.paddingSizeExtraSmall.h,
+                bottom: Dimensions.paddingSizeMini.h,
               ),
-              child: OrderTabs(),
+              child: Column(
+                spacing: Dimensions.paddingSizeExtraSmall.h,
+                children: [
+                  OrderTabs(),
+                  Row(
+                    spacing: 8.w,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          getTranslated("orders_number"),
+                          style: AppTextStyles.w600
+                              .copyWith(fontSize: 14, color: Styles.TITLE),
+                        ),
+                      ),
+                      Text(
+                        "(${context.read<OrdersBloc>().total ?? "..."}) ${getTranslated("order")}",
+                        style: AppTextStyles.w700
+                            .copyWith(fontSize: 16, color: Styles.HEADER),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           );
         },

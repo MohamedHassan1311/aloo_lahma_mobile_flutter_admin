@@ -35,7 +35,7 @@ class OrdersBody extends StatelessWidget {
                 (i) => Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.h),
                   child: CustomShimmerContainer(
-                    height: 120.h,
+                    height: 180.h,
                     width: context.width,
                     radius: 12.w,
                   ),

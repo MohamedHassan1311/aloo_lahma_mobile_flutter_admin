@@ -654,6 +654,8 @@
   "search_by_order_id": "Search by order id",
   "see_details": "See Details",
   "orders": "Orders",
+  "order": "Order",
+  "orders_number": "Orders Number",
   "order_details": "Order Details",
   "order_created_at": "Order created at",
   "order_delivered_at": "Order delivered at",
@@ -694,5 +696,9 @@
   "min_purchase_validation": "You can't complete the order, the minimum purchase value is",
   "driver": "Driver",
   "admin": "Admin",
-  "delivered": "Delivered"
+  "delivered": "Delivered",
+  "delivery": "Delivery",
+  "takeAway": "Take Away",
+  "receipt_type": "Receipt Type",
+  "pay_type": "Pay Type"
 }

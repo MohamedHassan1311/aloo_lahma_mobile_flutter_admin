@@ -117,14 +117,14 @@ class _MoreState extends State<More> {
                               ///Language
                               const LanguageButton(),
 
-                              ///Contact With Us
-                              MoreButton(
-                                title: getTranslated("contact_with_us",
-                                    context: context),
-                                icon: SvgImages.contactWithUs,
-                                onTap: () =>
-                                    CustomNavigator.push(Routes.contactWithUs),
-                              ),
+                              // ///Contact With Us
+                              // MoreButton(
+                              //   title: getTranslated("contact_with_us",
+                              //       context: context),
+                              //   icon: SvgImages.contactWithUs,
+                              //   onTap: () =>
+                              //       CustomNavigator.push(Routes.contactWithUs),
+                              // ),
 
                               ///About the App
                               MoreButton(
