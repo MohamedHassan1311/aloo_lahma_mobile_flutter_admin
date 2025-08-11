@@ -707,5 +707,8 @@
   "store_address_details": "تفاصيل عنوان المحل",
   "paid_from": "تم الدفع عن طريق",
   "order_number": "رقم الطلب",
-  "order_status": "حالة الطلب"
+  "order_status": "حالة الطلب",
+  "from_wallet": "من المحفظة",
+  "remaining_amount": "المبلغ المتبقي",
+  "cashback": "كاشباك"
 }

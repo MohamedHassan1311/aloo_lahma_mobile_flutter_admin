@@ -17,16 +17,15 @@ class SplashBloc extends Bloc<AppEvent, AppState> {
 
   Future<void> onClick(AppEvent event, Emitter<AppState> emit) async {
     Future.delayed(const Duration(milliseconds: 2500), () async {
-
       ///Get Settings
       sl<SettingsBloc>().add(Get());
 
       if (repo.isLogin) {
         UserBloc.instance.add(Click());
       } else {
-        if (!kDebugMode) {
-          await repo.guestMode();
-        }
+        // if (!kDebugMode) {
+        await repo.guestMode();
+        // }
       }
 
       if (!repo.isLogin) {
