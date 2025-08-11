@@ -17,7 +17,6 @@ import '../../features/change_password/repo/change_password_repo.dart';
 import '../../features/edit_profile/repo/edit_profile_repo.dart';
 import '../../features/faqs/repo/faqs_repo.dart';
 import '../../features/order_details/repo/order_details_repo.dart';
-import '../../features/orders/bloc/orders_bloc.dart';
 import '../../features/orders/repo/orders_repo.dart';
 import '../../features/setting/repo/settings_repo.dart';
 import '../../main_blocs/country_states_bloc.dart';
@@ -138,7 +137,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => DashboardBloc());
   sl.registerLazySingleton(() => ProfileBloc(repo: sl()));
   sl.registerLazySingleton(() => UserBloc(repo: sl()));
-  sl.registerLazySingleton(() => OrdersBloc(repo: sl(), internetConnection: sl()));
 
   ///Log out
   sl.registerLazySingleton(() => LogoutBloc(repo: sl()));

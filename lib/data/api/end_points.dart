@@ -1,17 +1,14 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class EndPoints {
-  static const bool isProductionEnv = true;
-  static String domain =
-      dotenv.env['DOMAIN_${isProductionEnv ? "PRO" : "DEV"}'] ?? "";
-  static String baseUrl =
-      dotenv.env['BASE_URL_${isProductionEnv ? "PRO" : "DEV"}'] ?? "";
+  static const bool isProductionEnv = false;
+  static String domain = dotenv.env['DOMAIN_${isProductionEnv ? "PRO" : "DEV"}'] ?? "";
+  static String baseUrl = dotenv.env['BASE_URL_${isProductionEnv ? "PRO" : "DEV"}'] ?? "";
   static String apiKey = dotenv.env['API_KEY'] ?? "";
   static chatPort(id) => '${dotenv.env['CHAT_PORT']}$id';
   static String googleMapsBaseUrl = dotenv.env['GOOGLE_MAPS_BASE_URL'] ?? "";
-  static const String generalTopic =
-      isProductionEnv ? 'aloo_lahma_admin' : 't_aloo_lahma';
-  static String userTypeTopic(type) => isProductionEnv ? 'type' : 't_$type';
+  static const String generalTopic = isProductionEnv ? 'aloo_lahma_admin' : 't_aloo_lahma_admin';
+  static String userTypeTopic(type) => isProductionEnv ? '$type' : 't_$type';
   static specificTopic(id) => isProductionEnv ? '$id' : 't_$id';
 
   ///Auth
@@ -38,7 +35,8 @@ class EndPoints {
 
   ///Notification
   static String notifications(userType) => '$userType/notifications';
-  static String readNotification(userType, id) => '$userType/notifications/read/$id';
+  static String readNotification(userType, id) =>
+      '$userType/notifications/read/$id';
   static deleteNotification(id) => 'notifications/$id';
 
   ///Orders

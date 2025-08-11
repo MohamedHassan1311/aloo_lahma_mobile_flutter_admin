@@ -9,7 +9,6 @@ import '../../../app/core/app_state.dart';
 import '../../../app/core/styles.dart';
 import '../../../app/core/text_styles.dart';
 import '../../../app/localization/language_constant.dart';
-import '../../../data/config/di.dart';
 import '../bloc/orders_bloc.dart';
 
 class OrdersHeader extends StatefulWidget {
@@ -26,7 +25,7 @@ class _OrdersHeaderState extends State<OrdersHeader> {
   Widget build(BuildContext context) {
     return BlocBuilder<OrdersBloc, AppState>(builder: (context, state) {
       return StreamBuilder(
-        stream: sl<OrdersBloc>().goingDownStream,
+        stream:  context.read<OrdersBloc>().goingDownStream,
         builder: (context, snapshot) {
           return AnimatedCrossFade(
             crossFadeState: snapshot.data == true

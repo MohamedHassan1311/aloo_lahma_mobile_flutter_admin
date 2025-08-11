@@ -45,7 +45,7 @@ class NavBar extends StatelessWidget {
                 Expanded(
                   child: BottomNavBarItem(
                     label: getTranslated("more", context: context),
-                    svgIcon: SvgImages.setting,
+                    svgIcon: SvgImages.moreIcon,
                     isSelected: (snapshot.data ?? 0) == 1,
                     onTap: () {
                       DashboardBloc.instance.updateSelectIndex(1);

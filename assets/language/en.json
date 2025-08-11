@@ -710,5 +710,8 @@
   "order_status": "Order Status",
   "from_wallet": "From Wallet",
   "remaining_amount": "Remaining Amount",
-  "cashback": "Cashback"
+  "cashback": "Cashback",
+  "account_number": "Account Number",
+  "bank_transfer_image": "Bank Transfer Image",
+  "waiting_bank_transfer_image": "Waiting Bank Transfer Image"
 }

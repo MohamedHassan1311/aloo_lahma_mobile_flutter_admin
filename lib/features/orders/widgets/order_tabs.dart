@@ -9,7 +9,6 @@ import '../../../app/core/dimensions.dart';
 import '../../../app/core/styles.dart';
 import '../../../app/core/text_styles.dart';
 import '../../../app/localization/language_constant.dart';
-import '../../../data/config/di.dart';
 import '../enums/order_main_status_enum.dart';
 
 class OrderTabs extends StatelessWidget {
@@ -20,7 +19,7 @@ class OrderTabs extends StatelessWidget {
     return BlocBuilder<OrdersBloc, AppState>(
       builder: (context, state) {
         return StreamBuilder<OrderMainStatus>(
-            stream: sl<OrdersBloc>().selectTabStream,
+            stream:  context.read<OrdersBloc>().selectTabStream,
             builder: (context, snapshot) {
               return SizedBox(
                 width: context.width,
@@ -28,8 +27,8 @@ class OrderTabs extends StatelessWidget {
                   groupValue: snapshot.data,
                   onValueChanged: (v) {
                     if (state is! Loading && v != null) {
-                      sl<OrdersBloc>().updateSelectTab(v);
-                      sl<OrdersBloc>().add(Click(arguments: SearchEngine()));
+                      context.read<OrdersBloc>().updateSelectTab(v);
+                      context.read<OrdersBloc>().add(Click(arguments: SearchEngine()));
                     }
                   },
                   thumbColor: Styles.PRIMARY_COLOR,

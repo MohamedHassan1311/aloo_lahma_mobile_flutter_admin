@@ -44,8 +44,7 @@ class FirebaseNotifications {
     if (Platform.isIOS) {
       iOSPermission();
     }
-    FirebaseMessaging.onMessage.listen(
-      (RemoteMessage data) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage data) {
         log('on Message notification ${data.notification?.toMap()}');
         log('on Message data ${data.data}');
         log('on Message body ${data.notification?.body}');
@@ -80,9 +79,7 @@ class FirebaseNotifications {
       }
     });
 
-    _notificationsPlugin!
-        .getNotificationAppLaunchDetails()
-        .then((NotificationAppLaunchDetails? data) {
+    _notificationsPlugin!.getNotificationAppLaunchDetails().then((NotificationAppLaunchDetails? data) {
       log('on Opened From Notification ${json.decode(json.encode(data!.notificationResponse?.payload.toString()))}');
       if (data.notificationResponse?.payload != null &&
           data.notificationResponse?.payload != "") {

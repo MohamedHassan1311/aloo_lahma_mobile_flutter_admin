@@ -710,5 +710,8 @@
   "order_status": "حالة الطلب",
   "from_wallet": "من المحفظة",
   "remaining_amount": "المبلغ المتبقي",
-  "cashback": "كاشباك"
+  "cashback": "كاشباك",
+  "account_number":"رقم الحساب",
+  "bank_transfer_image": "صورة التحويل بنكي",
+  "waiting_bank_transfer_image": "في انتظار صورة التحويل بنكي"
 }

@@ -11,7 +11,6 @@ import '../../../components/animated_widget.dart';
 import '../../../components/custom_loading_text.dart';
 import '../../../components/empty_widget.dart';
 import '../../../components/shimmer/custom_shimmer.dart';
-import '../../../data/config/di.dart';
 import '../../../main_models/search_engine.dart';
 import '../bloc/orders_bloc.dart';
 import '../model/orders_model.dart';
@@ -27,7 +26,7 @@ class OrdersBody extends StatelessWidget {
         builder: (context, state) {
           if (state is Loading) {
             return ListAnimator(
-              controller: sl<OrdersBloc>().controller,
+              controller: context.read<OrdersBloc>().controller,
               padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
               data: List.generate(
@@ -48,13 +47,15 @@ class OrdersBody extends StatelessWidget {
             return RefreshIndicator(
               color: Styles.PRIMARY_COLOR,
               onRefresh: () async {
-                sl<OrdersBloc>().add(Click(arguments: SearchEngine()));
+                context
+                    .read<OrdersBloc>()
+                    .add(Click(arguments: SearchEngine()));
               },
               child: Column(
                 children: [
                   Expanded(
                     child: ListAnimator(
-                      controller: sl<OrdersBloc>().controller,
+                      controller: context.read<OrdersBloc>().controller,
                       padding: EdgeInsets.symmetric(
                           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
                       data: List.generate(
@@ -74,13 +75,15 @@ class OrdersBody extends StatelessWidget {
             return RefreshIndicator(
               color: Styles.PRIMARY_COLOR,
               onRefresh: () async {
-                sl<OrdersBloc>().add(Click(arguments: SearchEngine()));
+                context
+                    .read<OrdersBloc>()
+                    .add(Click(arguments: SearchEngine()));
               },
               child: Column(
                 children: [
                   Expanded(
                     child: ListAnimator(
-                      controller: sl<OrdersBloc>().controller,
+                      controller: context.read<OrdersBloc>().controller,
                       padding: EdgeInsets.symmetric(
                         vertical: Dimensions.PADDING_SIZE_DEFAULT.h,
                       ),

@@ -57,7 +57,6 @@ class _DashBoardState extends State<DashBoard> {
     sl<UserBloc>().add(Click());
     if (UserBloc.instance.isLogin) {
       sl<ProfileBloc>().add(Get());
-      sl<OrdersBloc>().add(Click(arguments: SearchEngine()));
     }
   }
 

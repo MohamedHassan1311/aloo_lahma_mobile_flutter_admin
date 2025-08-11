@@ -71,6 +71,29 @@ class OrderPaymentMethod extends StatelessWidget {
                   vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
               child: BankCard(model: bank!),
             ),
+          if (bank != null && bankTransfer == null)
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(
+                vertical: Dimensions.paddingSizeMini.h,
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                vertical: Dimensions.paddingSizeExtraSmall.h,
+              ),
+              decoration: BoxDecoration(
+                color: Styles.PRIMARY_COLOR.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12.w),
+              ),
+              child: Text(
+                getTranslated("waiting_bank_transfer_image"),
+                textAlign: TextAlign.center,
+                style: AppTextStyles.w700.copyWith(
+                  fontSize: 14,
+                  color: Styles.PRIMARY_COLOR,
+                ),
+              ),
+            ),
           if (bankTransfer != null) ...[
             Text(
               getTranslated("bank_transfer_image"),

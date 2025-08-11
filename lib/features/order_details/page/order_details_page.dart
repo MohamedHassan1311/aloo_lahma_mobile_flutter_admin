@@ -148,6 +148,15 @@ class OrderDetailsPage extends StatelessWidget {
                           horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                         ),
                         data: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: Dimensions.paddingSizeMini.h),
+                            child: CustomShimmerContainer(
+                              height: 80.h,
+                              width: context.width,
+                              radius: 16.w,
+                            ),
+                          ),
                           Container(
                             margin: EdgeInsets.symmetric(
                                 vertical: Dimensions.paddingSizeMini.h),
