@@ -38,6 +38,7 @@ class _OrdersHeaderState extends State<OrdersHeader> {
               padding: EdgeInsets.only(
                 left: Dimensions.PADDING_SIZE_DEFAULT.w,
                 right: Dimensions.PADDING_SIZE_DEFAULT.w,
+                top: Dimensions.PADDING_SIZE_DEFAULT.h,
                 bottom: Dimensions.paddingSizeMini.h,
               ),
               child: Column(

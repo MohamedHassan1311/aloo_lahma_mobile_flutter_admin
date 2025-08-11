@@ -2,6 +2,8 @@ class Images {
   static const String logo = 'assets/logo.png';
   static const String appLogo = 'assets/app_logo.png';
   static const String splash = 'assets/splash.png';
+  static const String homeAppBarBG = 'assets/images/home_appbar_bg.png';
+
   static const String cancelCircle = 'assets/images/cancel_circle.png';
   static const String arabic = 'assets/images/saudi-arabia.png';
   static const String artist = 'assets/images/artist.png';
