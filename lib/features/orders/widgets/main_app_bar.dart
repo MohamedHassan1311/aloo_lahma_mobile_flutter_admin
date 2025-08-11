@@ -7,12 +7,12 @@ import 'package:aloo_lahma_admin/app/core/styles.dart';
 import 'package:aloo_lahma_admin/app/core/svg_images.dart';
 import 'package:aloo_lahma_admin/app/localization/language_constant.dart';
 import 'package:aloo_lahma_admin/components/custom_images.dart';
-import 'package:aloo_lahma_admin/components/shimmer/custom_shimmer.dart';
 import 'package:aloo_lahma_admin/features/maps/bloc/map_bloc.dart';
 import 'package:aloo_lahma_admin/features/maps/repo/maps_repo.dart';
 import 'package:aloo_lahma_admin/main_blocs/user_bloc.dart';
 import 'package:aloo_lahma_admin/navigation/custom_navigation.dart';
 import '../../../app/core/app_event.dart';
+import '../../../app/core/app_strings.dart';
 import '../../../app/core/text_styles.dart';
 import '../../../components/custom_bottom_sheet.dart';
 import '../../../components/marquee_widget.dart';
@@ -33,8 +33,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Styles.PRIMARY_COLOR.withOpacity(0.28),
-                Color(0XFFFFF6F1).withOpacity(0.2),
+                Styles.PRIMARY_COLOR.withValues(alpha: 0.28),
+                Color(0XFFFFF6F1).withValues(alpha: 0.2),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -116,7 +116,18 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                                       color: Styles.PRIMARY_COLOR,
                                       imageName: SvgImages.location),
                                   SizedBox(width: 8.w),
-                                  CustomShimmerText(width: 120.w),
+                                  Expanded(
+                                    child: MarqueeWidget(
+                                      child: Text(
+                                        AppStrings.defaultAddress,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: AppTextStyles.w400.copyWith(
+                                            fontSize: 14,
+                                            color: Styles.DETAILS_COLOR),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               );
                             }

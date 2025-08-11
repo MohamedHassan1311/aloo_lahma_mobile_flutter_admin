@@ -6,7 +6,7 @@ class AppStrings {
   static const String appName = 'الو لحمه للأعمال';
   static const String appStoreId = '13313131';
   static const String googleApiKey = 'AIzaSyA2xA7d84QkR0_0OPjdDRLfu--YbjJkSa8';
-  static const String defaultAddress = 'البحرين ، المنامة';
+  static const String defaultAddress = 'السعودية ، الرياض';
   static const double defaultLat = 26.225513;
   static const double defaultLong = 50.589816;
   static const String arFontFamily = 'ar';
