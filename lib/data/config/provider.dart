@@ -1,4 +1,5 @@
 import 'package:aloo_lahma_admin/data/config/di.dart' as di;
+import 'package:aloo_lahma_admin/features/orders/bloc/orders_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
 
 import 'package:aloo_lahma_admin/main_blocs/user_bloc.dart';
@@ -18,6 +19,7 @@ abstract class ProviderList {
     BlocProvider<SettingsBloc>(create: (_) => di.sl<SettingsBloc>()),
     BlocProvider<ProfileBloc>(create: (_) => di.sl<ProfileBloc>()),
     BlocProvider<UserBloc>(create: (_) => di.sl<UserBloc>()),
+    BlocProvider<OrdersBloc>(create: (_) => di.sl<OrdersBloc>()),
     ///Log out
     BlocProvider<LogoutBloc>(create: (_) => di.sl<LogoutBloc>()),
   ];

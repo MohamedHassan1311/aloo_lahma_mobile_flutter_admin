@@ -47,7 +47,6 @@ class ChangeStatusBloc extends Bloc<AppEvent, AppState> {
   }
 
   Future<void> onClick(Click event, Emitter<AppState> emit) async {
-    if (!formKey.currentState!.validate()) return;
     try {
       if (changeStatusEntity.valueOrNull?.receiptType ==
               ReceiptTypes.delivery &&
@@ -69,6 +68,8 @@ class ChangeStatusBloc extends Bloc<AppEvent, AppState> {
         AppCore.showToast(fail.error);
         emit(Error());
       }, (success) {
+        AppCore.showToast(getTranslated("your_order_updated_successfully"));
+
         OrderDetailsModel model =
             OrderDetailsModel.fromJson(success.data["data"]);
 
@@ -76,7 +77,7 @@ class ChangeStatusBloc extends Bloc<AppEvent, AppState> {
 
         sl<OrdersBloc>().add(Click(arguments: SearchEngine(isUpdate: true)));
 
-        AppCore.showToast(getTranslated("your_order_updated_successfully"));
+        CustomNavigator.pop();
         emit(Done());
       });
     } catch (e) {

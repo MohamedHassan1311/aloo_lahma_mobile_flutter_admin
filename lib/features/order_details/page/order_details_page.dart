@@ -1,5 +1,3 @@
-import 'package:aloo_lahma_admin/components/custom_bottom_sheet.dart';
-import 'package:aloo_lahma_admin/components/custom_button.dart';
 import 'package:aloo_lahma_admin/features/order_details/widgets/order_driver_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,13 +16,13 @@ import '../../../app/core/text_styles.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/empty_widget.dart';
 import '../../../data/config/di.dart';
-import '../../change_status/view/change_order_status_view.dart';
 import '../../setting/bloc/settings_bloc.dart';
 import '../enums/order_details_enums.dart';
 import '../widgets/delivery_date.dart';
 import '../widgets/delivery_location.dart';
 import '../widgets/order_bill_details.dart';
 import '../widgets/order_cancel_reason.dart';
+import '../widgets/order_details_actions.dart';
 import '../widgets/order_payment_method.dart';
 import '../widgets/order_products.dart';
 import '../widgets/order_status_list.dart';
@@ -142,30 +140,7 @@ class OrderDetailsPage extends StatelessWidget {
                             ),
                           ),
 
-                          ///Order Actions
-                          if (model.availableStatus != null &&
-                              model.availableStatus!.isNotEmpty &&
-                              model.currentStatus != null &&
-                              model.currentStatus != OrderStatuses.cancelled &&
-                              model.currentStatus != OrderStatuses.completed)
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                                vertical: Dimensions.paddingSizeExtraSmall.h,
-                              ),
-                              child: CustomButton(
-                                text: getTranslated("change_order_status"),
-                                onTap: () => CustomBottomSheet.show(
-                                    height: context.height * 0.7,
-                                    label: getTranslated("change_order_status"),
-                                    widget: ChangeOrderStatusView(
-                                      model: model,
-                                      onSuccess: (v) => context
-                                          .read<OrderDetailsBloc>()
-                                          .add(Update(arguments: v)),
-                                    )),
-                              ),
-                            ),
+                          OrderDetailsActions(model: model),
                         ],
                       );
                     }

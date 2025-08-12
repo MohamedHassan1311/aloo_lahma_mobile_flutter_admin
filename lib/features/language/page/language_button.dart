@@ -9,7 +9,10 @@ import '../../../app/core/svg_images.dart';
 import '../../../app/core/text_styles.dart';
 import '../../../app/localization/language_constant.dart';
 import '../../../components/custom_images.dart';
+import '../../../data/config/di.dart';
+import '../../../main_models/search_engine.dart';
 import '../../language/bloc/language_bloc.dart';
+import '../../orders/bloc/orders_bloc.dart';
 
 class LanguageButton extends StatefulWidget {
   final bool fromWelcome;
@@ -75,6 +78,7 @@ class _LanguageButtonState extends State<LanguageButton> {
                       onPressed: (index) {
                         LanguageBloc.instance.updateSelectIndex(index);
                         LanguageBloc.instance.add(Update());
+                        sl<OrdersBloc>().add(Click(arguments: SearchEngine()));
                       },
                       borderRadius: BorderRadius.circular(8.w),
                       selectedBorderColor: Styles.PRIMARY_COLOR,

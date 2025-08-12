@@ -14,6 +14,8 @@ class OrderDetailsBloc extends Bloc<AppEvent, AppState> {
     on<Click>(onClick);
     on<Update>(onUpdate);
   }
+  String? get userType => repo.userType;
+
 
   Future<void> onClick(Click event, Emitter<AppState> emit) async {
     try {
