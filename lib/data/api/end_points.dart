@@ -46,7 +46,7 @@ class EndPoints {
   static String orders(userType) => '$userType/orders';
   static orderDetails(userType, id) => '$userType/orders/$id';
   static const String cancelReasons = 'cancel-reason';
-  static changeOrderStatus(id) => 'orders/$id/changeOrderStatus';
+  static changeOrderStatus(userType,id) => '$userType/orders/$id/changeOrderStatus';
 
   ///Drivers
   static String orderSchedule(userType) => '$userType/checkout/newGetPeriods';

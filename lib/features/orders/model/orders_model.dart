@@ -79,7 +79,7 @@ class OrderModel extends SingleMapper {
     status = json['status'];
     deliveryType = json['delivery_type'] != null
         ? OrderDetailsEnumsConverter.convertStringToReceiptType(
-            json['delivery_type']?.toUpperCase())
+            json['delivery_type'])
         : null;
     deliveryDay = json['delivery_day'] != null
         ? DateTime.parse(json['delivery_day'])
@@ -105,7 +105,7 @@ class OrderModel extends SingleMapper {
     data['order_number'] = orderNum;
     data['amount'] = amount;
     data['status'] = status;
-    data['delivery_type'] = deliveryType?.name.toUpperCase();
+    data['delivery_type'] = OrderDetailsEnumsConverter.convertReceiptTypeEnumToString(deliveryType);
     data['delivery_day'] = deliveryDay?.toIso8601String();
     data['delivery_time'] = deliveryTime?.toJson();
     data['pay_type_object'] = payType?.toJson();

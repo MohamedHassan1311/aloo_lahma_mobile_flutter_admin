@@ -103,11 +103,11 @@ class OrderPaymentMethod extends StatelessWidget {
               ),
             ),
             CustomNetworkImage.containerNewWorkImage(
-              image: bankTransfer!,
-              height: 100.h,
-              width: context.width,
-              fit: BoxFit.contain,
-            )
+                image: bankTransfer!,
+                height: 100.h,
+                width: context.width,
+                fit: BoxFit.contain,
+                showPopUpViewer: true)
           ]
         ],
       ),

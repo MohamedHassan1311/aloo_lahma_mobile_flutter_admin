@@ -38,7 +38,8 @@ extension StringExtension on String {
 
 extension DateExtention on DateTime {
   String dateFormat({required String format, String? lang}) {
-    return DateFormat(format, sl<LanguageBloc>().selectLocale!.languageCode)
+    return DateFormat(
+            format, lang ?? sl<LanguageBloc>().selectLocale!.languageCode)
         .format(this);
   }
 

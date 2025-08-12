@@ -23,32 +23,29 @@ class OrderStatusSelectionInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: Dimensions.paddingSizeMini.h),
-      child: CustomTextField(
-        readOnly: true,
-        onTap: () => CustomBottomSheet.show(
-            label: getTranslated("select_order_status"),
-            widget: OrderStatusSelectionView(
-              initialValue: initialValue,
-              onConfirm: onConfirm,
-              list: availableStatus,
-            ),
-            onConfirm: () => CustomNavigator.pop()),
-        controller: TextEditingController(text: initialValue?.status),
-        label: getTranslated("order_status"),
-        hint: getTranslated("select_order_status"),
-        pSvgIcon: SvgImages.status,
-        validate: (v) => Validations.field(initialValue?.statusCode?.name,
-            fieldName: getTranslated("order_status")),
-        sufWidget: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
-          child: Icon(
-            Icons.keyboard_arrow_down_outlined,
-            color: Styles.DETAILS_COLOR,
-            size: 24,
+    return CustomTextField(
+      readOnly: true,
+      onTap: () => CustomBottomSheet.show(
+          label: getTranslated("select_order_status"),
+          widget: OrderStatusSelectionView(
+            initialValue: initialValue,
+            onConfirm: onConfirm,
+            list: availableStatus,
           ),
+          onConfirm: () => CustomNavigator.pop()),
+      controller: TextEditingController(text: initialValue?.status),
+      label: getTranslated("order_status"),
+      hint: getTranslated("select_order_status"),
+      pSvgIcon: SvgImages.status,
+      validate: (v) => Validations.field(initialValue?.statusCode?.name,
+          fieldName: getTranslated("order_status")),
+      sufWidget: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w),
+        child: Icon(
+          Icons.keyboard_arrow_down_outlined,
+          color: Styles.DETAILS_COLOR,
+          size: 24,
         ),
       ),
     );

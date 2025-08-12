@@ -28,8 +28,11 @@ class OrderSchedule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OrderDeliveryTimesBloc(repo: sl<OrderDeliveryTimesRepo>()),
+      create: (context) =>
+          OrderDeliveryTimesBloc(repo: sl<OrderDeliveryTimesRepo>()),
       child: Container(
+        margin:
+            EdgeInsets.symmetric(vertical: Dimensions.paddingSizeExtraSmall.h),
         padding: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_SMALL.w,
             vertical: Dimensions.PADDING_SIZE_SMALL.h),
@@ -82,10 +85,16 @@ class OrderSchedule extends StatelessWidget {
                           DateTime.now().day,
                         ),
                         valueChanged: (v) {
-                          context.read<ChangeStatusBloc>().updateChangeStatusEntity(snapshot.data?.copyWith(deliveryDate: v, clearDeliveryTime: true,));
+                          context
+                              .read<ChangeStatusBloc>()
+                              .updateChangeStatusEntity(snapshot.data?.copyWith(
+                                deliveryDate: v,
+                                clearDeliveryTime: true,
+                              ));
                           if (snapshot.data?.receiptType ==
                               ReceiptTypes.delivery) {
-                            context.read<OrderDeliveryTimesBloc>()
+                            context
+                                .read<OrderDeliveryTimesBloc>()
                                 .add(Click(arguments: {
                                   "shipping_id": snapshot.data?.address?.id,
                                   "date":
@@ -135,7 +144,8 @@ class OrderSchedule extends StatelessWidget {
                                 .read<ChangeStatusBloc>()
                                 .isReceiptTimeValid(
                                     selectedTime: v,
-                                    selectedDate: snapshot.data!.deliveryDate!)) {
+                                    selectedDate:
+                                        snapshot.data!.deliveryDate!)) {
                               context
                                   .read<ChangeStatusBloc>()
                                   .updateChangeStatusEntity(
@@ -143,7 +153,6 @@ class OrderSchedule extends StatelessWidget {
                             }
                           },
                         ),
-
                 ],
               );
             }),

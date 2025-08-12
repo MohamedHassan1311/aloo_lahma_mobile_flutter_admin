@@ -731,5 +731,8 @@
     "you_have_to_select_delivery_time_within_store_business_hours": "You have to select delivery time within store business hours",
     "you_have_to_select_delivery_time_after_at_least": "You have to select delivery time after at least",
     "please_select_delivery_date": "Please, Select delivery date to get available times",
-    "you_have_to_select_delivery_date_first": "Oops!,You have to select delivery date first"
+    "you_have_to_select_delivery_date_first": "Oops!,You have to select delivery date first",
+    "cancel_reason": "Cancel Reason",
+    "enter_cancel_reason": "Enter cancel reason",
+    "client": "Client"
 }

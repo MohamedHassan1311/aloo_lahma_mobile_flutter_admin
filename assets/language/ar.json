@@ -694,7 +694,7 @@
   "min_purchase_validation": "لا يمكنك إكمال الطلب، الحد الأدنى لقيمة الشراء هو",
   "there_is_no_drivers": "لا يوجد سائقين",
   "select_driver": "اختر سائق",
-  "driver": "سائق",
+  "driver": "السائق",
   "admin": "مدير",
   "see_details": "عرض التفاصيل",
   "delivered": "تم التوصيل",
@@ -731,5 +731,8 @@
     "you_have_to_select_delivery_time_within_store_business_hours": "يجب عليك اختيار وقت التوصيل ضمن ساعات عمل المتجر",
     "you_have_to_select_delivery_time_after_at_least": "يجب اختيار وقت التوصيل بعد مدة لا تقل عن",
     "you_have_to_select_delivery_date_first": "عذرًا! يجب عليك اختيار تاريخ التسليم أولاً",
-    "please_select_delivery_date": "يرجى اختيار تاريخ التسليم لعرض الأوقات المتاحة"
+    "please_select_delivery_date": "يرجى اختيار تاريخ التسليم لعرض الأوقات المتاحة",
+    "cancel_reason": "سبب الالغاء",
+    "enter_cancel_reason": "ادخل سبب الالغاء",
+    "client": "العميل"
 }

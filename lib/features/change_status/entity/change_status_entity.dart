@@ -55,15 +55,17 @@ class ChangeStatusEntity {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['cancel_reason'] = cancelReason?.text.trim();
-    data['delivery_date'] = deliveryDate?.dateFormat(format: "y-MM-d", lang: "en");
-    if (receiptType == ReceiptTypes.delivery) {
-      data['deliver_time_id'] = deliveryTime?.id;
-    } else {
-      data['time_receipt'] = receiptTime?.dateFormat(format: "hh:mm a", lang: "en");
+    data['status'] = status?.value;
+    if(status?.statusCode == OrderStatuses.cancelled) data['cancel_reason'] = cancelReason?.text.trim();
+    if(status?.statusCode == OrderStatuses.deferred) {
+      data['delivery_date'] = deliveryDate?.dateFormat(format: "y-MM-d", lang: "en");
+      if (receiptType == ReceiptTypes.delivery) {
+        data['deliver_time_id'] = deliveryTime?.id;
+      } else {
+        data['time_receipt'] = receiptTime?.dateFormat(format: "hh:mm a", lang: "en");
+      }
     }
-    data['driver_id'] = driver?.id;
-
+   if(status?.statusCode == OrderStatuses.outForDelivery) data['driver_id'] = driver?.id;
     data.removeWhere((key, value) => value == null || value == "");
     return data;
   }

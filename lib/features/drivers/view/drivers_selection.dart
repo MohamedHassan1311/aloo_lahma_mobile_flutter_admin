@@ -76,7 +76,7 @@ class _DriversSelectionState extends State<DriversSelection> {
                       return Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Flexible(
+                          Expanded(
                             child: _SelectionView(
                               controller:
                                   context.read<DriversBloc>().controller,

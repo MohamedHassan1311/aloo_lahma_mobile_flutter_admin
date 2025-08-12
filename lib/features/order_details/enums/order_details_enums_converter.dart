@@ -68,7 +68,7 @@ abstract class OrderDetailsEnumsConverter {
     }
   }
 
-  static String convertReceiptTypeEnumToString(ReceiptTypes type) {
+  static String convertReceiptTypeEnumToString(ReceiptTypes? type) {
     switch (type) {
       case ReceiptTypes.takeAway:
         return "Receipt_From_Store";

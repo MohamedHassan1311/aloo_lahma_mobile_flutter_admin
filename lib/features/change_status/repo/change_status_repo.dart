@@ -13,8 +13,7 @@ class ChangeStatusRepo extends BaseRepo {
       Map<String, dynamic> body) async {
     try {
       Response response = await dioClient.put(
-          uri: EndPoints.changeOrderStatus(body["id"]),
-          data: {"status": body["status"]});
+          uri: EndPoints.changeOrderStatus(userType, body["id"]), data: body);
       if (response.statusCode == 200) {
         return Right(response);
       } else {

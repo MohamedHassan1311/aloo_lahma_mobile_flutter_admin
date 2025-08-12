@@ -3,6 +3,7 @@ import '../enums/order_details_enums.dart';
 import '../enums/order_details_enums_converter.dart';
 
 class OrderStatusModel extends SingleMapper {
+  int? value;
   OrderStatuses? statusCode;
   String? status;
   String? image;
@@ -11,7 +12,8 @@ class OrderStatusModel extends SingleMapper {
   DateTime? createdAt;
 
   OrderStatusModel(
-      {this.status,
+      {this.value,
+      this.status,
       this.statusCode,
       this.image,
       this.color,
@@ -19,6 +21,7 @@ class OrderStatusModel extends SingleMapper {
       this.createdAt});
 
   OrderStatusModel.fromJson(Map<String, dynamic> json) {
+    value = int.parse(json['value']?.toString() ?? "0");
     status = json['status'];
     statusCode = json['status_code'] != null
         ? OrderDetailsEnumsConverter.convertStringToEnum(json['status_code'])
@@ -33,6 +36,7 @@ class OrderStatusModel extends SingleMapper {
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['value'] = value;
     data['status'] = status;
     data['status_code'] = statusCode?.name;
     data['image'] = image;

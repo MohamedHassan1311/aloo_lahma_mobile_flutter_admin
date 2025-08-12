@@ -34,7 +34,6 @@ class ChangeStatusBloc extends Bloc<AppEvent, AppState> {
 
   String? get userType => repo.userType;
 
-
   final changeStatusEntity = BehaviorSubject<ChangeStatusEntity?>();
   Function(ChangeStatusEntity?) get updateChangeStatusEntity =>
       changeStatusEntity.sink.add;
@@ -48,36 +47,37 @@ class ChangeStatusBloc extends Bloc<AppEvent, AppState> {
   }
 
   Future<void> onClick(Click event, Emitter<AppState> emit) async {
+    if(!formKey.currentState!.validate()) return;
     try {
-      if (changeStatusEntity.valueOrNull?.receiptType == ReceiptTypes.delivery &&
-          changeStatusEntity.valueOrNull?.status == OrderStatuses.deferred &&
-          changeStatusEntity.valueOrNull?.deliveryTime == null) {
-        return AppCore.showToast(
-            getTranslated("you_have_to_select_delivery_time_first"));
-      }
+    if (changeStatusEntity.valueOrNull?.receiptType == ReceiptTypes.delivery &&
+        changeStatusEntity.valueOrNull?.status?.statusCode ==
+            OrderStatuses.deferred &&
+        changeStatusEntity.valueOrNull?.deliveryTime == null) {
+      return AppCore.showToast(
+          getTranslated("you_have_to_select_delivery_time_first"));
+    }
 
+    emit(Loading());
+    loadingDialog();
+    Either<ServerFailure, Response> response =
+        await repo.changeStatus(changeStatusEntity.valueOrNull!.toJson());
 
-      emit(Loading());
-      loadingDialog();
-      Either<ServerFailure, Response> response =
-          await repo.changeStatus(event.arguments as Map<String, dynamic>);
+    CustomNavigator.pop();
 
-      CustomNavigator.pop();
+    response.fold((fail) {
+      AppCore.showToast(fail.error);
+      emit(Error());
+    }, (success) {
+      OrderDetailsModel model =
+          OrderDetailsModel.fromJson(success.data["data"]);
 
-      response.fold((fail) {
-        AppCore.showToast(fail.error);
-        emit(Error());
-      }, (success) {
-        OrderDetailsModel model =
-            OrderDetailsModel.fromJson(success.data["data"]);
+      (event.arguments as Map)["onSuccess"].call(model);
 
-        (event.arguments as Map)["onSuccess"].call(model);
+      sl<OrdersBloc>().add(Click(arguments: SearchEngine(isUpdate: true)));
 
-        sl<OrdersBloc>().add(Click(arguments: SearchEngine(isUpdate: true)));
-
-        AppCore.showToast(getTranslated("your_order_updated_successfully"));
-        emit(Done());
-      });
+      AppCore.showToast(getTranslated("your_order_updated_successfully"));
+      emit(Done());
+    });
     } catch (e) {
       AppCore.showToast(e.toString());
       CustomNavigator.pop();
@@ -152,12 +152,13 @@ class ChangeStatusBloc extends Bloc<AppEvent, AppState> {
   }
 
   Future<void> onInit(Init event, Emitter<AppState> emit) async {
-
-  OrderDetailsModel order = event.arguments as OrderDetailsModel;
-    updateChangeStatusEntity(ChangeStatusEntity(
-    id: order.id,
-    receiptType: order.deliveryType,
-    address: order.address),
+    OrderDetailsModel order = event.arguments as OrderDetailsModel;
+    updateChangeStatusEntity(
+      ChangeStatusEntity(
+          id: order.id,
+          receiptType: order.deliveryType,
+          address: order.address),
     );
+    emit(Start());
   }
-  }
+}

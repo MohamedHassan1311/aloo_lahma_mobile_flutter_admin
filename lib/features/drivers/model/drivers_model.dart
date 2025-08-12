@@ -19,7 +19,7 @@ class DriversModel extends SingleMapper {
   Map<String, dynamic> toJson() => {
         "message": message,
         "status_code": statusCode,
-        "pagination": meta?.toJson(),
+        "meta": meta?.toJson(),
         "data": data != null
             ? List<dynamic>.from(data!.map((x) => x.toJson()))
             : [],
@@ -29,7 +29,7 @@ class DriversModel extends SingleMapper {
     message = json['message'];
     statusCode = json['status_code'];
     meta =
-        json['pagination'] != null ? Meta.fromJson(json['pagination']) : null;
+        json['meta'] != null ? Meta.fromJson(json['meta']) : null;
 
     if (json['data'] != null) {
       data = [];

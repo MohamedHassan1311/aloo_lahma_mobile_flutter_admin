@@ -10,7 +10,6 @@ import 'package:aloo_lahma_admin/components/shimmer/custom_shimmer.dart';
 import 'package:aloo_lahma_admin/features/order_details/bloc/order_details_bloc.dart';
 import 'package:aloo_lahma_admin/features/order_details/model/order_details_model.dart';
 import 'package:aloo_lahma_admin/features/order_details/repo/order_details_repo.dart';
-import 'package:http/http.dart';
 import '../../../app/core/app_event.dart';
 import '../../../app/core/app_state.dart';
 import '../../../app/core/dimensions.dart';
@@ -29,6 +28,7 @@ import '../widgets/order_cancel_reason.dart';
 import '../widgets/order_payment_method.dart';
 import '../widgets/order_products.dart';
 import '../widgets/order_status_list.dart';
+import '../widgets/order_user_card.dart';
 
 class OrderDetailsPage extends StatelessWidget {
   const OrderDetailsPage({super.key, required this.id});
@@ -127,6 +127,9 @@ class OrderDetailsPage extends StatelessWidget {
                                   bank: model.bank,
                                   bankTransfer: model.bill?.bankTransfer,
                                 ),
+                                if (model.user != null)
+                                  OrderUserCard(user: model.user!),
+
                                 if (model.driver != null)
                                   OrderDriverCard(driver: model.driver!),
                                 if (model.cancelReason != null)
@@ -140,18 +143,17 @@ class OrderDetailsPage extends StatelessWidget {
                           ),
 
                           ///Order Actions
-                          // if(model.statusCode != null
-                          //     && model.statusCode != OrderStatuses.cancelled
-                          //     && model.statusCode != OrderStatuses.completed)
+                          if(model.availableStatus != null &&model.availableStatus!.isNotEmpty&&model.currentStatus != null && model.currentStatus != OrderStatuses.cancelled && model.currentStatus != OrderStatuses.completed)
                           Padding(
-                            padding:  EdgeInsets.symmetric(
-                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                            vertical: Dimensions.paddingSizeExtraSmall.h,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                              vertical: Dimensions.paddingSizeExtraSmall.h,
                             ),
                             child: CustomButton(
                               text: getTranslated("change_order_status"),
                               onTap: () => CustomBottomSheet.show(
-                                label:getTranslated("change_order_status"),
+                                  height: context.height * 0.7,
+                                  label: getTranslated("change_order_status"),
                                   widget: ChangeOrderStatusView(model: model)),
                             ),
                           ),

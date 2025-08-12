@@ -24,9 +24,10 @@ class OrderDetailsModel extends SingleMapper {
   List<OrderStatusModel>? availableStatus;
 
   String? status;
-  OrderStatuses? statusCode;
+  OrderStatuses? currentStatus;
   AddressModel? address;
   PaymentModel? payType;
+  UserModel? user;
   UserModel? driver;
   DateTime? createdAt;
 
@@ -43,8 +44,9 @@ class OrderDetailsModel extends SingleMapper {
     this.availableStatus,
     this.address,
     this.status,
-    this.statusCode,
+    this.currentStatus,
     this.payType,
+    this.user,
     this.driver,
     this.cancelReason,
     this.bank,
@@ -56,20 +58,23 @@ class OrderDetailsModel extends SingleMapper {
         "id": id,
         "order_number": orderNum,
         "status": status,
-        "status_code": statusCode?.name,
+        "status_code": currentStatus?.name,
         "delivery_day": deliveryDay?.toIso8601String(),
         "delivery_time": deliveryTime?.toJson(),
         "time_receipt": timeReceipt,
         "cancel_reason": cancelReason,
-        "delivery_type": deliveryType?.name.toUpperCase(),
+        "delivery_type":
+            OrderDetailsEnumsConverter.convertReceiptTypeEnumToString(
+                deliveryType),
         "invoice": bill?.toJson(),
-        "shipping": address?.toJson(),
+        "invoice[shipping]": address?.toJson(),
         "pay_type_object": payType?.toJson(),
+        "invoice[user]": user?.toJson(),
         "driver": driver?.toJson(),
         "status_logs": statuses != null
             ? List<dynamic>.from(statuses!.map((x) => x.toJson()))
             : [],
-        "available_status": availableStatus != null
+        "available_statuses": availableStatus != null
             ? List<dynamic>.from(availableStatus!.map((x) => x.toJson()))
             : [],
         "products": products != null
@@ -83,10 +88,6 @@ class OrderDetailsModel extends SingleMapper {
     id = json['id'];
     orderNum = json['order_number'];
     status = json['status'];
-    statusCode = json['status_code'] != null
-        ? OrderDetailsEnumsConverter.convertStringToEnum(
-            json['status_code']?.toUpperCase())
-        : null;
     cancelReason = json['cancel_reason'];
     deliveryType = json['delivery_type'] != null
         ? OrderDetailsEnumsConverter.convertStringToReceiptType(
@@ -100,6 +101,9 @@ class OrderDetailsModel extends SingleMapper {
         ? OrderScheduleModel.fromJson(json['delivery_time'])
         : null;
     timeReceipt = json['time_receipt'];
+    user = json['invoice'] != null && json['invoice']['user'] != null
+        ? UserModel.fromJson(json['invoice']['user'])
+        : null;
     driver = json['driver'] != null ? UserModel.fromJson(json['driver']) : null;
     bill = json['invoice'] != null
         ? OrderInvoiceModel.fromJson(json['invoice'])
@@ -122,9 +126,15 @@ class OrderDetailsModel extends SingleMapper {
       });
     }
 
-    if (json['available_status'] != null) {
+    statuses?.forEach((e) {
+      if (e.isCurrent == true) {
+        currentStatus = e.statusCode;
+      }
+    });
+
+    if (json['available_statuses'] != null) {
       availableStatus = [];
-      json['available_status'].forEach((v) {
+      json['available_statuses'].forEach((v) {
         availableStatus!.add(OrderStatusModel.fromJson(v));
       });
     }

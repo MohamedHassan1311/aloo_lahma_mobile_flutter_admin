@@ -53,7 +53,7 @@ class DriversBloc extends HydratedBloc<AppEvent, AppState> {
             emit(Loading());
           }
         } else {
-          emit(Done(data: _model, loading: true));
+          emit(Done(list: _model, loading: true));
         }
 
         Either<ServerFailure, Response> response =

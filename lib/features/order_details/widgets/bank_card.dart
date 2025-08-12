@@ -10,10 +10,7 @@ import '../model/payment_model.dart';
 
 class BankCard extends StatelessWidget {
   const BankCard(
-      {super.key,
-      required this.model,
-       this.isSelected = false,
-       this.onSelect});
+      {super.key, required this.model, this.isSelected = false, this.onSelect});
   final PaymentMethodModel model;
   final bool isSelected;
   final Function()? onSelect;
@@ -45,7 +42,8 @@ class BankCard extends StatelessWidget {
                 image: model.image ?? '',
                 width: (model.iban != null) ? 100.w : 50.w,
                 height: 50.w,
-                fit: BoxFit.contain),
+                fit: BoxFit.contain,
+                showPopUpViewer: true),
             Text(
               LanguageBloc.instance.isLtr
                   ? model.nameEn ?? ""
