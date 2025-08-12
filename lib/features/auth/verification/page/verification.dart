@@ -6,7 +6,6 @@ import 'package:aloo_lahma_admin/features/auth/verification/model/verification_m
 
 import '../../../../app/core/app_event.dart';
 import '../../../../app/core/dimensions.dart';
-import '../../../../app/core/images.dart';
 import '../../../../app/core/styles.dart';
 import '../../../../app/core/text_styles.dart';
 import '../../../../app/core/validation.dart';
@@ -15,9 +14,9 @@ import '../../../../components/animated_widget.dart';
 import '../../../../components/count_down.dart';
 import '../../../../components/custom_app_bar.dart';
 import '../../../../components/custom_button.dart';
-import '../../../../components/custom_images.dart';
 import '../../../../components/custom_pin_code_field.dart';
 import '../../../../data/config/di.dart';
+import '../../../language/bloc/language_bloc.dart';
 import '../repo/verification_repo.dart';
 
 class Verification extends StatefulWidget {
@@ -47,19 +46,10 @@ class _VerificationState extends State<Verification> {
                         horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
                         vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
                     data: [
-                      Center(
-                        child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: Dimensions.PADDING_SIZE_DEFAULT.h),
-                            child: customImageIcon(
-                                imageName: Images.logo,
-                                width: 220.w,
-                                height: 70.h)),
-                      ),
                       Text(
                         getTranslated("verify_phone"),
-                        style: AppTextStyles.w600.copyWith(
-                          fontSize: 24,
+                        style: AppTextStyles.w800.copyWith(
+                          fontSize: 26,
                         ),
                       ),
                       Padding(
@@ -67,22 +57,18 @@ class _VerificationState extends State<Verification> {
                             vertical: Dimensions.paddingSizeExtraSmall.h),
                         child: RichText(
                           text: TextSpan(
-                              text: getTranslated("we_sent"),
+                              text: getTranslated(
+                                  "verification_code_has_been_sent_to_the_number"),
                               style: AppTextStyles.w400.copyWith(
-                                  fontSize: 14, color: Styles.DETAILS_COLOR),
+                                  fontSize: 16, color: Styles.DETAILS_COLOR),
                               children: [
                                 TextSpan(
-                                  text: " ${widget.model.phone} ",
+                                  text:
+                                      " ${LanguageBloc.instance.isLtr ? "+" : ""}966${widget.model.phone}${LanguageBloc.instance.isLtr ? "" : "+"}",
                                   style: AppTextStyles.w500.copyWith(
                                     fontSize: 14,
-                                    color: Styles.DETAILS_COLOR,
+                                    color: Styles.PRIMARY_COLOR,
                                   ),
-                                ),
-                                TextSpan(
-                                  text: getTranslated("enter_it_below"),
-                                  style: AppTextStyles.w500.copyWith(
-                                      fontSize: 14,
-                                      color: Styles.DETAILS_COLOR),
                                 ),
                               ]),
                         ),
@@ -98,12 +84,19 @@ class _VerificationState extends State<Verification> {
                                 textDirection: TextDirection.ltr,
                                 child: CustomPinCodeField(
                                   validation: Validations.code,
+                                  onCompleted: (v) {
+                                    context
+                                        .read<VerificationBloc>()
+                                        .add(Click(arguments: widget.model));
+                                  },
                                   controller:
                                       context.read<VerificationBloc>().codeTEC,
-                                  onSave: (v) => context
-                                      .read<VerificationBloc>()
-                                      .add(Click(arguments: widget.model)),
                                 ),
+                              ),
+                              CountDown(
+                                onCount: () => context
+                                    .read<VerificationBloc>()
+                                    .add(Resend(arguments: widget.model)),
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(
@@ -118,11 +111,6 @@ class _VerificationState extends State<Verification> {
                                       }
                                     },
                                     isLoading: state is Loading),
-                              ),
-                              CountDown(
-                                onCount: () => context
-                                    .read<VerificationBloc>()
-                                    .add(Resend(arguments: widget.model)),
                               ),
                             ],
                           )),

@@ -13,11 +13,19 @@ import '../widgets/main_app_bar.dart';
 import '../widgets/orders_body.dart';
 import '../widgets/orders_header.dart';
 
-class OrdersPage extends StatelessWidget {
+class OrdersPage extends StatefulWidget {
   const OrdersPage({super.key});
 
   @override
+  State<OrdersPage> createState() => _OrdersPageState();
+}
+
+class _OrdersPageState extends State<OrdersPage>
+    with AutomaticKeepAliveClientMixin<OrdersPage> {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Scaffold(
       appBar: MainAppBar(),
       body: SafeArea(
@@ -43,4 +51,7 @@ class OrdersPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

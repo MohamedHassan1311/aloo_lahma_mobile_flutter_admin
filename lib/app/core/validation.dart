@@ -131,7 +131,7 @@ class Validations {
   }
 
   static String? code(String? value) {
-    if (value == null || value.length < 6) {
+    if (value == null || value.length < 4) {
       return getTranslated("please_enter_valid_code");
     } else {
       return null;

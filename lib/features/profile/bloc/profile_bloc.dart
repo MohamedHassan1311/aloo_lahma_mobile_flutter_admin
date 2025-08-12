@@ -15,6 +15,7 @@ class ProfileBloc extends Bloc<AppEvent, AppState> {
   }
 
   bool get isLogin => repo.isLogin;
+  String? get userType => repo.userType;
 
   Future<void> onGetData(Get event, Emitter<AppState> emit) async {
     try {

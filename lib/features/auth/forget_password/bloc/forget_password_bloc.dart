@@ -34,7 +34,7 @@ class ForgetPasswordBloc extends Bloc<AppEvent, AppState> {
       emit(Loading());
 
       Map<String, dynamic> data = {
-        "phone_number": phoneTEC.text.trim(),
+        "mobile": phoneTEC.text.trim(),
         "type": event.arguments as String
       };
       Either<ServerFailure, Response> response =

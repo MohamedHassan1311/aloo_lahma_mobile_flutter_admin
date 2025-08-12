@@ -77,7 +77,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 customImageIconSVG(
                                     width: 20,
                                     height: 20,
-                                    color: Styles.DETAILS_COLOR,
+                                    color: Styles.WHITE_COLOR,
                                     imageName: SvgImages.location),
                                 SizedBox(width: 8.w),
                                 Expanded(
@@ -100,7 +100,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 customImageIconSVG(
                                     width: 20,
                                     height: 20,
-                                    color: Styles.PRIMARY_COLOR,
+                                    color: Styles.WHITE_COLOR,
                                     imageName: SvgImages.location),
                                 SizedBox(width: 8.w),
                                 Expanded(

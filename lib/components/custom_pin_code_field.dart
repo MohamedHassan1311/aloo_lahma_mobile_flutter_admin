@@ -10,6 +10,7 @@ import '../app/core/text_styles.dart';
 class CustomPinCodeField extends StatelessWidget {
   final void Function(String?)? onSave;
   final void Function(String)? onChanged;
+  final void Function(String)? onCompleted;
   final TextEditingController? controller;
   final String? Function(String?)? validation;
 
@@ -18,6 +19,7 @@ class CustomPinCodeField extends StatelessWidget {
       this.onSave,
       this.validation,
       this.onChanged,
+      this.onCompleted,
       this.controller});
 
   @override
@@ -40,28 +42,30 @@ class CustomPinCodeField extends StatelessWidget {
       pastedTextStyle: AppTextStyles.w600.copyWith(color: Styles.HEADER),
       textInputAction: TextInputAction.done,
       pinTheme: PinTheme(
-        borderWidth: 1,
+        borderWidth: 0.5,
         shape: PinCodeFieldShape.box,
         borderRadius: BorderRadius.circular(10),
-        fieldHeight: 50.h,
-        fieldWidth: 50.w,
+        fieldHeight: 70.h,
+        fieldWidth: 70.w,
         fieldOuterPadding: EdgeInsets.symmetric(horizontal: 4.w),
-        activeFillColor: Styles.PRIMARY_COLOR.withOpacity(0.1),
+        activeFillColor: Styles.FILL_COLOR,
         activeColor: Styles.PRIMARY_COLOR,
-        inactiveColor: Styles.LIGHT_BORDER_COLOR,
-        inactiveFillColor: Colors.transparent,
-        selectedFillColor: Colors.transparent,
+        inactiveColor: Styles.FILL_COLOR,
+        inactiveFillColor: Styles.FILL_COLOR,
+        selectedFillColor: Styles.FILL_COLOR,
         selectedColor: Styles.PRIMARY_COLOR,
         disabledColor: Styles.ERORR_COLOR,
         errorBorderColor: Styles.ERORR_COLOR,
       ),
       appContext: context,
-      length: 6,
+      length: 4,
       onSaved: onSave,
       onChanged: (v) {
         onChanged?.call(v);
       },
-      onCompleted: onSave,
+      onCompleted: (v) {
+        onCompleted?.call(v);
+      },
       errorTextSpace: (context.width - (5 * 50.w)) / 4,
     );
   }

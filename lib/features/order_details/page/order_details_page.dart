@@ -1,3 +1,5 @@
+import 'package:aloo_lahma_admin/components/custom_bottom_sheet.dart';
+import 'package:aloo_lahma_admin/components/custom_button.dart';
 import 'package:aloo_lahma_admin/features/order_details/widgets/order_driver_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +10,7 @@ import 'package:aloo_lahma_admin/components/shimmer/custom_shimmer.dart';
 import 'package:aloo_lahma_admin/features/order_details/bloc/order_details_bloc.dart';
 import 'package:aloo_lahma_admin/features/order_details/model/order_details_model.dart';
 import 'package:aloo_lahma_admin/features/order_details/repo/order_details_repo.dart';
+import 'package:http/http.dart';
 import '../../../app/core/app_event.dart';
 import '../../../app/core/app_state.dart';
 import '../../../app/core/dimensions.dart';
@@ -16,7 +19,7 @@ import '../../../app/core/text_styles.dart';
 import '../../../components/animated_widget.dart';
 import '../../../components/empty_widget.dart';
 import '../../../data/config/di.dart';
-import '../../change_status/view/order_details_actions.dart';
+import '../../change_status/view/change_order_status_view.dart';
 import '../../setting/bloc/settings_bloc.dart';
 import '../enums/order_details_enums.dart';
 import '../widgets/delivery_date.dart';
@@ -137,8 +140,21 @@ class OrderDetailsPage extends StatelessWidget {
                           ),
 
                           ///Order Actions
-                          OrderDetailsActions(
-                              id: id, status: model.statusCode ?? ""),
+                          // if(model.statusCode != null
+                          //     && model.statusCode != OrderStatuses.cancelled
+                          //     && model.statusCode != OrderStatuses.completed)
+                          Padding(
+                            padding:  EdgeInsets.symmetric(
+                            horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                            vertical: Dimensions.paddingSizeExtraSmall.h,
+                            ),
+                            child: CustomButton(
+                              text: getTranslated("change_order_status"),
+                              onTap: () => CustomBottomSheet.show(
+                                label:getTranslated("change_order_status"),
+                                  widget: ChangeOrderStatusView(model: model)),
+                            ),
+                          ),
                         ],
                       );
                     }

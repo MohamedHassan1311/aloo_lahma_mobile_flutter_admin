@@ -21,7 +21,10 @@ class OrderDetailsModel extends SingleMapper {
   PaymentMethodModel? bank;
   List<OrderProductModel>? products;
   List<OrderStatusModel>? statuses;
-  String? status, statusCode;
+  List<OrderStatusModel>? availableStatus;
+
+  String? status;
+  OrderStatuses? statusCode;
   AddressModel? address;
   PaymentModel? payType;
   UserModel? driver;
@@ -37,6 +40,7 @@ class OrderDetailsModel extends SingleMapper {
     this.bill,
     this.products,
     this.statuses,
+    this.availableStatus,
     this.address,
     this.status,
     this.statusCode,
@@ -52,7 +56,7 @@ class OrderDetailsModel extends SingleMapper {
         "id": id,
         "order_number": orderNum,
         "status": status,
-        "status_code": statusCode,
+        "status_code": statusCode?.name,
         "delivery_day": deliveryDay?.toIso8601String(),
         "delivery_time": deliveryTime?.toJson(),
         "time_receipt": timeReceipt,
@@ -65,6 +69,9 @@ class OrderDetailsModel extends SingleMapper {
         "status_logs": statuses != null
             ? List<dynamic>.from(statuses!.map((x) => x.toJson()))
             : [],
+        "available_status": availableStatus != null
+            ? List<dynamic>.from(availableStatus!.map((x) => x.toJson()))
+            : [],
         "products": products != null
             ? List<dynamic>.from(products!.map((x) => x.toJson()))
             : [],
@@ -76,7 +83,10 @@ class OrderDetailsModel extends SingleMapper {
     id = json['id'];
     orderNum = json['order_number'];
     status = json['status'];
-    statusCode = json['status_code'];
+    statusCode = json['status_code'] != null
+        ? OrderDetailsEnumsConverter.convertStringToEnum(
+            json['status_code']?.toUpperCase())
+        : null;
     cancelReason = json['cancel_reason'];
     deliveryType = json['delivery_type'] != null
         ? OrderDetailsEnumsConverter.convertStringToReceiptType(
@@ -111,6 +121,14 @@ class OrderDetailsModel extends SingleMapper {
         statuses!.add(OrderStatusModel.fromJson(v));
       });
     }
+
+    if (json['available_status'] != null) {
+      availableStatus = [];
+      json['available_status'].forEach((v) {
+        availableStatus!.add(OrderStatusModel.fromJson(v));
+      });
+    }
+
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {

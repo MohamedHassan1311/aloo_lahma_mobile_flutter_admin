@@ -29,8 +29,16 @@ class EditProfileBloc extends Bloc<AppEvent, AppState> {
   Map<String, dynamic> body = {
     "name": "${UserBloc.instance.user?.name}",
     "email": "${UserBloc.instance.user?.email}",
-    "phone_number": "${UserBloc.instance.user?.mobile}",
+    "mobile": "${UserBloc.instance.user?.mobile}",
   };
+
+  resetBody() {
+    body = {
+      "name": "${UserBloc.instance.user?.name}",
+      "email": "${UserBloc.instance.user?.email}",
+      "mobile": "${UserBloc.instance.user?.mobile}",
+    };
+  }
 
   TextEditingController nameTEC = TextEditingController();
   TextEditingController phoneTEC = TextEditingController();
@@ -74,7 +82,7 @@ class EditProfileBloc extends Bloc<AppEvent, AppState> {
   bool checkData() {
     return _boolCheckString(nameTEC.text.trim(), "name") ||
         _boolCheckString(mailTEC.text.trim(), "email") ||
-        _boolCheckString(phoneTEC.text.trim(), "phone_number");
+        _boolCheckString(phoneTEC.text.trim(), "mobile");
   }
 
   Future<void> onClick(Click event, Emitter<AppState> emit) async {
@@ -97,8 +105,8 @@ class EditProfileBloc extends Bloc<AppEvent, AppState> {
           body["email"] = mailTEC.text.trim();
         }
 
-        if (_boolCheckString(phoneTEC.text.trim(), "phone_number")) {
-          body["phone_number"] = phoneTEC.text.trim();
+        if (_boolCheckString(phoneTEC.text.trim(), "mobile")) {
+          body["mobile"] = phoneTEC.text.trim();
         }
 
         Either<ServerFailure, Response> response = await repo.editProfile(body);
@@ -110,6 +118,7 @@ class EditProfileBloc extends Bloc<AppEvent, AppState> {
                   isFloating: true,
                   backgroundColor: Styles.IN_ACTIVE,
                   borderColor: Colors.transparent));
+          resetBody();
           emit(Error());
         }, (success) {
           if (event.arguments as bool == true) {
@@ -136,9 +145,11 @@ class EditProfileBloc extends Bloc<AppEvent, AppState> {
         });
       } else {
         AppCore.showToast(getTranslated("you_must_change_something"));
+        resetBody();
         emit(Start());
       }
     } catch (e) {
+      resetBody();
       AppCore.showSnackBar(
         notification: AppNotification(
           message: e.toString(),

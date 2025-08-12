@@ -2,27 +2,30 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class EndPoints {
   static const bool isProductionEnv = false;
-  static String domain = dotenv.env['DOMAIN_${isProductionEnv ? "PRO" : "DEV"}'] ?? "";
-  static String baseUrl = dotenv.env['BASE_URL_${isProductionEnv ? "PRO" : "DEV"}'] ?? "";
+  static String domain =
+      dotenv.env['DOMAIN_${isProductionEnv ? "PRO" : "DEV"}'] ?? "";
+  static String baseUrl =
+      dotenv.env['BASE_URL_${isProductionEnv ? "PRO" : "DEV"}'] ?? "";
   static String apiKey = dotenv.env['API_KEY'] ?? "";
   static chatPort(id) => '${dotenv.env['CHAT_PORT']}$id';
   static String googleMapsBaseUrl = dotenv.env['GOOGLE_MAPS_BASE_URL'] ?? "";
-  static const String generalTopic = isProductionEnv ? 'aloo_lahma_admin' : 't_aloo_lahma_admin';
+  static const String generalTopic =
+      isProductionEnv ? 'aloo_lahma_admin' : 't_aloo_lahma_admin';
   static String userTypeTopic(type) => isProductionEnv ? '$type' : 't_$type';
   static specificTopic(id) => isProductionEnv ? '$id' : 't_$id';
 
   ///Auth
-  static String forgetPassword(userType) => '$userType/forgot-password';
+  static String forgetPassword(userType) => '$userType/forget-password';
   static String resetPassword(userType) => '$userType/reset-password';
   static String changePassword(userType) => '$userType/change-password';
   static String logIn(userType) => '$userType/login';
   static const String resend = 'resend-otp';
-  static String verifyOtp(userType) => '$userType/verify-forgot-password';
+  static String verifyOtp(userType) => '$userType/verify-otp';
   static const String suspendAccount = 'suspend-account';
   static const String reactivateAccount = 'reactivate-account';
 
   ///User Profile
-  static const String editProfile = 'update-profile';
+  static String editProfile(userType) => '$userType/update-profile';
   static String profile(userType) => '$userType/me';
 
   ///Chats
@@ -44,6 +47,10 @@ class EndPoints {
   static orderDetails(userType, id) => '$userType/orders/$id';
   static const String cancelReasons = 'cancel-reason';
   static changeOrderStatus(id) => 'orders/$id/changeOrderStatus';
+
+  ///Drivers
+  static String orderSchedule(userType) => '$userType/checkout/newGetPeriods';
+  static String drivers(userType) => '$userType/drivers';
 
   ///Setting
   static const String settings = 'user/settings';

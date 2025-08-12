@@ -4,10 +4,7 @@ class SvgImages {
   static const String fillCloseCircle = 'assets/svgs/fill-close-circle.svg';
   static const String cameraIcon = 'assets/svgs/camera.svg';
   static const String appLogo = 'assets/svgs/app_logo.svg';
-  static const String createRoom = 'assets/svgs/create_room.svg';
   static const String homeIcon = 'assets/svgs/home.svg';
-  static const String car = 'assets/svgs/car.svg';
-  static const String order = 'assets/svgs/order.svg';
   static const String messages = 'assets/svgs/messages.svg';
   static const String category = 'assets/svgs/category.svg';
   static const String heartIcon = 'assets/svgs/heart.svg';
@@ -21,6 +18,7 @@ class SvgImages {
   static const String gallery = 'assets/svgs/gallery.svg';
   static const String video = 'assets/svgs/video.svg';
   static const String calendar = 'assets/svgs/calendar.svg';
+  static const String calendarDay = 'assets/svgs/calendar_day.svg';
   static const String emptyStar = 'assets/svgs/empty_star.svg';
   static const String fillStar = 'assets/svgs/fill_star.svg';
   static const String backArrow = 'assets/svgs/arrow_back.svg';
@@ -110,6 +108,7 @@ class SvgImages {
   static const String timer = 'assets/svgs/timer.svg';
   static const String users = 'assets/svgs/users.svg';
   static const String description = 'assets/svgs/description.svg';
+  static const String status = 'assets/svgs/status.svg';
   static const String request = 'assets/svgs/request.svg';
   static const String orders = 'assets/svgs/orders.svg';
   static const String addRequest = 'assets/svgs/add_request.svg';

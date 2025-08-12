@@ -14,6 +14,8 @@ import '../../features/auth/logout/repo/logout_repo.dart';
 import '../../features/auth/reset_password/repo/reset_password_repo.dart';
 import '../../features/auth/verification/repo/verification_repo.dart';
 import '../../features/change_password/repo/change_password_repo.dart';
+import '../../features/delivery_times/repo/order_delivery_times_repo.dart';
+import '../../features/drivers/repo/drivers_repo.dart';
 import '../../features/edit_profile/repo/edit_profile_repo.dart';
 import '../../features/faqs/repo/faqs_repo.dart';
 import '../../features/order_details/repo/order_details_repo.dart';
@@ -127,6 +129,12 @@ Future<void> init() async {
 
   sl.registerLazySingleton(
       () => ChangeStatusRepo(sharedPreferences: sl(), dioClient: sl()));
+
+  sl.registerLazySingleton(
+      () => DriversRepo(sharedPreferences: sl(), dioClient: sl()));
+
+  sl.registerLazySingleton(
+      () => OrderDeliveryTimesRepo(sharedPreferences: sl(), dioClient: sl()));
 
 
   //provider
