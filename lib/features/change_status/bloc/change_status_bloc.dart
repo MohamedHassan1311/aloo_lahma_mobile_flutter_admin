@@ -140,13 +140,13 @@ class ChangeStatusBloc extends Bloc<AppEvent, AppState> {
     log("earliestAllowed $earliestAllowed");
     log("receiptDateTime $receiptDateTime");
     log("isValid ${receiptDateTime.isBefore(earliestAllowed)}");
-    if (receiptDateTime.isBefore(earliestAllowed)) {
-      AppCore.showToast(
-        "${getTranslated("you_have_to_select_delivery_time_after_at_least")} "
-        "$hoursBeforeOrder ${getTranslated("hours")}",
-      );
-      return false;
-    }
+    // if (receiptDateTime.isBefore(earliestAllowed)) {
+    //   AppCore.showToast(
+    //     "${getTranslated("you_have_to_select_delivery_time_after_at_least")} "
+    //     "$hoursBeforeOrder ${getTranslated("hours")}",
+    //   );
+    //   return false;
+    // }
 
     return true;
   }
