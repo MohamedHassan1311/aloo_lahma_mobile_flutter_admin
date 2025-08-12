@@ -15,7 +15,7 @@ class OrderDetailsRepo extends BaseRepo {
       Response response = await dioClient.get(
         uri: EndPoints.orderDetails(userType,id),
         queryParameters: {
-          "with": "invoice.user,invoice.shipping,invoice.bank,invoice.bankTransfer,driver,products.product,products.gift,products.items.item,orderStatusLogs"
+          "with": "invoice.user,invoice.shipping,invoice.bank,invoice.bankTransfer,driver,products.product,products.gift,products.items.item,orderStatusLogs,deliveryTime"
         },
       );
       if (response.statusCode == 200) {

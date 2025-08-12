@@ -21,9 +21,11 @@ import '../widgets/order_cancelled_reason.dart';
 import '../widgets/order_status_selection_input.dart';
 
 class ChangeOrderStatusView extends StatelessWidget {
-  const ChangeOrderStatusView({super.key, required this.model});
+  const ChangeOrderStatusView(
+      {super.key, required this.model, required this.onSuccess});
 
   final OrderDetailsModel model;
+  final Function(OrderDetailsModel) onSuccess;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,8 @@ class ChangeOrderStatusView extends StatelessWidget {
                                 DriverOrderAction(),
 
                               ///Order Status
-                              if (context.read<ChangeStatusBloc>().userType == UserType.admin.name) ...[
+                              if (context.read<ChangeStatusBloc>().userType ==
+                                  UserType.admin.name) ...[
                                 ///Order Status
                                 OrderStatusSelectionInput(
                                   initialValue: snapshot.data?.status,
@@ -67,7 +70,8 @@ class ChangeOrderStatusView extends StatelessWidget {
                                 ),
 
                                 ///Select Driver
-                                if (snapshot.data?.status?.statusCode == OrderStatuses.outForDelivery)
+                                if (snapshot.data?.status?.statusCode ==
+                                    OrderStatuses.outForDelivery)
                                   DriversSelection(
                                     initialSelection: snapshot.data?.driver,
                                     onSelect: (v) => context
@@ -76,13 +80,17 @@ class ChangeOrderStatusView extends StatelessWidget {
                                             snapshot.data?.copyWith(driver: v)),
                                   ),
 
-                                if (snapshot.data?.status?.statusCode == OrderStatuses.deferred)
+                                if (snapshot.data?.status?.statusCode ==
+                                    OrderStatuses.deferred)
                                   OrderSchedule(),
 
-                                if (snapshot.data?.status?.statusCode == OrderStatuses.cancelled)
+                                if (snapshot.data?.status?.statusCode ==
+                                    OrderStatuses.cancelled)
                                   OrderCancelledReason(
                                     controller: snapshot.data?.cancelReason,
-                                    validate: (v)=>Validations.field(v,fieldName: getTranslated("cancel_reason")),
+                                    validate: (v) => Validations.field(v,
+                                        fieldName:
+                                            getTranslated("cancel_reason")),
                                   ),
                               ]
                             ],
@@ -95,8 +103,9 @@ class ChangeOrderStatusView extends StatelessWidget {
                         child: CustomButton(
                           text: getTranslated("confirm"),
                           isLoading: state is Loading,
-                          onTap: () =>
-                              context.read<ChangeStatusBloc>().add(Click()),
+                          onTap: () => context
+                              .read<ChangeStatusBloc>()
+                              .add(Click(arguments: onSuccess)),
                         ),
                       )
                     ],

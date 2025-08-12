@@ -143,20 +143,29 @@ class OrderDetailsPage extends StatelessWidget {
                           ),
 
                           ///Order Actions
-                          if(model.availableStatus != null &&model.availableStatus!.isNotEmpty&&model.currentStatus != null && model.currentStatus != OrderStatuses.cancelled && model.currentStatus != OrderStatuses.completed)
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
-                              vertical: Dimensions.paddingSizeExtraSmall.h,
+                          if (model.availableStatus != null &&
+                              model.availableStatus!.isNotEmpty &&
+                              model.currentStatus != null &&
+                              model.currentStatus != OrderStatuses.cancelled &&
+                              model.currentStatus != OrderStatuses.completed)
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.PADDING_SIZE_DEFAULT.w,
+                                vertical: Dimensions.paddingSizeExtraSmall.h,
+                              ),
+                              child: CustomButton(
+                                text: getTranslated("change_order_status"),
+                                onTap: () => CustomBottomSheet.show(
+                                    height: context.height * 0.7,
+                                    label: getTranslated("change_order_status"),
+                                    widget: ChangeOrderStatusView(
+                                      model: model,
+                                      onSuccess: (v) => context
+                                          .read<OrderDetailsBloc>()
+                                          .add(Update(arguments: v)),
+                                    )),
+                              ),
                             ),
-                            child: CustomButton(
-                              text: getTranslated("change_order_status"),
-                              onTap: () => CustomBottomSheet.show(
-                                  height: context.height * 0.7,
-                                  label: getTranslated("change_order_status"),
-                                  widget: ChangeOrderStatusView(model: model)),
-                            ),
-                          ),
                         ],
                       );
                     }

@@ -47,37 +47,38 @@ class ChangeStatusBloc extends Bloc<AppEvent, AppState> {
   }
 
   Future<void> onClick(Click event, Emitter<AppState> emit) async {
-    if(!formKey.currentState!.validate()) return;
+    if (!formKey.currentState!.validate()) return;
     try {
-    if (changeStatusEntity.valueOrNull?.receiptType == ReceiptTypes.delivery &&
-        changeStatusEntity.valueOrNull?.status?.statusCode ==
-            OrderStatuses.deferred &&
-        changeStatusEntity.valueOrNull?.deliveryTime == null) {
-      return AppCore.showToast(
-          getTranslated("you_have_to_select_delivery_time_first"));
-    }
+      if (changeStatusEntity.valueOrNull?.receiptType ==
+              ReceiptTypes.delivery &&
+          changeStatusEntity.valueOrNull?.status?.statusCode ==
+              OrderStatuses.deferred &&
+          changeStatusEntity.valueOrNull?.deliveryTime == null) {
+        return AppCore.showToast(
+            getTranslated("you_have_to_select_delivery_time_first"));
+      }
 
-    emit(Loading());
-    loadingDialog();
-    Either<ServerFailure, Response> response =
-        await repo.changeStatus(changeStatusEntity.valueOrNull!.toJson());
+      emit(Loading());
+      loadingDialog();
+      Either<ServerFailure, Response> response =
+          await repo.changeStatus(changeStatusEntity.valueOrNull!.toJson());
 
-    CustomNavigator.pop();
+      CustomNavigator.pop();
 
-    response.fold((fail) {
-      AppCore.showToast(fail.error);
-      emit(Error());
-    }, (success) {
-      OrderDetailsModel model =
-          OrderDetailsModel.fromJson(success.data["data"]);
+      response.fold((fail) {
+        AppCore.showToast(fail.error);
+        emit(Error());
+      }, (success) {
+        OrderDetailsModel model =
+            OrderDetailsModel.fromJson(success.data["data"]);
 
-      (event.arguments as Map)["onSuccess"].call(model);
+        (event.arguments as Function(OrderDetailsModel)).call(model);
 
-      sl<OrdersBloc>().add(Click(arguments: SearchEngine(isUpdate: true)));
+        sl<OrdersBloc>().add(Click(arguments: SearchEngine(isUpdate: true)));
 
-      AppCore.showToast(getTranslated("your_order_updated_successfully"));
-      emit(Done());
-    });
+        AppCore.showToast(getTranslated("your_order_updated_successfully"));
+        emit(Done());
+      });
     } catch (e) {
       AppCore.showToast(e.toString());
       CustomNavigator.pop();
@@ -157,7 +158,8 @@ class ChangeStatusBloc extends Bloc<AppEvent, AppState> {
       ChangeStatusEntity(
           id: order.id,
           receiptType: order.deliveryType,
-          address: order.address),
+          address: order.address,
+          cancelReason: TextEditingController()),
     );
     emit(Start());
   }

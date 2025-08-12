@@ -1,12 +1,8 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import '../../../../../app/core/app_core.dart';
 import '../../../../../app/core/app_event.dart';
-import '../../../../../app/core/app_notification.dart';
 import '../../../../../app/core/app_state.dart';
-import '../../../../../app/core/styles.dart';
 import '../../../../../data/error/failures.dart';
 import '../model/order_details_model.dart';
 import '../repo/order_details_repo.dart';
@@ -20,7 +16,7 @@ class OrderDetailsBloc extends Bloc<AppEvent, AppState> {
   }
 
   Future<void> onClick(Click event, Emitter<AppState> emit) async {
-    // try {
+    try {
       emit(Loading());
 
       Either<ServerFailure, Response> response =
@@ -37,9 +33,9 @@ class OrderDetailsBloc extends Bloc<AppEvent, AppState> {
           emit(Error());
         }
       });
-    // } catch (e) {
-    //   emit(Error());
-    // }
+    } catch (e) {
+      emit(Error());
+    }
   }
 
   Future<void> onUpdate(Update event, Emitter<AppState> emit) async {
