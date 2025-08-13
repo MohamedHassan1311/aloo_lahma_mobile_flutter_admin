@@ -17,6 +17,7 @@ import '../../../app/localization/language_constant.dart';
 import '../../../data/config/di.dart';
 import '../../order_details/enums/order_details_enums.dart';
 import '../../orders/bloc/orders_bloc.dart';
+import '../../profile/enums/user_types_enum.dart';
 import '../../setting/bloc/settings_bloc.dart';
 import '../../setting/model/setting_model.dart';
 import '../entity/change_status_entity.dart';
@@ -77,7 +78,9 @@ class ChangeStatusBloc extends Bloc<AppEvent, AppState> {
 
         sl<OrdersBloc>().add(Click(arguments: SearchEngine(isUpdate: true)));
 
-        CustomNavigator.pop();
+        if (userType == UserType.admin.name) {
+          CustomNavigator.pop();
+        }
         emit(Done());
       });
     } catch (e) {
