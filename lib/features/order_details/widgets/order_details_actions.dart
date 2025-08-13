@@ -40,7 +40,7 @@ class OrderDetailsActions extends StatelessWidget {
                     model: model,
                     onSuccess: (v) => context
                         .read<OrderDetailsBloc>()
-                        .add(Update(arguments: v)),
+                        .add(Click(arguments: model.id)),
                   )),
             ),
           ),
@@ -51,7 +51,7 @@ class OrderDetailsActions extends StatelessWidget {
           DriverOrderAction(
             model: model,
             onSuccess: (v) =>
-                context.read<OrderDetailsBloc>().add(Update(arguments: v)),
+                context.read<OrderDetailsBloc>().add(Update(arguments: model.id)),
           ),
       ],
     );

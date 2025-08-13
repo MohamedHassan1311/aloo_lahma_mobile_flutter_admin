@@ -65,6 +65,9 @@ class ChangeOrderStatusView extends StatelessWidget {
                                   OrderStatuses.outForDelivery)
                                 DriversSelection(
                                   initialSelection: snapshot.data?.driver,
+                                  validate: (v) => Validations.field(v,
+                                      fieldName:
+                                      getTranslated("driver")),
                                   onSelect: (v) => context
                                       .read<ChangeStatusBloc>()
                                       .updateChangeStatusEntity(

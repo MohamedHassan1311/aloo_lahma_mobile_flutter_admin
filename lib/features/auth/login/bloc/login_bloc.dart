@@ -51,7 +51,6 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
   clear() {
     phoneTEC.clear();
     passwordTEC.clear();
-    updateUserType(UserType.admin);
     updateRememberMe(false);
   }
 

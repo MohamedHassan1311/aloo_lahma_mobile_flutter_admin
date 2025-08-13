@@ -15,7 +15,7 @@ class LoginRepo extends BaseRepo {
 
   saveUserData(json) {
     if (!kDebugMode) {
-      subscribeToTopic(id: "${json["id"]}", userType: userType);
+      subscribeToTopic("${json["id"]}");
     }
     sharedPreferences.setString(AppStorageKey.userId, "${json["id"]}");
     sharedPreferences.setString(AppStorageKey.userData, jsonEncode(json));
@@ -27,10 +27,9 @@ class LoginRepo extends BaseRepo {
     dioClient.updateHeader(token);
   }
 
-  Future subscribeToTopic(
-      {required String id, required String userType}) async {
+  Future subscribeToTopic(id) async {
     FirebaseMessaging.instance
-        .subscribeToTopic(EndPoints.specificTopic(id))
+        .subscribeToTopic(EndPoints.specificTopic(userType, id))
         .then((v) async {
       FirebaseMessaging.instance
           .subscribeToTopic(EndPoints.userTypeTopic(String))

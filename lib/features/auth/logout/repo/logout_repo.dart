@@ -11,7 +11,7 @@ class LogoutRepo extends BaseRepo {
 
   Future unSubscribeToTopic() async {
     await FirebaseMessaging.instance
-        .unsubscribeFromTopic(EndPoints.specificTopic(userId))
+        .unsubscribeFromTopic(EndPoints.specificTopic(userType,userId))
         .then((v) async {
       await sharedPreferences.remove(AppStorageKey.isSubscribe);
     });

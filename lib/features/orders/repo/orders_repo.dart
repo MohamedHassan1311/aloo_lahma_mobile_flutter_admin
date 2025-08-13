@@ -20,7 +20,7 @@ class OrdersRepo extends BaseRepo {
         queryParameters: {
           "page": data.currentPage! + 1,
           "limit": data.limit,
-          if (userType == UserType.driver.name) "deliveryByMyTeam": true,
+          if (userType == UserType.driver.name) "deliveredByMe": true,
           if (userType == UserType.admin.name) "managedByMe": true,
           "order_by": jsonEncode({"created_at": "desc"}),
           "with": "invoice,deliveryTime",

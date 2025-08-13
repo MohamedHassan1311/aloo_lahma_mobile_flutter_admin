@@ -54,11 +54,11 @@ class ChangeStatusEntity {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    data['order_id'] = id;
     data['status'] = status?.value;
     if(status?.statusCode == OrderStatuses.cancelled) data['cancel_reason'] = cancelReason?.text.trim();
     if(status?.statusCode == OrderStatuses.deferred) {
-      data['delivery_date'] = deliveryDate?.dateFormat(format: "y-MM-d", lang: "en");
+      data['deliver_day'] = deliveryDate?.dateFormat(format: "y-MM-d", lang: "en");
       if (receiptType == ReceiptTypes.delivery) {
         data['deliver_time_id'] = deliveryTime?.id;
       } else {

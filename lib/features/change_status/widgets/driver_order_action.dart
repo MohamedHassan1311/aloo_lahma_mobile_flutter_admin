@@ -10,7 +10,9 @@ import '../../../app/core/styles.dart';
 import '../../../app/core/text_styles.dart';
 import '../../../app/localization/language_constant.dart';
 import '../../../data/config/di.dart';
+import '../../order_details/enums/order_details_enums.dart';
 import '../../order_details/model/order_details_model.dart';
+import '../../order_details/model/order_status_model.dart';
 import '../bloc/change_status_bloc.dart';
 import '../repo/change_status_repo.dart';
 
@@ -53,9 +55,19 @@ class DriverOrderAction extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            onSwipe: () => context
-                .read<ChangeStatusBloc>()
-                .add(Click(arguments: onSuccess)),
+            onSwipe: () {
+              context
+                  .read<ChangeStatusBloc>()
+                  .changeStatusEntity
+                  .valueOrNull
+                  ?.copyWith(
+                      status: OrderStatusModel(
+                    statusCode: OrderStatuses.completed,
+                    status: getTranslated("completed"),
+                    value: 5,
+                  ));
+              context.read<ChangeStatusBloc>().add(Click(arguments: onSuccess));
+            },
           ).animate(onPlay: (c) {
             c.repeat();
           }).shimmer(

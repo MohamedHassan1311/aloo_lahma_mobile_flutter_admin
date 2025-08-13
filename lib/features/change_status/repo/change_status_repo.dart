@@ -12,8 +12,8 @@ class ChangeStatusRepo extends BaseRepo {
   Future<Either<ServerFailure, Response>> changeStatus(
       Map<String, dynamic> body) async {
     try {
-      Response response = await dioClient.put(
-          uri: EndPoints.changeOrderStatus(userType, body["id"]), data: body);
+      Response response = await dioClient.post(
+          uri: EndPoints.changeOrderStatus(userType), data: body);
       if (response.statusCode == 200) {
         return Right(response);
       } else {

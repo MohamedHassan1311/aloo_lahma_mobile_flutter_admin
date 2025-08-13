@@ -61,10 +61,7 @@ class OrderInvoiceModel {
     actualTotalPrice = json['amount_price_value'] != null
         ? double.parse(json['amount_price_value'].toString())
         : null;
-    cashback = json['cash_back'] != null
-        ? double.parse(json['cash_back'].toString())
-        : null;
-
+    cashback =double.parse(json['cashback']?.toString()??json['cash_back']?.toString()??"0");
     needBankTransfer = json['need_bank_transfer'];
     bankTransfer = json['bank_transfer'] != null &&
             json['bank_transfer']['attachment'] != null

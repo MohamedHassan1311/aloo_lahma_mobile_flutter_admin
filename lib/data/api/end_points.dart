@@ -10,9 +10,10 @@ class EndPoints {
   static chatPort(id) => '${dotenv.env['CHAT_PORT']}$id';
   static String googleMapsBaseUrl = dotenv.env['GOOGLE_MAPS_BASE_URL'] ?? "";
   static const String generalTopic =
-      isProductionEnv ? 'aloo_lahma_admin' : 't_aloo_lahma_admin';
+      isProductionEnv ? 'aloo_lahma' : 't_aloo_lahma';
   static String userTypeTopic(type) => isProductionEnv ? '$type' : 't_$type';
-  static specificTopic(id) => isProductionEnv ? '$id' : 't_$id';
+  static specificTopic(type, id) =>
+      isProductionEnv ? '${type}_$id' : 't_${type}_$id';
 
   ///Auth
   static String forgetPassword(userType) => '$userType/forget-password';
@@ -46,7 +47,7 @@ class EndPoints {
   static String orders(userType) => '$userType/orders';
   static orderDetails(userType, id) => '$userType/orders/$id';
   static const String cancelReasons = 'cancel-reason';
-  static changeOrderStatus(userType,id) => '$userType/orders/$id/changeOrderStatus';
+  static changeOrderStatus(userType) => '$userType/orders/change-status';
 
   ///Drivers
   static String orderSchedule(userType) => '$userType/checkout/newGetPeriods';
