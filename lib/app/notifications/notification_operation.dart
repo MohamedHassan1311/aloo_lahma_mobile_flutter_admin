@@ -51,13 +51,7 @@ scheduleNotification(String title, String subtitle, String data,
       ticker: 'ticker',
       icon: '@mipmap/ic_launcher',
     );
-    iOSPlatformChannelSpecifics = DarwinNotificationDetails(
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-      attachments:
-          imagePath != null ? [DarwinNotificationAttachment(imagePath)] : [],
-    );
+    iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
   }
 
   var platformChannelSpecifics = NotificationDetails(
@@ -122,20 +116,18 @@ void handlePath(Map dataMap) {
 }
 
 updateUserFunctions({required notify}) async {
-  Future.delayed(Duration.zero, () {
+  /*Future.delayed(Duration.zero, () {
     if (UserBloc.instance.isLogin) {
       // sl<NotificationsBloc>().add(Get(arguments: SearchEngine()));
     }
-  });
+  });*/
 }
 
 Future<void> handlePathByRoute(Map notify) async {
   Future.delayed(
     Duration.zero,
     () {
-      if (UserBloc.instance.isLogin) {
-        CustomNavigator.push(Routes.notifications);
-      }
+      CustomNavigator.push(Routes.notifications);
     },
   );
 }

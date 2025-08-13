@@ -47,8 +47,7 @@ Future<void> main() async {
       );
       await CountryCodes.init();
 
-      await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform);
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
       await FirebaseNotifications.setUpFirebase();
       if (kReleaseMode) {
         await AnalyticsService.init();

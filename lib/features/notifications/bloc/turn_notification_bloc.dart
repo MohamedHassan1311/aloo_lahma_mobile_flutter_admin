@@ -17,16 +17,16 @@ class TurnNotificationsBloc extends Bloc<AppEvent, AppState> {
   bool get isTurnOn => repo.isTurnOn;
 
   Future<void> onTurn(Turn event, Emitter<AppState> emit) async {
-    try {
+    // try {
       emit(Loading());
       loadingDialog();
       await repo.switchNotification();
       CustomNavigator.pop();
       emit(Done());
-    } catch (e) {
-      CustomNavigator.pop();
-      AppCore.showToast(e.toString());
-      emit(Error());
-    }
+    // } catch (e) {
+    //   CustomNavigator.pop();
+    //   AppCore.showToast(e.toString());
+    //   emit(Error());
+    // }
   }
 }

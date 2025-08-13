@@ -16,14 +16,24 @@ class NotificationsRepo extends BaseRepo {
 
   Future switchNotification() async {
     if (isTurnOn) {
-      await FirebaseMessaging.instance
-          .unsubscribeFromTopic(userId)
+      FirebaseMessaging.instance
+          .unsubscribeFromTopic(EndPoints.specificTopic(userType, userType))
           .then((v) async {
-        await sharedPreferences.remove(AppStorageKey.isSubscribe);
+        FirebaseMessaging.instance
+            .unsubscribeFromTopic(EndPoints.userTypeTopic(String))
+            .then((v) async {
+          await sharedPreferences.remove(AppStorageKey.isSubscribe);
+        });
       });
     } else {
-      await FirebaseMessaging.instance.subscribeToTopic(userId).then((v) async {
-        await sharedPreferences.setBool(AppStorageKey.isSubscribe, true);
+      FirebaseMessaging.instance
+          .subscribeToTopic(EndPoints.specificTopic(userType, userType))
+          .then((v) async {
+        FirebaseMessaging.instance
+            .subscribeToTopic(EndPoints.userTypeTopic(String))
+            .then((v) async {
+          await sharedPreferences.setBool(AppStorageKey.isSubscribe, true);
+        });
       });
     }
   }

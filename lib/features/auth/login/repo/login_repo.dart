@@ -15,7 +15,7 @@ class LoginRepo extends BaseRepo {
 
   saveUserData(json) {
     // if (!kDebugMode) {
-      subscribeToTopic("${json["id"]}");
+    subscribeToTopic("${json["id"]}");
     // }
     sharedPreferences.setString(AppStorageKey.userId, "${json["id"]}");
     sharedPreferences.setString(AppStorageKey.userData, jsonEncode(json));
