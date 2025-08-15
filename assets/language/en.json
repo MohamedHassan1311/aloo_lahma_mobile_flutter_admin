@@ -734,5 +734,6 @@
     "you_have_to_select_delivery_date_first": "Oops!,You have to select delivery date first",
     "cancel_reason": "Cancel Reason",
     "enter_cancel_reason": "Enter cancel reason",
-    "client": "Client"
+    "client": "Client",
+  "other_notes": "Other Notes"
 }
